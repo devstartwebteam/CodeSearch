@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CodeSearch.Models.Data.Category>
+
+@{
+    ViewBag.Title = "Snippet Categories";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="w-index-title">
+    @Html.Partial("_PageTitle")
+</div>
+
+<p class="w-create-btn-sm btn btn-default">
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table w-index-table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td class="w-index-description">
+                @Html.DisplayFor(modelItem => item.CategoryDescription)
+            </td>
+            <td>
+                <img src="@item.ImageURL" class="w-index-img" />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CategoryId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CodeSearchModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="CodeSearchModelStoreContainer">
+    <EntitySet Name="Snippets" EntityType="CodeSearchModel.Store.Snippets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Categories" EntityType="CodeSearchModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Notes" EntityType="CodeSearchModel.Store.Notes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tags" EntityType="CodeSearchModel.Store.Tags" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Projects" EntityType="CodeSearchModel.Store.Projects" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CategorySnippetAssociations" EntityType="CodeSearchModel.Store.CategorySnippetAssociations" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CategorySnippetAssociationsCategory" Association="CodeSearchModel.Store.CategorySnippetAssociationsCategory">
+      <End Role="CategorySnippetAssociations" EntitySet="CategorySnippetAssociations" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="CategorySnippetAssociationsSnippet" Association="CodeSearchModel.Store.CategorySnippetAssociationsSnippet">
+      <End Role="CategorySnippetAssociations" EntitySet="CategorySnippetAssociations" />
+      <End Role="Snippet" EntitySet="Snippets" />
+    </AssociationSet>
+    <AssociationSet Name="SnippetNote" Association="CodeSearchModel.Store.SnippetNote">
+      <End Role="Snippet" EntitySet="Snippets" />
+      <End Role="Note" EntitySet="Notes" />
+    </AssociationSet>
+    <AssociationSet Name="SnippetTag" Association="CodeSearchModel.Store.SnippetTag">
+      <End Role="Snippet" EntitySet="Snippets" />
+      <End Role="Tag" EntitySet="Tags" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Snippets">
+    <Key>
+      <PropertyRef Name="SnippetId" />
+    </Key>
+    <Property Name="SnippetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SnippetName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SnippetDescription" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="SnippetContent" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Created" Type="datetime" Nullable="true" />
+    <Property Name="Modified" Type="datetime" Nullable="true" />
+    <Property Name="SnippetLanguage" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ReferenceURL" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CategoryDescription" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Created" Type="datetime" Nullable="true" />
+    <Property Name="Modified" Type="datetime" Nullable="true" />
+    <Property Name="ImageURL" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Notes">
+    <Key>
+      <PropertyRef Name="NoteId" />
+    </Key>
+    <Property Name="NoteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoteTitle" Type="datetime" Nullable="true" />
+    <Property Name="NoteContent" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NoteSnippetId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tags">
+    <Key>
+      <PropertyRef Name="TagId" />
+    </Key>
+    <Property Name="TagId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TagName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TagSnippetId" Type="int" Nullable="false" />
+    <Property Name="TagCategory" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Projects">
+    <Key>
+      <PropertyRef Name="ProjectId" />
+    </Key>
+    <Property Name="ProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectTitle" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProjectDescription" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CategorySnippetAssociations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryAssociationId" Type="int" Nullable="false" />
+    <Property Name="SnippetAssociationId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CategorySnippetAssociationsCategory">
+    <End Role="CategorySnippetAssociations" Type="CodeSearchModel.Store.CategorySnippetAssociations" Multiplicity="*" />
+    <End Role="Category" Type="CodeSearchModel.Store.Categories" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="CategorySnippetAssociations">
+        <PropertyRef Name="CategoryAssociationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CategorySnippetAssociationsSnippet">
+    <End Role="CategorySnippetAssociations" Type="CodeSearchModel.Store.CategorySnippetAssociations" Multiplicity="*" />
+    <End Role="Snippet" Type="CodeSearchModel.Store.Snippets" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Snippet">
+        <PropertyRef Name="SnippetId" />
+      </Principal>
+      <Dependent Role="CategorySnippetAssociations">
+        <PropertyRef Name="SnippetAssociationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SnippetNote">
+    <End Role="Snippet" Type="CodeSearchModel.Store.Snippets" Multiplicity="1" />
+    <End Role="Note" Type="CodeSearchModel.Store.Notes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Snippet">
+        <PropertyRef Name="SnippetId" />
+      </Principal>
+      <Dependent Role="Note">
+        <PropertyRef Name="NoteSnippetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SnippetTag">
+    <End Role="Snippet" Type="CodeSearchModel.Store.Snippets" Multiplicity="1" />
+    <End Role="Tag" Type="CodeSearchModel.Store.Tags" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Snippet">
+        <PropertyRef Name="SnippetId" />
+      </Principal>
+      <Dependent Role="Tag">
+        <PropertyRef Name="TagSnippetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="CodeSearchModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="CodeSearchModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Snippets" EntityType="CodeSearchModel.Snippet" />
+          <EntitySet Name="Categories" EntityType="CodeSearchModel.Category" />
+          <EntitySet Name="Notes" EntityType="CodeSearchModel.Note" />
+          <EntitySet Name="Tags" EntityType="CodeSearchModel.Tag" />
+          <EntitySet Name="Projects" EntityType="CodeSearchModel.Project" />
+          <EntitySet Name="CategorySnippetAssociations" EntityType="CodeSearchModel.CategorySnippetAssociations" />
+          <AssociationSet Name="CategorySnippetAssociationsCategory" Association="CodeSearchModel.CategorySnippetAssociationsCategory">
+            <End Role="CategorySnippetAssociations" EntitySet="CategorySnippetAssociations" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="CategorySnippetAssociationsSnippet" Association="CodeSearchModel.CategorySnippetAssociationsSnippet">
+            <End Role="CategorySnippetAssociations" EntitySet="CategorySnippetAssociations" />
+            <End Role="Snippet" EntitySet="Snippets" />
+          </AssociationSet>
+          <AssociationSet Name="SnippetNote" Association="CodeSearchModel.SnippetNote">
+            <End Role="Snippet" EntitySet="Snippets" />
+            <End Role="Note" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="SnippetTag" Association="CodeSearchModel.SnippetTag">
+            <End Role="Snippet" EntitySet="Snippets" />
+            <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Snippet">
+          <Key>
+            <PropertyRef Name="SnippetId" />
+          </Key>
+          <Property Name="SnippetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SnippetName" Type="String" Nullable="false" />
+          <Property Name="SnippetDescription" Type="String" Nullable="true" />
+          <Property Name="SnippetContent" Type="String" Nullable="true" />
+          <Property Name="Created" Type="DateTime" Nullable="true" />
+          <Property Name="Modified" Type="DateTime" Nullable="true" />
+          <Property Name="SnippetLanguage" Type="String" Nullable="true" />
+          <Property Name="ReferenceURL" Type="String" Nullable="false" />
+          <NavigationProperty Name="CategorySnippetAssociations" Relationship="CodeSearchModel.CategorySnippetAssociationsSnippet" FromRole="Snippet" ToRole="CategorySnippetAssociations" />
+          <NavigationProperty Name="Notes" Relationship="CodeSearchModel.SnippetNote" FromRole="Snippet" ToRole="Note" />
+          <NavigationProperty Name="Tags" Relationship="CodeSearchModel.SnippetTag" FromRole="Snippet" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" Nullable="false" />
+          <Property Name="CategoryDescription" Type="String" Nullable="true" />
+          <Property Name="Created" Type="DateTime" Nullable="true" />
+          <Property Name="Modified" Type="DateTime" Nullable="true" />
+          <Property Name="ImageURL" Type="String" Nullable="false" />
+          <NavigationProperty Name="CategorySnippetAssociations" Relationship="CodeSearchModel.CategorySnippetAssociationsCategory" FromRole="Category" ToRole="CategorySnippetAssociations" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="NoteId" />
+          </Key>
+          <Property Name="NoteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NoteTitle" Type="DateTime" Nullable="true" />
+          <Property Name="NoteContent" Type="String" Nullable="false" />
+          <Property Name="NoteSnippetId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Snippet" Relationship="CodeSearchModel.SnippetNote" FromRole="Note" ToRole="Snippet" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="TagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TagName" Type="String" Nullable="false" />
+          <Property Name="TagSnippetId" Type="Int32" Nullable="false" />
+          <Property Name="TagCategory" Type="String" Nullable="true" />
+          <NavigationProperty Name="Snippet" Relationship="CodeSearchModel.SnippetTag" FromRole="Tag" ToRole="Snippet" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectTitle" Type="String" Nullable="false" />
+          <Property Name="ProjectDescription" Type="String" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="HttpPostedFileBase" />
+        <EntityType Name="CategorySnippetAssociations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryAssociationId" Type="Int32" Nullable="false" />
+          <Property Name="SnippetAssociationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="CodeSearchModel.CategorySnippetAssociationsCategory" FromRole="CategorySnippetAssociations" ToRole="Category" />
+          <NavigationProperty Name="Snippet" Relationship="CodeSearchModel.CategorySnippetAssociationsSnippet" FromRole="CategorySnippetAssociations" ToRole="Snippet" />
+        </EntityType>
+        <Association Name="CategorySnippetAssociationsCategory">
+          <End Type="CodeSearchModel.CategorySnippetAssociations" Role="CategorySnippetAssociations" Multiplicity="*" />
+          <End Type="CodeSearchModel.Category" Role="Category" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="CategorySnippetAssociations">
+              <PropertyRef Name="CategoryAssociationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CategorySnippetAssociationsSnippet">
+          <End Type="CodeSearchModel.CategorySnippetAssociations" Role="CategorySnippetAssociations" Multiplicity="*" />
+          <End Type="CodeSearchModel.Snippet" Role="Snippet" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Snippet">
+              <PropertyRef Name="SnippetId" />
+            </Principal>
+            <Dependent Role="CategorySnippetAssociations">
+              <PropertyRef Name="SnippetAssociationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SnippetNote">
+          <End Type="CodeSearchModel.Snippet" Role="Snippet" Multiplicity="1" />
+          <End Type="CodeSearchModel.Note" Role="Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Snippet">
+              <PropertyRef Name="SnippetId" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="NoteSnippetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SnippetTag">
+          <End Type="CodeSearchModel.Snippet" Role="Snippet" Multiplicity="1" />
+          <End Type="CodeSearchModel.Tag" Role="Tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Snippet">
+              <PropertyRef Name="SnippetId" />
+            </Principal>
+            <Dependent Role="Tag">
+              <PropertyRef Name="TagSnippetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CodeSearchModelStoreContainer" CdmEntityContainer="CodeSearchModelContainer">
+    <EntitySetMapping Name="Snippets">
+      <EntityTypeMapping TypeName="IsTypeOf(CodeSearchModel.Snippet)">
+        <MappingFragment StoreEntitySet="Snippets">
+          <ScalarProperty Name="SnippetId" ColumnName="SnippetId" />
+          <ScalarProperty Name="SnippetName" ColumnName="SnippetName" />
+          <ScalarProperty Name="SnippetDescription" ColumnName="SnippetDescription" />
+          <ScalarProperty Name="SnippetContent" ColumnName="SnippetContent" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="SnippetLanguage" ColumnName="SnippetLanguage" />
+          <ScalarProperty Name="ReferenceURL" ColumnName="ReferenceURL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="IsTypeOf(CodeSearchModel.Category)">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notes">
+      <EntityTypeMapping TypeName="IsTypeOf(CodeSearchModel.Note)">
+        <MappingFragment StoreEntitySet="Notes">
+          <ScalarProperty Name="NoteId" ColumnName="NoteId" />
+          <ScalarProperty Name="NoteTitle" ColumnName="NoteTitle" />
+          <ScalarProperty Name="NoteContent" ColumnName="NoteContent" />
+          <ScalarProperty Name="NoteSnippetId" ColumnName="NoteSnippetId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tags">
+      <EntityTypeMapping TypeName="IsTypeOf(CodeSearchModel.Tag)">
+        <MappingFragment StoreEntitySet="Tags">
+          <ScalarProperty Name="TagId" ColumnName="TagId" />
+          <ScalarProperty Name="TagName" ColumnName="TagName" />
+          <ScalarProperty Name="TagSnippetId" ColumnName="TagSnippetId" />
+          <ScalarProperty Name="TagCategory" ColumnName="TagCategory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="IsTypeOf(CodeSearchModel.Project)">
+        <MappingFragment StoreEntitySet="Projects">
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
+          <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategorySnippetAssociations">
+      <EntityTypeMapping TypeName="IsTypeOf(CodeSearchModel.CategorySnippetAssociations)">
+        <MappingFragment StoreEntitySet="CategorySnippetAssociations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CategoryAssociationId" ColumnName="CategoryAssociationId" />
+          <ScalarProperty Name="SnippetAssociationId" ColumnName="SnippetAssociationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

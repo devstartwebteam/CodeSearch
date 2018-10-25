@@ -1,0 +1,267 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>@ViewBag.Title - Developer Assistant</title>
+
+    @Html.Partial("_Header")
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+<body class="w-login-body">
+
+    @Html.Partial("_Navigation")
+
+    <div class="w-feature-wrap w-code-editor">
+        <div class="container-fluid w-section-container">
+            <div class="row w-section-row">
+                <div class="col-sm-2 w-sidebar-col">
+
+                    @Html.Partial("_DashboardSidebar")
+
+                </div>
+                <div class="col-sm-10">
+                    <div class="row w-inner-row">
+                        <div class="col-sm-6 w-editor-col">
+                            <div class="container-fluid w-feature-container w-feature-box">
+                                <div class="row w-title-row">
+                                    <div class="col-sm-8">
+                                        <h1 class="w-dashboard-title w-primary-title">Dashboard</h1>
+                                        @RenderBody()
+                                    </div>
+                                </div>
+                                <!-- end .w-title-row -->
+                                <div class="row w-feature-row">
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                            <h4 class="w-dash-title">New Messages</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row w-feature-row">
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row w-feature-row">
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 w-editor-col">
+                            <div class="container-fluid w-feature-container w-feature-box">
+                                <div class="row w-title-row">
+                                    <div class="col-sm-12">
+                                        <h3 class="w-secondary-title">New Resources</h3>
+                                    </div>
+                                </div>
+                                <!-- end .w-title-row -->
+                                <div class="row w-feature-row">
+                                    <div class="w-dash-box">
+                                        <h4 class="w-dash-title">Recently Published</h4>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <ul class="w-published-list">
+                                            <li>May 8th 2015 </li>
+                                            <li>Jan 5th 2015 </li>
+                                            <li>Aug 19th 2014 </li>
+                                            <li>Jun 4th 2014 </li>
+                                            <li>Mar 27th 2014</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                            <ul class="w-published-list">
+                                                <li>May 8th 2015 </li>
+                                                <li>Jan 5th 2015 </li>
+                                                <li>Aug 19th 2014 </li>
+                                                <li>Jun 4th 2014 </li>
+                                                <li>Mar 27th 2014</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row w-feature-row">
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row w-feature-row">
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end column -->
+                    </div>
+                    <!-- end .w-inner-row -->
+                    <div class="row w-inner-row">
+                        <div class="col-sm-6 w-editor-col">
+                            <div class="container-fluid w-feature-container w-feature-box">
+                                <div class="row w-title-row">
+                                    <div class="col-sm-12">
+                                        <h3 class="w-secondary-title">Categories</h3>
+                                    </div>
+                                </div>
+                                <!-- end .w-title-row -->
+                                <div class="row w-feature-row">
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                            <h4 class="w-dash-title"></h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row w-feature-row">
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row w-feature-row">
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="container-fluid w-feature-container w-feature-box">
+                                <div class="row w-title-row">
+                                    <div class="col-sm-12">
+                                        <h3 class="w-secondary-title">Recently Viewed</h3>
+                                    </div>
+                                </div>
+                                <!-- end .w-title-row -->
+                                <div class="row w-feature-row">
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                            <h4 class="w-dash-title"></h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row w-feature-row">
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row w-feature-row">
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="w-dash-box">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end column -->
+                    </div>
+                    <!-- end .w-inner-row -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+            /* Check if another script has already loaded jQuery, if not, load it inline */
+            window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
+    </script>
+
+    <script type="text/javascript" src="Scripts/main.js"></script>
+    <script type="text/javascript" src="Scripts/jquery.bxslider.min.js"></script>
+
+    <!-- Code Mirror javascript -->
+    <script type="text/javascript" src="Scripts/codemirror.js"></script>
+    <script type="text/javascript" src="Scripts/codemirror-5.26.0/mode/htmlmixed/htmlmixed.js"></script>
+    <script type="text/javascript" src="Scripts/codemirror-5.26.0/mode/clike/clike.js"></script>
+    <script type="text/javascript" src="Scripts/codemirror-5.26.0/mode/htmlembedded/htmlembedded.js"></script>
+    <script type="text/javascript" src="Scripts/codemirror-5.26.0/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="Scripts/codemirror-5.26.0/mode/xml/xml.js"></script>
+
+    <!-- custom scripts -->
+    <script src="Scripts/scripts.js"></script>
+    <script src="https://use.fontawesome.com/da3fb30753.js"></script>
+
+    <!-- highlight.js -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- clipboard.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var clipboard = new Clipboard('.w_copy', {
+                target: function (trigger) {
+                    return $(trigger).closest('.w_snippet').find('#w_target_code').get(0);
+                }
+            });
+        });
+
+    </script>
+
+</body>
+</html>

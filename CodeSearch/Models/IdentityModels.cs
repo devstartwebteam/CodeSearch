@@ -29,5 +29,7 @@ namespace CodeSearch.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<CodeSearch.Models.Data.Snippet> Snippets { get; set; }
     }
 }

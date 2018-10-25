@@ -3,42 +3,108 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>@ViewBag.Title - Developer Assistant</title>
+
+    @Html.Partial("_Header")
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+
+<body class="w-login-body">
+
+    @Html.Partial("_Navigation")
+
+    @RenderBody()
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+    /* Check if another script has already loaded jQuery, if not, load it inline */
+    window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
+    </script>
+
+    <script type="text/javascript" src="Scripts/main.js"></script>
+    <script type="text/javascript" src="Scripts/jquery.bxslider.min.js"></script>
+
+    <!-- Code Mirror javascript -->
+    <script type="text/javascript" src="/Scripts/codemirror.js"></script>
+    <script type="text/javascript" src="/Scripts/codemirror-5.26.0/mode/htmlmixed/htmlmixed.js"></script>
+    <script type="text/javascript" src="Scripts/codemirror-5.26.0/mode/clike/clike.js"></script>
+    <script type="text/javascript" src="Scripts/codemirror-5.26.0/mode/htmlembedded/htmlembedded.js"></script>
+    <script type="text/javascript" src="Scripts/codemirror-5.26.0/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="Scripts/codemirror-5.26.0/mode/xml/xml.js"></script>
+
+    <!-- custom scripts -->
+    <script src="Scripts/scripts.js"></script>
+    <script src="https://use.fontawesome.com/da3fb30753.js"></script>
+
+    <!-- highlight.js -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- clipboard.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        var clipboard = new Clipboard('.w_copy', {
+            target: function (trigger) {
+                return $(trigger).closest('.w_snippet').find('#w_target_code').get(0);
+            }
+        });
+    });
+
+
+    </script>
+
+    <script>
+    $(document).ready(function () {
+        $('.w-home-slider').bxSlider({
+            mode: 'fade'
+        });
+    });
+
+    </script>
+
+
+    <script>
+        $(function () {
+            var click = 0;
+            //this captures the event when the user hits the go button
+            $("#Go").click(function () {
+
+                $("#search-form").css("display", "inline");
+
+                if (click % 2) {
+                    if ($("#criteria").val() === "") {
+                        $("#search-form").css("display", "none");
+                    }
+                    else {
+                        window.location = $("form").attr("action") + "?criteria=" + encodeURI($("#criteria").val());
+                        return false;
+                    }
+                }
+
+                click++;
+            });
+
+            //this captures the event when the user hits the return key
+
+            $("#search-form").submit(function () {
+                window.location = $("form").attr("action") + "?criteria=" + encodeURI($("#criteria").val());
+                return false;
+            });
+
+        });
+    </script>
+
 </body>
 </html>

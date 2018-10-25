@@ -1,0 +1,42 @@
+﻿
+<!-- Search Form -->
+<div class="b-search-wrapper">
+    <button class="fa fa-search fa-2x b-home-search top-search-button" type="button" value="Go" id="Go"></button>
+    <form id="search-form" style="display: inline;" action="/Search/Results" method="post">
+
+        <input type="text" id="criteria" name="criteria" placeholder="Search Site">
+
+        <script type="text/javascript">
+
+            $(function () {
+                var click = 0;
+                //this captures the event when the user hits the go button
+                $("#Go").click(function () {
+
+                    $("#search-form").css("display", "inline");
+
+                    if (click % 2) {
+                        if ($("#criteria").val() === "") {
+                            $("#search-form").css("display", "none");
+                        }
+                        else {
+                            window.location = $("form").attr("action") + "?criteria=" + encodeURI($("#criteria").val());
+                            return false;
+                        }
+                    }
+
+                    click++;
+                });
+
+                //this captures the event when the user hits the return key
+
+                $("#search-form").submit(function () {
+                    window.location = $("form").attr("action") + "?criteria=" + encodeURI($("#criteria").val());
+                    return false;
+                });
+
+            });
+        </script>
+
+    </form>
+</div>

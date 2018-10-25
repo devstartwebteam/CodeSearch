@@ -1,0 +1,148 @@
+﻿@model CodeSearch.ViewModels.SnippetsViewModel
+
+@{
+    ViewBag.Title = "Add New Snippet";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@Html.Partial("_PageTitle")
+
+<div class="row w-feature-row">
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-sm-12">
+
+        <!-- Start Form Groups -->
+        <div class="form-group row">
+            <label for="example-text-input" class="control-label col-md-2">Choose Language</label>
+            <div class="col-sm-10">
+                <select id="mode" name="SnippetLanguage" class="w-code-select" onchange="loadModeForSelectedOption()">
+                    <option value="text" selected="selected" data-mime-type="text">
+                        Plain Text
+                    </option>
+                    <option value="HTML"
+                            data-mime-type="text/html"
+                            data-script="/Scripts/codemirror-5.26.0/mode/htmlembedded/htmlembedded.js">
+                        HTML
+                    </option>
+                    <option value="CSS"
+                            data-mime-type="text/css"
+                            data-script="/Scripts/codemirror-5.26.0/mode/css/css.js">
+                        CSS
+                    </option>
+                    <option value="Javascript"
+                            data-mime-type="javascript"
+                            data-script="/Scripts/codemirror-5.26.0/mode/javascript/javascript.js">
+                        Javascript
+                    </option>
+                    <option value="PHP"
+                            data-mime-type="application/x-httpd-php"
+                            data-script="/Scripts/codemirror-5.26.0/mode/php/php.js">
+                        PHP
+                    </option>
+                    <option value="Plain PHP"
+                            data-mime-type="text/x-php"
+                            data-script="/Scripts/codemirror-5.26.0/mode/php/php.js">
+                        Plain PHP
+                    </option>
+                    <option value="C#"
+                            data-mime-type="text/x-csharp"
+                            data-script="/Scripts/codemirror-5.26.0/mode/clike/clike.js">
+                        C#
+                    </option>
+                    <option value="ASP.NET"
+                            data-mime-type="application/x-aspx"
+                            data-script="/Scripts/codemirror-5.26.0/mode/htmlembedded/htmlembedded.js">
+                        ASP.NET
+                    </option>
+                    <option value="Java"
+                            data-mime-type="text/x-java"
+                            data-script="/Scripts/codemirror-5.26.0/mode/java/java.js">
+                        Java
+                    </option>
+                    <option value="XML"
+                            data-mime-type="text/xml"
+                            data-script="/Scripts/codemirror-5.26.0/mode/xml/xml.js">
+                        XML
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Snippets.SnippetContent, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Snippets.SnippetContent, new { id = "w_code", @class = "w-fields form-control codemirror-textarea form-control" })
+                @Html.ValidationMessageFor(model => model.Snippets.SnippetContent, "", new { @class = "text-danger" })
+
+                <!--<textarea id="w_code" name="w_code" class="w-fields form-control codemirror-textarea"></textarea>-->
+            </div>
+        </div>
+        <br />
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Snippets.SnippetName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-sm-6 offset-sm-4">
+                @Html.EditorFor(model => model.Snippets.SnippetName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Snippets.SnippetName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Snippets.SnippetDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-sm-6 offset-sm-4 w-text-area">
+                @Html.TextAreaFor(model => model.Snippets.SnippetDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Snippets.SnippetDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Categories.CategoryName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-sm-6 offset-sm-4">
+
+                <select name="categoryList" id="categoryList">
+                    @foreach (var item in Model.CategoryList)
+                    {   
+                    <option value="@item.CategoryId.ToString()">
+                        @item.CategoryName.ToString()
+                    </option>
+                    }
+                </select>
+
+                @Html.ValidationMessageFor(model => model.Categories, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Snippets.ReferenceURL, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-sm-6 offset-sm-4">
+                @Html.EditorFor(model => model.Snippets.ReferenceURL, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Snippets.ReferenceURL, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+    <div class="w-back-btn">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+</div><!-- end .w-feature-row -->
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
