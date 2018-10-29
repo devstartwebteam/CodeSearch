@@ -11,7 +11,6 @@
 
 // Form Handling - Login Form 
 
-
 $(document).ready(function(){
     $('#w-login-form').submit(function(e){
 

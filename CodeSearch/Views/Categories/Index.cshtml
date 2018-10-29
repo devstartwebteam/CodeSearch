@@ -13,21 +13,25 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-<table class="table w-index-table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageURL)
-        </th>
-        <th>
-            Actions
-        </th>
-    </tr>
+<table id="CodeSearchDataTable" class="table w-index-table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageURL)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
 
     @foreach (var item in Model)
     {
@@ -49,4 +53,5 @@
         </tr>
     }
 
+        </tbody>
 </table>

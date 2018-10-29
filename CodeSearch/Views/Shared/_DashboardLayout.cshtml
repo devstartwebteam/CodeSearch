@@ -17,68 +17,80 @@
 
     @Html.Partial("_Navigation")
 
-<div class="w-feature-wrap w-code-editor">
-    <div class="container-fluid w-section-container">
-        <div class="row w-section-row">
-            <div class="col-sm-2 w-sidebar-col">
+    <div class="w-feature-wrap w-code-editor">
+        <div class="container-fluid w-section-container">
+            <div class="row w-section-row">
+                <div class="col-sm-2 w-sidebar-col">
 
-                @Html.Partial("_DashboardSidebar")
+                    @Html.Partial("_DashboardSidebar")
 
-            </div>
-            <div class="col-sm-10 w-editor-col w-feature-box">
+                </div>
+                <div class="col-sm-10 w-editor-col w-feature-box">
 
-                @RenderBody()
+                    @RenderBody()
 
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
-
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>
-            /* Check if another script has already loaded jQuery, if not, load it inline */
-            window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
-        </script>
 
-        <script type="text/javascript" src="/Scripts/main.js"></script>
-        <!--<script type="text/javascript" src="Scripts/jquery.bxslider.min.js"></script>-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+        /* Check if another script has already loaded jQuery, if not, load it inline */
+        window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
+    </script>
 
-        <!-- Code Mirror javascript -->
-        <script type="text/javascript" src="/Scripts/codemirror.js"></script>
-        <script type="text/javascript" src="/Scripts/codemirror-5.26.0/mode/htmlmixed/htmlmixed.js"></script>
-        <script type="text/javascript" src="/Scripts/codemirror-5.26.0/mode/clike/clike.js"></script>
-        <script type="text/javascript" src="/Scripts/codemirror-5.26.0/mode/htmlembedded/htmlembedded.js"></script>
-        <script type="text/javascript" src="/Scripts/codemirror-5.26.0/mode/javascript/javascript.js"></script>
-        <script type="text/javascript" src="/Scripts/codemirror-5.26.0/mode/xml/xml.js"></script>
+    <script type="text/javascript" src="/Scripts/main.js"></script>
+    <!--<script type="text/javascript" src="Scripts/jquery.bxslider.min.js"></script>-->
+    <!-- Code Mirror javascript -->
+    <script type="text/javascript" src="/Scripts/codemirror.js"></script>
+    <script type="text/javascript" src="/Scripts/codemirror-5.26.0/mode/htmlmixed/htmlmixed.js"></script>
+    <script type="text/javascript" src="/Scripts/codemirror-5.26.0/mode/clike/clike.js"></script>
+    <script type="text/javascript" src="/Scripts/codemirror-5.26.0/mode/htmlembedded/htmlembedded.js"></script>
+    <script type="text/javascript" src="/Scripts/codemirror-5.26.0/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="/Scripts/codemirror-5.26.0/mode/xml/xml.js"></script>
 
-        <!-- custom scripts -->
-        <script src="/Scripts/scripts.js"></script>
-        <script src="https://use.fontawesome.com/da3fb30753.js"></script>
+    <!-- Responsive Data Tables -->
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.0/js/responsive.bootstrap.min.js"></script>
 
-        <!-- highlight.js -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
 
-        <!-- clipboard.js -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
-        <script type="text/javascript">
+    <!-- custom scripts -->
+    <!--<script src="/Scripts/scripts.js"></script>-->
+    <script src="https://use.fontawesome.com/da3fb30753.js"></script>
 
-            $(document).ready(function () {
-                var clipboard = new Clipboard('.w_copy', {
-                    target: function (trigger) {
-                        return $(trigger).closest('.w_snippet').find('#w_target_code').get(0);
-                    }
-                });
+    <!-- highlight.js -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- clipboard.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var clipboard = new Clipboard('.w_copy', {
+                target: function (trigger) {
+                    return $(trigger).closest('.w_snippet').find('#w_target_code').get(0);
+                }
             });
+        });
+    </script>
 
-
-        </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#CodeSearchDataTable').DataTable({
+               //Options go here
+            });
+        });
+    </script>
 
 </body>
 </html>

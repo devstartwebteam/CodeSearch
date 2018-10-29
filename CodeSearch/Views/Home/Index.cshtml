@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Index";
 }
@@ -7,30 +6,18 @@
     <div class="w-login-container">
         <div class="container w-feature-container">
             <div class="w-login-wrap">
-                <h1 class="w-primary-title">Account Log In</h1>
+                <h1 class="w-primary-title">Welcome to Dev Assistant</h1>
 
-                <form id="w-login-form">
+                <div id="w-login-form">
                     <div class="w-login-logo">
                         <i class="fa fa-4x fa-user-circle"></i>
                     </div>
 
                     <div class="w-login-field">
-                        <input type="text" placeholder="Enter Username" name="uname" required><br />
-                        <input type="password" placeholder="Enter Password" name="psw" required><br />
-
-                        <button id="w-login-submit" class="w-login-btn" type="submit">Log In</button>
+                        @Html.ActionLink("Log into Account", "Login")
+                        @Html.ActionLink("Register New Account", "Account")
                     </div>
-
-                    <div class="w-login-field">
-                        <p class="w-remember">
-                            <span class="w-rem-span">Remember Me</span>
-                            <input type="checkbox" checked="checked">
-                        </p>
-                        <span class="psw"><a href="#">Forgot Password? </a></span>
-                        <span class="psw"><a href="#"> Create a New Account</a></span>
-                    </div>
-                </form>
-
+                </div>
             </div>
         </div>
     </div>

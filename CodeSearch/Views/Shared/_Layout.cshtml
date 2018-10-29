@@ -23,27 +23,25 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
-
-
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script>
     /* Check if another script has already loaded jQuery, if not, load it inline */
     window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
     </script>
 
-    <script type="text/javascript" src="Scripts/main.js"></script>
-    <script type="text/javascript" src="Scripts/jquery.bxslider.min.js"></script>
+    <script type="text/javascript" src="/Scripts/main.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery.bxslider.min.js"></script>
 
     <!-- Code Mirror javascript -->
     <script type="text/javascript" src="/Scripts/codemirror.js"></script>
     <script type="text/javascript" src="/Scripts/codemirror-5.26.0/mode/htmlmixed/htmlmixed.js"></script>
-    <script type="text/javascript" src="Scripts/codemirror-5.26.0/mode/clike/clike.js"></script>
-    <script type="text/javascript" src="Scripts/codemirror-5.26.0/mode/htmlembedded/htmlembedded.js"></script>
-    <script type="text/javascript" src="Scripts/codemirror-5.26.0/mode/javascript/javascript.js"></script>
-    <script type="text/javascript" src="Scripts/codemirror-5.26.0/mode/xml/xml.js"></script>
+    <script type="text/javascript" src="/Scripts/codemirror-5.26.0/mode/clike/clike.js"></script>
+    <script type="text/javascript" src="/Scripts/codemirror-5.26.0/mode/htmlembedded/htmlembedded.js"></script>
+    <script type="text/javascript" src="/Scripts/codemirror-5.26.0/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="/Scripts/codemirror-5.26.0/mode/xml/xml.js"></script>
 
     <!-- custom scripts -->
-    <script src="Scripts/scripts.js"></script>
+    <!--<script src="/Scripts/scripts.js"></script>-->
     <script src="https://use.fontawesome.com/da3fb30753.js"></script>
 
     <!-- highlight.js -->
@@ -68,7 +66,8 @@
     <script>
     $(document).ready(function () {
         $('.w-home-slider').bxSlider({
-            mode: 'fade'
+            mode: 'fade',
+            controls: false
         });
     });
 
