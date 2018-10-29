@@ -677,6 +677,32 @@ body #CodeSearchDataTable_wrapper table thead > tr > th {
     border:0px;
 }
 
+body #CodeSearchDataTable_length {
+    padding-bottom:20px;
+}
+
+body .pagination > .active > a,
+body .pagination > .active > span,
+body .pagination > .active > a:hover,
+body .pagination > .active > span:hover,
+body .pagination > .active > a:focus,
+body .pagination > .active > span:focus {
+    background-color: #2475c5;
+}
+
+body .pagination > .disabled > span, 
+body .pagination > .disabled > a,
+body .pagination > .disabled > a:hover,
+body .pagination > .disabled > a:focus {
+    color:#333333;
+    border: #c7c7c7 1px solid;
+    box-shadow:0 2px 2px rgba(0,0,0,.04);
+}
+
+body #CodeSearchDataTable_wrapper table thead > tr > th::after {
+    padding-bottom: 12px;
+}
+
 body .w-code-editor #mode {
     margin: 5px 0px;
 }
