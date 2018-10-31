@@ -13,6 +13,7 @@ using CodeSearch.ViewModels;
 
 namespace CodeSearch.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
         private CodeSearchModelContainer db = new CodeSearchModelContainer();

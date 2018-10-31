@@ -9,6 +9,7 @@ using CodeSearch.ViewModels;
 
 namespace CodeSearch.Controllers
 {
+    [Authorize]
     public class SnippetsController : Controller
     {
         private CodeSearchModelContainer db = new CodeSearchModelContainer();
@@ -103,6 +104,7 @@ namespace CodeSearch.Controllers
                 db.Snippets.Add(newSnippet);
                 db.SaveChanges();
                 
+                TempData["SuccessMessage"] = "<div class='alert alert-success'><strong> Success!</strong> Indicates a successful or positive action.</div>";
             }
 
             return RedirectToAction("Index");
@@ -194,6 +196,7 @@ namespace CodeSearch.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(snippetViewModel);
         }
 
@@ -209,6 +212,9 @@ namespace CodeSearch.Controllers
             db.CategorySnippetAssociations.Remove(snippetCategory);
 
             db.SaveChanges();
+
+            TempData["DeleteMessage"] = "<div class='alert alert-success'><strong> Snippet Successfully Removed!</strong> Indicates a successful or positive action.</div>";
+
             return RedirectToAction("Index");
         }
 

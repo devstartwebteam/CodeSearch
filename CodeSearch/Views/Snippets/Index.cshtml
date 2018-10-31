@@ -4,63 +4,74 @@
     ViewBag.Title = "Code Snippets";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 
+    var SuccessMessage = TempData["SuccessMessage"];
+
 }
 
 <div class="w-index-title">
     @Html.Partial("_PageTitle")
+
+    @if (SuccessMessage != null) {
+        @Html.Raw(TempData["SuccessMessage"].ToString())
+    }
+
 </div>
 
 <p class="w-create-btn-sm btn btn-default"> @Html.ActionLink("Create New", "Create") </p>
 
-<table class="table w-index-table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.SnippetName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SnippetDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReferenceURL)
-        </th>
-        <th>
-            Category
-        </th>
-        <th>
-            Actions
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table id="CodeSearchDataTable" class="table w-index-table">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SnippetName)
-            </td>
-            <td class="w-index-description">
-                @Html.DisplayFor(modelItem => item.SnippetDescription)
-            </td>
-            <td>
-                <a href="@Html.DisplayFor(modelItem => item.ReferenceURL)" target="_blank">
-                @Html.DisplayFor(modelItem => item.ReferenceURL)
-                </a>
-            </td>
-            <td>
-                @foreach (var cat in item.CategorySnippetAssociations)
-                {
-                    @Html.DisplayFor(modelItem => cat.Category.CategoryName)
-                }
-
-            </td>
-
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.SnippetId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.SnippetId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.SnippetId })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.SnippetName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SnippetDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReferenceURL)
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Actions
+            </th>
         </tr>
+    </thead>
 
-    }
+    <tbody>
 
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SnippetName)
+                </td>
+                <td class="w-index-description">
+                    @Html.DisplayFor(modelItem => item.SnippetDescription)
+                </td>
+                <td>
+                    <a href="@Html.DisplayFor(modelItem => item.ReferenceURL)" target="_blank">
+                        @Html.DisplayFor(modelItem => item.ReferenceURL)
+                    </a>
+                </td>
+                <td>
+                    @foreach (var cat in item.CategorySnippetAssociations)
+                    {
+                        @Html.DisplayFor(modelItem => cat.Category.CategoryName)
+                    }
 
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.SnippetId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.SnippetId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.SnippetId })
+                </td>
+            </tr>
+
+        }
+
+    </tbody>
 </table>

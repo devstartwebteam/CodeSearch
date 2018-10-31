@@ -266,6 +266,10 @@ body .w-create-btn-sm a {
     padding:6px 12px;
 }
 
+body .w-reset-title {
+    padding: 20px 0px;
+}
+
 body .w-sidebar-list .w-sidebar-label {
     padding: 10px;
     list-style-type:none;
