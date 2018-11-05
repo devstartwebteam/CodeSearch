@@ -95,11 +95,11 @@
 
                 <select name="categoryList" id="categoryList">
                     @foreach (var item in Model.CategoryList)
-                {
-                    <option value="@item.CategoryId.ToString()">
-                        @item.CategoryName.ToString()
-                    </option>
-            }
+                    {
+                        <option value="@item.CategoryId.ToString()">
+                            @item.CategoryName.ToString()
+                        </option>
+                    }
                 </select>
 
                 @Html.ValidationMessageFor(model => model.Categories, "", new { @class = "text-danger" })
@@ -139,3 +139,14 @@
         @Html.ActionLink("Back to List", "Index")
     </div>
 </div><!-- end .row -->
+
+<script>
+
+    var mode = "@Model.Snippets.SnippetLanguage"
+
+        function setLanguage() {
+            var modeSelect = document.getElementById("mode");
+            modeSelect.value = mode;
+        }
+        setLanguage();
+</script>

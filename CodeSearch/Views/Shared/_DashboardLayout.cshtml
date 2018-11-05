@@ -11,9 +11,10 @@
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 
-<body class="w-login-body">
+<body class="w-login-body w-fade-in">
 
     @Html.Partial("_Navigation")
 
@@ -87,9 +88,10 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#CodeSearchDataTable').DataTable({
-               //Options go here
+                //Options go here
             });
-        });
+        });
+
     </script>
 
     <script type="text/javascript">
@@ -123,6 +125,10 @@
             };
             document.getElementsByTagName('head')[0].appendChild(s);
         }
+    </script>
+
+    <script>
+        loadModeForSelectedOption();
     </script>
 
 </body>

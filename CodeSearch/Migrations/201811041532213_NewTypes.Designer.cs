@@ -7,13 +7,13 @@ namespace CodeSearch.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class UpdateAccount : IMigrationMetadata
+    public sealed partial class NewTypes : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateAccount));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(NewTypes));
         
         string IMigrationMetadata.Id
         {
-            get { return "201810290306565_UpdateAccount"; }
+            get { return "201811041532213_NewTypes"; }
         }
         
         string IMigrationMetadata.Source

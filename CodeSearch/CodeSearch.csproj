@@ -46,6 +46,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AntiXssLibrary, Version=4.3.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\AntiXssLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlSanitizationLibrary, Version=4.3.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\HtmlSanitizationLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -192,17 +198,20 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\DisclaimerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SnippetsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201810290306565_UpdateAccount.cs" />
-    <Compile Include="Migrations\201810290306565_UpdateAccount.Designer.cs">
-      <DependentUpon>201810290306565_UpdateAccount.cs</DependentUpon>
+    <Compile Include="Helpers\ProjectHelpers.cs" />
+    <Compile Include="Migrations\201811041532213_NewTypes.cs" />
+    <Compile Include="Migrations\201811041532213_NewTypes.Designer.cs">
+      <DependentUpon>201811041532213_NewTypes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -377,6 +386,7 @@
     <Content Include="Scripts\codemirror-5.26.0\LICENSE" />
     <Content Include="Scripts\codemirror-5.26.0\package.json" />
     <Content Include="Scripts\codemirror-5.26.0\README.md" />
+    <Content Include="fonts\Mark Simonson - Proxima Nova Alt Regular-webfont.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\codemirror-5.26.0\addon\comment\comment.js" />
     <Content Include="Scripts\codemirror-5.26.0\addon\comment\continuecomment.js" />
@@ -988,6 +998,9 @@
     <Content Include="Views\Shared\_PageTitle.cshtml" />
     <Content Include="Views\Shared\_SearchForm.cshtml" />
     <Content Include="Views\Shared\_SliderBackground.cshtml" />
+    <Content Include="Views\Shared\_LayoutPage.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Search\Results.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1011,8 +1024,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201810290306565_UpdateAccount.resx">
-      <DependentUpon>201810290306565_UpdateAccount.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201811041532213_NewTypes.resx">
+      <DependentUpon>201811041532213_NewTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

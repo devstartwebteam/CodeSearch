@@ -1,7 +1,15 @@
 ﻿@{
     ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<div class="w-page-wrap">
+    <div class="container w-page-container">
+
+        <h1 class="w-primary-title">@ViewBag.Title</h1>
+        <h3>@ViewBag.Message</h3>
+
+        <p>Use this area to provide additional information.</p>
+
+    </div>
+</div>

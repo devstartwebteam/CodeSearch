@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/25/2018 10:26:06
+-- Date Created: 11/04/2018 07:28:18
 -- Generated from EDMX file: C:\Users\njohnson\source\repos\CodeSearch\CodeSearch\Models\Data\CodeSearchModel.edmx
 -- --------------------------------------------------
 
@@ -61,8 +61,8 @@ GO
 CREATE TABLE [dbo].[Snippets] (
     [SnippetId] int IDENTITY(1,1) NOT NULL,
     [SnippetName] nvarchar(max)  NOT NULL,
+    [SnippetContent] nvarchar(max)  NOT NULL,
     [SnippetDescription] nvarchar(max)  NULL,
-    [SnippetContent] nvarchar(max)  NULL,
     [Created] datetime  NULL,
     [Modified] datetime  NULL,
     [SnippetLanguage] nvarchar(max)  NULL,

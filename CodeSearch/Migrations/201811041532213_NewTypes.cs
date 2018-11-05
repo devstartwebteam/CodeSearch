@@ -3,7 +3,7 @@ namespace CodeSearch.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class UpdateAccount : DbMigration
+    public partial class NewTypes : DbMigration
     {
         public override void Up()
         {
@@ -36,8 +36,8 @@ namespace CodeSearch.Migrations
                     {
                         SnippetId = c.Int(nullable: false, identity: true),
                         SnippetName = c.String(),
-                        SnippetDescription = c.String(),
                         SnippetContent = c.String(),
+                        SnippetDescription = c.String(),
                         Created = c.DateTime(),
                         Modified = c.DateTime(),
                         SnippetLanguage = c.String(),

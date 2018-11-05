@@ -35,8 +35,8 @@
     </Key>
     <Property Name="SnippetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SnippetName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SnippetContent" Type="nvarchar(max)" Nullable="false" />
     <Property Name="SnippetDescription" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="SnippetContent" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Created" Type="datetime" Nullable="true" />
     <Property Name="Modified" Type="datetime" Nullable="true" />
     <Property Name="SnippetLanguage" Type="nvarchar(max)" Nullable="true" />
@@ -169,8 +169,8 @@
           </Key>
           <Property Name="SnippetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SnippetName" Type="String" Nullable="false" />
+          <Property Name="SnippetContent" Type="String" Nullable="false" />
           <Property Name="SnippetDescription" Type="String" Nullable="true" />
-          <Property Name="SnippetContent" Type="String" Nullable="true" />
           <Property Name="Created" Type="DateTime" Nullable="true" />
           <Property Name="Modified" Type="DateTime" Nullable="true" />
           <Property Name="SnippetLanguage" Type="String" Nullable="true" />
@@ -289,8 +289,8 @@
         <MappingFragment StoreEntitySet="Snippets">
           <ScalarProperty Name="SnippetId" ColumnName="SnippetId" />
           <ScalarProperty Name="SnippetName" ColumnName="SnippetName" />
-          <ScalarProperty Name="SnippetDescription" ColumnName="SnippetDescription" />
           <ScalarProperty Name="SnippetContent" ColumnName="SnippetContent" />
+          <ScalarProperty Name="SnippetDescription" ColumnName="SnippetDescription" />
           <ScalarProperty Name="Created" ColumnName="Created" />
           <ScalarProperty Name="Modified" ColumnName="Modified" />
           <ScalarProperty Name="SnippetLanguage" ColumnName="SnippetLanguage" />

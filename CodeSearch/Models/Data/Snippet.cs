@@ -24,8 +24,8 @@ namespace CodeSearch.Models.Data
     
         public int SnippetId { get; set; }
         public string SnippetName { get; set; }
-        public string SnippetDescription { get; set; }
         public string SnippetContent { get; set; }
+        public string SnippetDescription { get; set; }
         public Nullable<System.DateTime> Created { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
         public string SnippetLanguage { get; set; }

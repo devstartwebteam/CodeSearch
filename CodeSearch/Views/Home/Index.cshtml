@@ -1,34 +1,41 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Index";
 }
 
     <div class="w-login-container">
         <div class="container w-feature-container">
-            <div class="w-login-wrap">
-                <h1 class="w-primary-title">Welcome to Dev Assistant</h1>
+            <div class="w-home-login-wrap">
+                <h1 class="w-home-title"><strong>Dev Assistant</strong> is a searchable library to organize your code</h1>
 
-                <div id="w-login-form">
-                    <div class="w-login-logo">
-                        <i class="fa fa-4x fa-user-circle"></i>
-                    </div>
+                <div id="w-login-form" class="w-home-login-form">
 
                     <div class="w-login-field">
-                        @Html.ActionLink("Log into Account", "Login")
-                        @Html.ActionLink("Register New Account", "Account")
-                    </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="w-dark-btn">
+                                    @Html.ActionLink("Create a New Account", "Register", "Account")
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="w-light-btn">
+                                    @Html.ActionLink("Log into Your Account", "Login", "Account")
+                                </div>
+                            </div>
+                        </div>    
+                        
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="w-learn-wrap">
+                                    <a href="/Home/About">
+                                    <i class="fa fa-4x fa-question-circle-o"></i>
+                                    <span class="w-learn-text">Want to Learn More?</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end w-login-field -->
+
                 </div>
             </div>
-        </div>
-    </div>
-
-
-    <div class="w-body-wrap">
-        <div class="w-slide-wrap">
-            <ul class="w-home-slider">
-                <li><img src="/Content/Images/dev-assistant-login-background.jpg"></li>
-                <li><img src="/Content/Images/web-assistant-polar.jpg" /></li>
-                <li><img src="/Content/Images/web-assistant-smart-phone.jpg" /></li>
-            </ul>
         </div>
     </div>

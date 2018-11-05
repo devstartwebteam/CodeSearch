@@ -15,7 +15,8 @@
                 <ul class="nav navbar-nav">
                     <li><a class="w-login-link" href="/Account/Login">Log In</a></li>
                     <li><a class="w-login-link" href="/Account/Register">Sign Up</a></li>
-                    <li><form id="w-search-form"><input id="w-nav-search" name="w-nav-search" type="text" placeholder=" Search..." /><i class="fa fa-search"></i></form></li>
+                    <li><form id="w-search-form" action="/Search/Results/" method="post">
+                        <input class="w-nav-search" id="criteria" name="criteria" type="text" placeholder=" Search..." /><i id="w-search-btn" class="fa fa-search"></i></form></li>
                 </ul>
             </div><!--.nav-collapse -->
         </div><!--.container -->

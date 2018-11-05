@@ -17,9 +17,10 @@
 
     @Html.Partial("_Navigation")
 
-    @RenderBody()
+    <div class="container w-page-container">
+        @RenderBody()
+    </div>
 
-    @Html.Partial("_SliderBackground")
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -53,23 +54,28 @@
     <!-- clipboard.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
     <script type="text/javascript">
-        $(function () {
+
+    $(document).ready(function () {
         var clipboard = new Clipboard('.w_copy', {
             target: function (trigger) {
                 return $(trigger).closest('.w_snippet').find('#w_target_code').get(0);
             }
-            });
         });
+    });
+
+
     </script>
 
     <script>
-        $(function () {
+    $(document).ready(function () {
         $('.w-home-slider').bxSlider({
             mode: 'fade',
             controls: false
         });
     });
+
     </script>
+
 
     <script>
         $(function () {
@@ -83,7 +89,9 @@
                 window.location = $("form").attr("action") + "?criteria=" + encodeURI($("#criteria").val());
                 return false;
             });
+
         });
+
     </script>
 
 </body>

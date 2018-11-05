@@ -6,6 +6,9 @@ using System.Net;
 using System.Web.Mvc;
 using CodeSearch.Models.Data;
 using CodeSearch.ViewModels;
+using CodeSearch.Helpers;
+using System.Text;
+using Microsoft.Security.Application;
 
 namespace CodeSearch.Controllers
 {
@@ -47,6 +50,8 @@ namespace CodeSearch.Controllers
 
             Snippet snippet = db.Snippets.Find(id);
 
+            //Convert.ToBase64String(snippet.SnippetContent);
+
             SnippetsViewModel snippetViewModel = new SnippetsViewModel
             {
                 CategoryList = categories.ToList<Category>(),
@@ -78,19 +83,21 @@ namespace CodeSearch.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create(SnippetsViewModel model, int categoryList, string SnippetLanguage)
         {
             if (ModelState.IsValid)
             {
+                string snippetString = model.Snippets.SnippetContent.ToString();
+
                 var newSnippet = new Snippet
                 {
                     SnippetId = model.Snippets.SnippetId,
-                    SnippetName = model.Snippets.SnippetName,
+                    SnippetName = Sanitizer.GetSafeHtmlFragment(model.Snippets.SnippetName),
                     SnippetContent = model.Snippets.SnippetContent,
-                    SnippetDescription = model.Snippets.SnippetDescription,
-                    ReferenceURL = model.Snippets.ReferenceURL,
-                    SnippetLanguage = SnippetLanguage
-
+                    SnippetDescription = Sanitizer.GetSafeHtmlFragment(model.Snippets.SnippetDescription),
+                    ReferenceURL = Sanitizer.GetSafeHtmlFragment(model.Snippets.ReferenceURL),
+                    SnippetLanguage = Sanitizer.GetSafeHtmlFragment(SnippetLanguage)
                 };
 
                 var snippetCategory = new CategorySnippetAssociations
@@ -99,12 +106,11 @@ namespace CodeSearch.Controllers
                     CategoryAssociationId = categoryList
                 };
 
-
                 db.CategorySnippetAssociations.Add(snippetCategory);
                 db.Snippets.Add(newSnippet);
                 db.SaveChanges();
                 
-                TempData["SuccessMessage"] = "<div class='alert alert-success'><strong> Success!</strong> Indicates a successful or positive action.</div>";
+                TempData["SuccessMessage"] = "<div class='alert alert-success'><strong> Success!</strong> New Code Snippet Created</div>";
             }
 
             return RedirectToAction("Index");
@@ -142,6 +148,7 @@ namespace CodeSearch.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit(int id, SnippetsViewModel model, int categoryList, string SnippetLanguage)
         {
             Snippet snippet = db.Snippets.Find(id);
@@ -155,11 +162,11 @@ namespace CodeSearch.Controllers
                     return new HttpNotFoundResult();
                 }
 
-                snippet.SnippetName = model.Snippets.SnippetName;
-                snippet.SnippetContent = model.Snippets.SnippetContent;
-                snippet.SnippetDescription = model.Snippets.SnippetDescription;
-                snippet.ReferenceURL = model.Snippets.ReferenceURL;
-                snippet.SnippetLanguage = SnippetLanguage;
+                snippet.SnippetName = Sanitizer.GetSafeHtmlFragment(model.Snippets.SnippetName);
+                snippet.SnippetContent = Sanitizer.GetSafeHtmlFragment(model.Snippets.SnippetContent);
+                snippet.SnippetDescription = Sanitizer.GetSafeHtmlFragment(model.Snippets.SnippetDescription);
+                snippet.ReferenceURL = Sanitizer.GetSafeHtmlFragment(model.Snippets.ReferenceURL);
+                snippet.SnippetLanguage = Sanitizer.GetSafeHtmlFragment(SnippetLanguage);
 
                 snippetCategory.CategoryAssociationId = categoryList;
 
@@ -225,21 +232,6 @@ namespace CodeSearch.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        //Search
-        public ActionResult Search(string id)
-        {
-            string searchString = id;
-            var snippets = from s in db.Snippets
-                         select s;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                snippets = snippets.Where(s => s.SnippetName.Contains(searchString));
-            }
-
-            return View(snippets);
         }
     }
 }

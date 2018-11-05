@@ -1,0 +1,47 @@
+﻿@model IEnumerable<CodeSearch.Models.Data.Project>
+
+@{
+    ViewBag.Title = "Dashboard Home";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="w-index-title">
+    @Html.Partial("_PageTitle")
+</div>
+
+<table id="CodeSearchDataTable" class="table w-index-table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectDescription)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectTitle)
+                </td>
+                <td class="w-index-description">
+                    @Html.DisplayFor(modelItem => item.ProjectDescription)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProjectId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ProjectId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProjectId })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
