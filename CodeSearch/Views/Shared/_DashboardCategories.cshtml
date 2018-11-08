@@ -68,23 +68,6 @@
     <!--<script src="/Scripts/scripts.js"></script>-->
     <script src="https://use.fontawesome.com/da3fb30753.js"></script>
 
-    <!-- highlight.js -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-
-    <!-- clipboard.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-            var clipboard = new Clipboard('.w_copy', {
-                target: function (trigger) {
-                    return $(trigger).closest('.w_snippet').find('#w_target_code').get(0);
-                }
-            });
-        });
-    </script>
-
     <script type="text/javascript">
         $(document).ready(function () {
             $('#CodeSearchDataTable').DataTable({
@@ -94,40 +77,5 @@
 
     </script>
 
-    <script type="text/javascript">
-        //Initialize with HTML
-        var code = $(".codemirror-textarea")[0];
-        var editor = CodeMirror.fromTextArea(code, {
-            lineNumbers: true,
-            mode: "null",
-            htmlMode: true
-        });
-
-        function loadModeForSelectedOption() {
-
-            var script = $("#mode option:selected").attr('data-script');
-            var mode = $("#mode option:selected").attr('data-mime-type');
-            loadJS(script, function () {
-                editor.setOption("mode", mode);
-            });
-        }
-
-        function loadJS(src, callback) {
-            var s = document.createElement('script');
-            s.src = src;
-            s.async = true;
-            s.onreadystatechange = s.onload = function () {
-                var state = s.readyState;
-                if (!callback.done && (!state || /loaded|complete/.test(state))) {
-                    callback.done = true;
-                    callback();
-                }
-            };
-            document.getElementsByTagName('head')[0].appendChild(s);
-        }
-    </script>
-    <script>
-        loadModeForSelectedOption();
-    </script>
 </body>
 </html>

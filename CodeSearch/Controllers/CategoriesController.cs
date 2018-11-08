@@ -64,6 +64,7 @@ namespace CodeSearch.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create(ImageViewModel model)
         {
             var validImageTypes = new string[]

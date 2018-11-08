@@ -5,14 +5,27 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 
     var SuccessMessage = TempData["SuccessMessage"];
+    var DeleteMessage = TempData["DeleteMessage"];
+    var UpdateMessage = TempData["UpdateMessage"];
 
 }
 
 <div class="w-index-title">
     @Html.Partial("_PageTitle")
 
-    @if (SuccessMessage != null) {
+    @if (SuccessMessage != null)
+    {
         @Html.Raw(TempData["SuccessMessage"].ToString())
+    }
+
+    @if (DeleteMessage != null)
+    {
+        @Html.Raw(TempData["DeleteMessage"].ToString())
+    }
+
+    @if (UpdateMessage != null)
+    {
+        @Html.Raw(TempData["UpdateMessage"].ToString())
     }
 
 </div>

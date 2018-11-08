@@ -9,6 +9,7 @@ using CodeSearch.ViewModels;
 using CodeSearch.Helpers;
 using System.Text;
 using Microsoft.Security.Application;
+using System.Web;
 
 namespace CodeSearch.Controllers
 {
@@ -20,17 +21,6 @@ namespace CodeSearch.Controllers
         // GET: Snippets
         public ActionResult Index()
         {
-            //var snippets = db.Snippets.Include(x => x.CategorySnippetAssociations);
-
-            /*var snippets = from Snippets in db.Snippets
-                           from Categories in db.Categories
-                           select new {
-                               SnippetName = Snippets.SnippetName,
-                               SnippetDescription = Snippets.SnippetDescription,
-                               ReferenceURL = Snippets.ReferenceURL,
-                               CategoryName = Categories.CategoryName
-                           };*/
-
             var snippets = db.Snippets.Include(x => x.CategorySnippetAssociations);
 
             return View(snippets.ToList());
@@ -48,14 +38,18 @@ namespace CodeSearch.Controllers
                              where r.CategoryName != ""
                              select r;
 
-            Snippet snippet = db.Snippets.Find(id);
+            var selectedCatId = (from csa in db.CategorySnippetAssociations
+                                 where csa.SnippetAssociationId == id
+                                 select csa.Category.CategoryId).FirstOrDefault();
 
-            //Convert.ToBase64String(snippet.SnippetContent);
+            Snippet snippet = db.Snippets.Find(id);
+            HttpUtility.HtmlDecode(snippet.SnippetContent);
 
             SnippetsViewModel snippetViewModel = new SnippetsViewModel
             {
+                Snippets = snippet,
                 CategoryList = categories.ToList<Category>(),
-                Snippets = snippet
+                selectedCategory = selectedCatId
             };
 
             if (snippet == null)
@@ -84,7 +78,7 @@ namespace CodeSearch.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create(SnippetsViewModel model, int categoryList, string SnippetLanguage)
+        public ActionResult Create(SnippetsViewModel model, int categoryList, string SnippetLanguage, string SnippetName, string SnippetDescription)
         {
             if (ModelState.IsValid)
             {
@@ -92,17 +86,16 @@ namespace CodeSearch.Controllers
 
                 var newSnippet = new Snippet
                 {
-                    SnippetId = model.Snippets.SnippetId,
-                    SnippetName = Sanitizer.GetSafeHtmlFragment(model.Snippets.SnippetName),
-                    SnippetContent = model.Snippets.SnippetContent,
-                    SnippetDescription = Sanitizer.GetSafeHtmlFragment(model.Snippets.SnippetDescription),
+                    SnippetName = Sanitizer.GetSafeHtmlFragment(model.SnippetName),
+                    SnippetContent = HtmlSanitizer.SanitizeHtml(model.Snippets.SnippetContent),
+                    SnippetDescription = Sanitizer.GetSafeHtmlFragment(model.SnippetDescription),
                     ReferenceURL = Sanitizer.GetSafeHtmlFragment(model.Snippets.ReferenceURL),
                     SnippetLanguage = Sanitizer.GetSafeHtmlFragment(SnippetLanguage)
                 };
 
                 var snippetCategory = new CategorySnippetAssociations
                 {
-                    SnippetAssociationId = model.Snippets.SnippetId,
+                    SnippetAssociationId = newSnippet.SnippetId,
                     CategoryAssociationId = categoryList
                 };
 
@@ -110,7 +103,7 @@ namespace CodeSearch.Controllers
                 db.Snippets.Add(newSnippet);
                 db.SaveChanges();
                 
-                TempData["SuccessMessage"] = "<div class='alert alert-success'><strong> Success!</strong> New Code Snippet Created</div>";
+                TempData["SuccessMessage"] = "<div class='alert alert-success w-fade-out'><strong> Success!</strong> New Code Snippet Created</div>";
             }
 
             return RedirectToAction("Index");
@@ -125,15 +118,27 @@ namespace CodeSearch.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var categories = from r in db.Categories
-                             where r.CategoryName != ""
-                             select r;
+            //Get All Categories
+            var categories = from c in db.Categories
+                             where c.CategoryName != ""
+                             select c;
+
+            //Get Assigned Category based on Snippet Id
+            /* var selectedCat = (from csa in db.CategorySnippetAssociations
+                               join c in db.Categories on csa.CategoryAssociationId equals c.CategoryId
+                               where csa.SnippetAssociationId == id
+                               select c.CategoryName).FirstOrDefault(); */
+
+            var selectedCatId = (from csa in db.CategorySnippetAssociations
+                               where csa.SnippetAssociationId == id
+                               select csa.Category.CategoryId).FirstOrDefault();
 
             Snippet snippet = db.Snippets.Find(id);
             SnippetsViewModel snippetViewModel = new SnippetsViewModel
             {
+                Snippets = snippet,
                 CategoryList = categories.ToList<Category>(),
-                Snippets = snippet
+                selectedCategory = selectedCatId
             };
 
             if (snippet == null)
@@ -153,26 +158,29 @@ namespace CodeSearch.Controllers
         {
             Snippet snippet = db.Snippets.Find(id);
 
-            CategorySnippetAssociations snippetCategory = db.CategorySnippetAssociations.Find(id);
+            CategorySnippetAssociations snippetCategoryAssociation = db.CategorySnippetAssociations.Find(id);
 
             if (ModelState.IsValid) {
        
-                if (snippet == null || snippetCategory == null)
+                if (snippet == null || snippetCategoryAssociation == null)
                 {
                     return new HttpNotFoundResult();
                 }
 
                 snippet.SnippetName = Sanitizer.GetSafeHtmlFragment(model.Snippets.SnippetName);
-                snippet.SnippetContent = Sanitizer.GetSafeHtmlFragment(model.Snippets.SnippetContent);
+                snippet.SnippetContent = HtmlSanitizer.SanitizeHtml(model.Snippets.SnippetContent);
                 snippet.SnippetDescription = Sanitizer.GetSafeHtmlFragment(model.Snippets.SnippetDescription);
                 snippet.ReferenceURL = Sanitizer.GetSafeHtmlFragment(model.Snippets.ReferenceURL);
                 snippet.SnippetLanguage = Sanitizer.GetSafeHtmlFragment(SnippetLanguage);
 
-                snippetCategory.CategoryAssociationId = categoryList;
+                snippetCategoryAssociation.CategoryAssociationId = categoryList;
 
-                db.Entry(snippetCategory).State = EntityState.Modified;
+                db.Entry(snippetCategoryAssociation).State = EntityState.Modified;
                 db.Entry(snippet).State = EntityState.Modified;
                 db.SaveChanges();
+
+                TempData["UpdateMessage"] = "<div class='alert alert-info w-fade-out'>Code Snippet Successfully Updated!</div>";
+
                 return RedirectToAction("Index");
             }
 
@@ -192,11 +200,17 @@ namespace CodeSearch.Controllers
                              where r.CategoryName != ""
                              select r;
 
+            var selectedCatId = (from csa in db.CategorySnippetAssociations
+                                 where csa.SnippetAssociationId == id
+                                 select csa.Category.CategoryId).FirstOrDefault();
+
             Snippet snippet = db.Snippets.Find(id);
             SnippetsViewModel snippetViewModel = new SnippetsViewModel
             {
+                Snippets = snippet,
                 CategoryList = categories.ToList<Category>(),
-                Snippets = snippet
+                selectedCategory = selectedCatId
+
             };
 
             if (snippet == null)
@@ -220,7 +234,7 @@ namespace CodeSearch.Controllers
 
             db.SaveChanges();
 
-            TempData["DeleteMessage"] = "<div class='alert alert-success'><strong> Snippet Successfully Removed!</strong> Indicates a successful or positive action.</div>";
+            TempData["DeleteMessage"] = "<div class='alert alert-info w-fade-out'>Code Snippet Successfully Removed!</div>";
 
             return RedirectToAction("Index");
         }

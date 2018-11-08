@@ -222,8 +222,6 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
-
-
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script>
             /* Check if another script has already loaded jQuery, if not, load it inline */
@@ -233,35 +231,10 @@
     <script type="text/javascript" src="Scripts/main.js"></script>
     <script type="text/javascript" src="Scripts/jquery.bxslider.min.js"></script>
 
-    <!-- Code Mirror javascript -->
-    <script type="text/javascript" src="Scripts/codemirror.js"></script>
-    <script type="text/javascript" src="Scripts/codemirror-5.26.0/mode/htmlmixed/htmlmixed.js"></script>
-    <script type="text/javascript" src="Scripts/codemirror-5.26.0/mode/clike/clike.js"></script>
-    <script type="text/javascript" src="Scripts/codemirror-5.26.0/mode/htmlembedded/htmlembedded.js"></script>
-    <script type="text/javascript" src="Scripts/codemirror-5.26.0/mode/javascript/javascript.js"></script>
-    <script type="text/javascript" src="Scripts/codemirror-5.26.0/mode/xml/xml.js"></script>
-
     <!-- custom scripts -->
     <script src="Scripts/scripts.js"></script>
     <script src="https://use.fontawesome.com/da3fb30753.js"></script>
 
-    <!-- highlight.js -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-
-    <!-- clipboard.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-            var clipboard = new Clipboard('.w_copy', {
-                target: function (trigger) {
-                    return $(trigger).closest('.w_snippet').find('#w_target_code').get(0);
-                }
-            });
-        });
-
-    </script>
 
 </body>
 </html>

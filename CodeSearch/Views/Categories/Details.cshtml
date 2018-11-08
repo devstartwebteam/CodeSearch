@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Category Details";
-    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    Layout = "~/Views/Shared/_DashboardCategories.cshtml";
 }
 
 @Html.Partial("_PageTitle")
@@ -31,10 +31,10 @@
             </div>
        </div>
 
-            <div class="w-back-btn">
-                @Html.ActionLink("Edit", "Edit", new { id = Model.CategoryId }) |
-                @Html.ActionLink("Back to List", "Index")
-            </div>
+        <div class="w-back-btn">
+            @Html.ActionLink("Back to List", "Index") |
+            @Html.ActionLink("Edit", "Edit", new { id = Model.CategoryId })
+        </div>
         
         </div>    
     </div><!-- end .w-feature-row -->

@@ -12,7 +12,7 @@
 
         <!-- Start Form Groups -->
         <div class="form-group row">
-            <label for="example-text-input" class="control-label col-md-2">Choose Language</label>
+            <label for="example-text-input" class="control-label col-md-2">Selected Language</label>
             <div class="col-sm-10">
                 <select id="mode" name="SnippetLanguage" class="w-code-select" onchange="loadModeForSelectedOption()">
                     <option value="text" selected="selected" data-mime-type="text">
@@ -77,19 +77,19 @@
         <div class="form-group row">
             @Html.LabelFor(model => model.Snippets.SnippetContent, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Snippets.SnippetContent, new { id = "w_code", @class = "w-fields form-control codemirror-textarea form-control" })
+                <textarea id="w_code" name="w_code" class="w-fields form-control codemirror-textarea">@Html.Raw(Model.Snippets.SnippetContent)</textarea>
             </div>
         </div>
 
         <div class="form-group row">
             @Html.LabelFor(model => model.Snippets.SnippetDescription, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-sm-6 offset-sm-4">
-                @Html.EditorFor(model => model.Snippets.SnippetDescription, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-sm-6 offset-sm-4 w-text-area">
+                @Html.TextAreaFor(model => model.Snippets.SnippetDescription, new { htmlAttributes = new { @class = "form-control w-description-box" } })
             </div>
         </div>
 
         <div class="form-group row">
-            @Html.LabelFor(model => model.Categories.CategoryName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Select Category</label>
             <div class="col-sm-6 offset-sm-4">
 
                 <select name="categoryList" id="categoryList">
@@ -101,7 +101,6 @@
                     }
                 </select>
 
-                @Html.ValidationMessageFor(model => model.Categories, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group row">
@@ -114,8 +113,8 @@
     </div><!-- end .col-sm-12 -->
 
     <div class="w-back-btn">
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Snippets.SnippetId }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to List", "Index") | 
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Snippets.SnippetId })
     </div>
 
 </div><!-- end .w-feature-row -->
@@ -123,11 +122,14 @@
 <script>
 
     var mode = "@Model.Snippets.SnippetLanguage"
+    var selectedCatId = "@Model.selectedCategory"
 
-        function setLanguage() {
+        function setValues() {
             var modeSelect = document.getElementById("mode");
+            var catSelect = document.getElementById("categoryList");
             modeSelect.value = mode;
+            catSelect.value = selectedCatId;
         }
-    setLanguage();
+        setValues();
     
 </script>
