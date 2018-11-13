@@ -746,7 +746,7 @@ body .field-validation-valid {
     display:none; 
 }
 
-body .w-text-area textarea, body .w-text-area .w-description-box {
+body .w-text-area textarea, body .w-text-area .w-description-box, body #CategoryDescription {
     display: block;
     width: 100%;
     height: 175px;

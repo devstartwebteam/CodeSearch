@@ -211,6 +211,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ImageResize.cs" />
     <Compile Include="Helpers\ProjectHelpers.cs" />
     <Compile Include="Helpers\HtmlSanitizer.cs" />
     <Compile Include="Migrations\201811041532213_NewTypes.cs" />
@@ -272,6 +273,8 @@
     <Content Include="Content\Images\dev-assistant-login-background-dark.jpg" />
     <Content Include="Content\Images\dev-assistant-login-background-original.jpg" />
     <Content Include="Content\Images\dev-assistant-login-background.jpg" />
+    <Content Include="Content\Images\dev-assistant-login-bg-2.jpg" />
+    <Content Include="Content\Images\dev-assistant-login-bg-3.jpg" />
     <Content Include="Content\Images\logos\dev-assistant-android-logo.png" />
     <Content Include="Content\Images\logos\dev-assistant-asplogo-square.png" />
     <Content Include="Content\Images\logos\dev-assistant-html-5-logo.png" />

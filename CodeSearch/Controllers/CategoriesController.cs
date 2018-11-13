@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using CodeSearch.Models;
 using CodeSearch.Models.Data;
 using CodeSearch.ViewModels;
+using CodeSearch.Helpers;
 
 namespace CodeSearch.Controllers
 {
@@ -69,10 +70,10 @@ namespace CodeSearch.Controllers
         {
             var validImageTypes = new string[]
             {
-        "image/gif",
-        "image/jpeg",
-        "image/pjpeg",
-        "image/png"
+                "image/gif",
+                "image/jpeg",
+                "image/pjpeg",
+                "image/png"
             };
 
             if (model.ImageUpload == null || model.ImageUpload.ContentLength == 0)
@@ -100,6 +101,10 @@ namespace CodeSearch.Controllers
                     var uploadDir = "/uploads";
                     var imagePath = Path.Combine(Server.MapPath(uploadDir), model.ImageUpload.FileName);
                     var imageUrl = Path.Combine(uploadDir, model.ImageUpload.FileName);
+
+                    //Resize Image
+                    ImageResize.ResizeImage(model.ImageUpload);
+
                     model.ImageUpload.SaveAs(imagePath);
                     category.ImageURL = imageUrl;
                 }
