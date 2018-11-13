@@ -13,7 +13,7 @@ namespace CodeSearch.Helpers
 
                 //Save File
                 string imageFile = ImageUpload.FileName.ToString();
-                string path = HttpContext.Current.Server.MapPath("~/Content/Images/" + imageFile);
+                string path = HttpContext.Current.Server.MapPath("~/uploads/" + imageFile);
                 ImageUpload.SaveAs(path);
 
                 System.Drawing.Image image = System.Drawing.Image.FromFile(path);
@@ -33,7 +33,7 @@ namespace CodeSearch.Helpers
 
                     using (var newBitmap = new Bitmap(thumbBitmap))
                     {
-                        newBitmap.Save(HttpContext.Current.Server.MapPath("~/Content/Images/" + "resize-" + ImageUpload.FileName), System.Drawing.Imaging.ImageFormat.Jpeg);
+                        newBitmap.Save(HttpContext.Current.Server.MapPath("~/uploads/" + "resize-" + ImageUpload.FileName), System.Drawing.Imaging.ImageFormat.Png);
                     }
 
                 thumbGraph.Dispose();

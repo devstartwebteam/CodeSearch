@@ -96,11 +96,14 @@ namespace CodeSearch.Controllers
                     CategoryDescription = model.CategoryDescription
                 };
         
-        if (model.ImageUpload != null && model.ImageUpload.ContentLength > 0)
+            if (model.ImageUpload != null && model.ImageUpload.ContentLength > 0)
                 {
                     var uploadDir = "/uploads";
+
+                    string finalImageName = "resize-" + model.ImageUpload.FileName.ToString();
+
                     var imagePath = Path.Combine(Server.MapPath(uploadDir), model.ImageUpload.FileName);
-                    var imageUrl = Path.Combine(uploadDir, model.ImageUpload.FileName);
+                    var imageUrl = Path.Combine(uploadDir, finalImageName);
 
                     //Resize Image
                     ImageResize.ResizeImage(model.ImageUpload);
