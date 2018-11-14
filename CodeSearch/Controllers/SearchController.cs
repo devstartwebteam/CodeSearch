@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CodeSearch.Models;
-using CodeSearch.Models.Data;
+using CodeSearch.Data;
 
 namespace CodeSearch.Controllers
 {

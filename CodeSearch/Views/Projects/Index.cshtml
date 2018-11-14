@@ -1,0 +1,45 @@
+﻿@model IEnumerable<CodeSearch.Data.Project>
+
+@{
+    ViewBag.Title = "Projects";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+
+    var SuccessMessage = TempData["SuccessMessage"];
+    var DeleteMessage = TempData["DeleteMessage"];
+    var UpdateMessage = TempData["UpdateMessage"];
+}
+
+@Html.Partial("_PageTitle")
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectDescription)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectDescription)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProjectId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProjectId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProjectId })
+            </td>
+        </tr>
+    }
+
+</table>

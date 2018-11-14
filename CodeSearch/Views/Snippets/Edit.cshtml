@@ -70,6 +70,11 @@
                             data-script="/Scripts/codemirror-5.26.0/mode/xml/xml.js">
                         XML
                     </option>
+                    <option value="SQL"
+                            data-mime-type="text/x-mysql"
+                            data-script="/Scripts/codemirror-5.26.0/mode/sql/sql.js">
+                        SQL
+                    </option>
                 </select>
             </div>
         </div>
@@ -84,18 +89,18 @@
         <br />
 
         <div class="form-group row">
-            @Html.LabelFor(model => model.Snippets.SnippetName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SnippetName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-6 offset-md-4">
-                @Html.EditorFor(model => model.Snippets.SnippetName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Snippets.SnippetName, "Please enter a Snippet Name", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.SnippetName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SnippetName, "Please enter a Snippet Name", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group row">
-            @Html.LabelFor(model => model.Snippets.SnippetDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SnippetDescription, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-sm-6 offset-sm-4 w-text-area">
-                @Html.TextAreaFor(model => model.Snippets.SnippetDescription, new { htmlAttributes = new { @class = "form-control w-description-box" } })
-                @Html.ValidationMessageFor(model => model.Snippets.SnippetDescription, "Please Enter a Snippet Description", new { @class = "text-danger" })
+                @Html.TextAreaFor(model => model.SnippetDescription, new { htmlAttributes = new { @class = "form-control w-description-box" } })
+                @Html.ValidationMessageFor(model => model.SnippetDescription, "Please Enter a Snippet Description", new { @class = "text-danger" })
             </div>
         </div>
 

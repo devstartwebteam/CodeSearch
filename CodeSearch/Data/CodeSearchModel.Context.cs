@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeSearch.Models.Data
+namespace CodeSearch.Data
 {
     using System;
     using System.Data.Entity;
@@ -31,5 +31,8 @@ namespace CodeSearch.Models.Data
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<CategorySnippetAssociations> CategorySnippetAssociations { get; set; }
+        public virtual DbSet<ProjectNote> ProjectNotes { get; set; }
+        public virtual DbSet<ProjectCategories> ProjectCategories { get; set; }
+        public virtual DbSet<ProjectSnippets> ProjectSnippets { get; set; }
     }
 }

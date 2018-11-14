@@ -206,56 +206,63 @@
     <Compile Include="Controllers\DisclaimerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SnippetsController.cs" />
+    <Compile Include="Data\ProjectCategories.cs">
+      <DependentUpon>CodeSearchModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProjectNote.cs">
+      <DependentUpon>CodeSearchModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProjectSnippets.cs">
+      <DependentUpon>CodeSearchModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ImageResize.cs" />
     <Compile Include="Helpers\ProjectHelpers.cs" />
     <Compile Include="Helpers\HtmlSanitizer.cs" />
-    <Compile Include="Migrations\201811041532213_NewTypes.cs" />
-    <Compile Include="Migrations\201811041532213_NewTypes.Designer.cs">
-      <DependentUpon>201811041532213_NewTypes.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Data\Category.cs">
+    <Compile Include="Data\Category.cs">
       <DependentUpon>CodeSearchModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Data\CategorySnippetAssociations.cs">
+    <Compile Include="Data\CategorySnippetAssociations.cs">
       <DependentUpon>CodeSearchModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Data\CodeSearchModel.Context.cs">
+    <Compile Include="Data\CodeSearchModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CodeSearchModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Data\CodeSearchModel.cs">
+    <Compile Include="Data\CodeSearchModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CodeSearchModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Data\CodeSearchModel.Designer.cs">
+    <Compile Include="Data\CodeSearchModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CodeSearchModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Data\HttpPostedFileBase.cs">
+    <Compile Include="Data\HttpPostedFileBase.cs">
       <DependentUpon>CodeSearchModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Data\Note.cs">
+    <Compile Include="Data\Note.cs">
       <DependentUpon>CodeSearchModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Data\Project.cs">
+    <Compile Include="Data\Project.cs">
       <DependentUpon>CodeSearchModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Data\Snippet.cs">
+    <Compile Include="Data\Snippet.cs">
       <DependentUpon>CodeSearchModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Data\Tag.cs">
+    <Compile Include="Data\Tag.cs">
       <DependentUpon>CodeSearchModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ImageViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -334,13 +341,13 @@
     <Content Include="fonts\Mark Simonson - Proxima Nova Thin-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Data\CodeSearchModel.Context.tt">
+    <Content Include="Data\CodeSearchModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CodeSearchModel.Context.cs</LastGenOutput>
       <DependentUpon>CodeSearchModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\Data\CodeSearchModel.edmx.sql" />
-    <Content Include="Models\Data\CodeSearchModel.tt">
+    <Content Include="Data\CodeSearchModel.edmx.sql" />
+    <Content Include="Data\CodeSearchModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CodeSearchModel.cs</LastGenOutput>
       <DependentUpon>CodeSearchModel.edmx</DependentUpon>
@@ -350,11 +357,11 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\Data\CodeSearchModel.edmx">
+    <EntityDeploy Include="Data\CodeSearchModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CodeSearchModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Data\CodeSearchModel.edmx.diagram">
+    <Content Include="Data\CodeSearchModel.edmx.diagram">
       <DependentUpon>CodeSearchModel.edmx</DependentUpon>
     </Content>
     <Content Include="fonts\Mark Simonson - Proxima Nova Alt Black-webfont.ttf" />
@@ -1009,6 +1016,11 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Search\Results.cshtml" />
     <Content Include="Views\Shared\_DashboardCategories.cshtml" />
+    <Content Include="Views\Projects\Create.cshtml" />
+    <Content Include="Views\Projects\Delete.cshtml" />
+    <Content Include="Views\Projects\Details.cshtml" />
+    <Content Include="Views\Projects\Edit.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1030,11 +1042,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201811041532213_NewTypes.resx">
-      <DependentUpon>201811041532213_NewTypes.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

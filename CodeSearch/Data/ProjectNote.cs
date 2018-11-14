@@ -7,18 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeSearch.Models.Data
+namespace CodeSearch.Data
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Note
+    public partial class ProjectNote
     {
-        public int NoteId { get; set; }
-        public Nullable<System.DateTime> NoteTitle { get; set; }
-        public string NoteContent { get; set; }
-        public int NoteSnippetId { get; set; }
+        public int ProjectNoteId { get; set; }
+        public string ProjectNoteTitle { get; set; }
+        public string ProjectNoteContent { get; set; }
+        public string Created { get; set; }
+        public string Modified { get; set; }
+        public int ProjectProjectId { get; set; }
     
-        public virtual Snippet Snippet { get; set; }
+        public virtual Project Project { get; set; }
     }
 }

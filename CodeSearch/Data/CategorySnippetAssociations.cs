@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeSearch.Models.Data
+namespace CodeSearch.Data
 {
     using System;
     using System.Collections.Generic;

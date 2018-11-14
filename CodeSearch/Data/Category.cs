@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeSearch.Models.Data
+namespace CodeSearch.Data
 {
     using System;
     using System.Collections.Generic;
@@ -18,6 +18,7 @@ namespace CodeSearch.Models.Data
         public Category()
         {
             this.CategorySnippetAssociations = new HashSet<CategorySnippetAssociations>();
+            this.ProjectCategories = new HashSet<ProjectCategories>();
         }
     
         public int CategoryId { get; set; }
@@ -29,5 +30,7 @@ namespace CodeSearch.Models.Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CategorySnippetAssociations> CategorySnippetAssociations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProjectCategories> ProjectCategories { get; set; }
     }
 }

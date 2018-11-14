@@ -8,11 +8,11 @@ namespace CodeSearch.ViewModels
 {
     public class SnippetsViewModel
     {
-        public Models.Data.Snippet Snippets { get; set; }
+        public Data.Snippet Snippets { get; set; }
 
-        public Models.Data.Category Categories { get; set; }
-        public Models.Data.Note Notes { get; set; }
-        public Models.Data.Tag Tags { get; set; }
+        public Data.Category Categories { get; set; }
+        public Data.Note Notes { get; set; }
+        public Data.Tag Tags { get; set; }
 
         [Required]
         public string SnippetName { get; set; }
@@ -20,7 +20,7 @@ namespace CodeSearch.ViewModels
         [Required]
         public string SnippetDescription { get; set; }
 
-        public List<Models.Data.Category> CategoryList;
+        public List<Data.Category> CategoryList;
         public int selectedCategory;
     }
 }

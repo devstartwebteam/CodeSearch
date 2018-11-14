@@ -12,6 +12,9 @@
     <EntitySet Name="Tags" EntityType="CodeSearchModel.Store.Tags" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Projects" EntityType="CodeSearchModel.Store.Projects" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CategorySnippetAssociations" EntityType="CodeSearchModel.Store.CategorySnippetAssociations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProjectNotes" EntityType="CodeSearchModel.Store.ProjectNotes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProjectCategories" EntityType="CodeSearchModel.Store.ProjectCategories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProjectSnippets" EntityType="CodeSearchModel.Store.ProjectSnippets" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="CategorySnippetAssociationsCategory" Association="CodeSearchModel.Store.CategorySnippetAssociationsCategory">
       <End Role="CategorySnippetAssociations" EntitySet="CategorySnippetAssociations" />
       <End Role="Category" EntitySet="Categories" />
@@ -27,6 +30,26 @@
     <AssociationSet Name="SnippetTag" Association="CodeSearchModel.Store.SnippetTag">
       <End Role="Snippet" EntitySet="Snippets" />
       <End Role="Tag" EntitySet="Tags" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectProjectNote" Association="CodeSearchModel.Store.ProjectProjectNote">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="ProjectNote" EntitySet="ProjectNotes" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectProjectCategories" Association="CodeSearchModel.Store.ProjectProjectCategories">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="ProjectCategories" EntitySet="ProjectCategories" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectCategoriesCategory" Association="CodeSearchModel.Store.ProjectCategoriesCategory">
+      <End Role="ProjectCategories" EntitySet="ProjectCategories" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectProjectSnippets" Association="CodeSearchModel.Store.ProjectProjectSnippets">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="ProjectSnippets" EntitySet="ProjectSnippets" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectSnippetsSnippet" Association="CodeSearchModel.Store.ProjectSnippetsSnippet">
+      <End Role="ProjectSnippets" EntitySet="ProjectSnippets" />
+      <End Role="Snippet" EntitySet="Snippets" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Snippets">
@@ -78,6 +101,8 @@
     <Property Name="ProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ProjectTitle" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ProjectDescription" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Created" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Modified" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="CategorySnippetAssociations">
     <Key>
@@ -86,6 +111,33 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CategoryAssociationId" Type="int" Nullable="false" />
     <Property Name="SnippetAssociationId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProjectNotes">
+    <Key>
+      <PropertyRef Name="ProjectNoteId" />
+    </Key>
+    <Property Name="ProjectNoteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectNoteTitle" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProjectNoteContent" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Created" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Modified" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProjectProjectId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProjectCategories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectProjectId" Type="int" Nullable="false" />
+    <Property Name="CategoryCategoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProjectSnippets">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectProjectId" Type="int" Nullable="false" />
+    <Property Name="Snippet_SnippetId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="CategorySnippetAssociationsCategory">
     <End Role="CategorySnippetAssociations" Type="CodeSearchModel.Store.CategorySnippetAssociations" Multiplicity="*" />
@@ -135,6 +187,66 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ProjectProjectNote">
+    <End Role="Project" Type="CodeSearchModel.Store.Projects" Multiplicity="1" />
+    <End Role="ProjectNote" Type="CodeSearchModel.Store.ProjectNotes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ProjectId" />
+      </Principal>
+      <Dependent Role="ProjectNote">
+        <PropertyRef Name="ProjectProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectProjectCategories">
+    <End Role="Project" Type="CodeSearchModel.Store.Projects" Multiplicity="1" />
+    <End Role="ProjectCategories" Type="CodeSearchModel.Store.ProjectCategories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ProjectId" />
+      </Principal>
+      <Dependent Role="ProjectCategories">
+        <PropertyRef Name="ProjectProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectCategoriesCategory">
+    <End Role="ProjectCategories" Type="CodeSearchModel.Store.ProjectCategories" Multiplicity="*" />
+    <End Role="Category" Type="CodeSearchModel.Store.Categories" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="ProjectCategories">
+        <PropertyRef Name="CategoryCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectProjectSnippets">
+    <End Role="Project" Type="CodeSearchModel.Store.Projects" Multiplicity="1" />
+    <End Role="ProjectSnippets" Type="CodeSearchModel.Store.ProjectSnippets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ProjectId" />
+      </Principal>
+      <Dependent Role="ProjectSnippets">
+        <PropertyRef Name="ProjectProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectSnippetsSnippet">
+    <End Role="ProjectSnippets" Type="CodeSearchModel.Store.ProjectSnippets" Multiplicity="*" />
+    <End Role="Snippet" Type="CodeSearchModel.Store.Snippets" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Snippet">
+        <PropertyRef Name="SnippetId" />
+      </Principal>
+      <Dependent Role="ProjectSnippets">
+        <PropertyRef Name="Snippet_SnippetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -162,6 +274,29 @@
             <End Role="Snippet" EntitySet="Snippets" />
             <End Role="Tag" EntitySet="Tags" />
           </AssociationSet>
+          <EntitySet Name="ProjectNotes" EntityType="CodeSearchModel.ProjectNote" />
+          <AssociationSet Name="ProjectProjectNote" Association="CodeSearchModel.ProjectProjectNote">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="ProjectNote" EntitySet="ProjectNotes" />
+          </AssociationSet>
+          <EntitySet Name="ProjectCategories" EntityType="CodeSearchModel.ProjectCategories" />
+          <AssociationSet Name="ProjectProjectCategories" Association="CodeSearchModel.ProjectProjectCategories">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="ProjectCategories" EntitySet="ProjectCategories" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectCategoriesCategory" Association="CodeSearchModel.ProjectCategoriesCategory">
+            <End Role="ProjectCategories" EntitySet="ProjectCategories" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+          <EntitySet Name="ProjectSnippets" EntityType="CodeSearchModel.ProjectSnippets" />
+          <AssociationSet Name="ProjectProjectSnippets" Association="CodeSearchModel.ProjectProjectSnippets">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="ProjectSnippets" EntitySet="ProjectSnippets" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectSnippetsSnippet" Association="CodeSearchModel.ProjectSnippetsSnippet">
+            <End Role="ProjectSnippets" EntitySet="ProjectSnippets" />
+            <End Role="Snippet" EntitySet="Snippets" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Snippet">
           <Key>
@@ -178,6 +313,7 @@
           <NavigationProperty Name="CategorySnippetAssociations" Relationship="CodeSearchModel.CategorySnippetAssociationsSnippet" FromRole="Snippet" ToRole="CategorySnippetAssociations" />
           <NavigationProperty Name="Notes" Relationship="CodeSearchModel.SnippetNote" FromRole="Snippet" ToRole="Note" />
           <NavigationProperty Name="Tags" Relationship="CodeSearchModel.SnippetTag" FromRole="Snippet" ToRole="Tag" />
+          <NavigationProperty Name="ProjectSnippets" Relationship="CodeSearchModel.ProjectSnippetsSnippet" FromRole="Snippet" ToRole="ProjectSnippets" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -190,6 +326,7 @@
           <Property Name="Modified" Type="DateTime" Nullable="true" />
           <Property Name="ImageURL" Type="String" Nullable="false" />
           <NavigationProperty Name="CategorySnippetAssociations" Relationship="CodeSearchModel.CategorySnippetAssociationsCategory" FromRole="Category" ToRole="CategorySnippetAssociations" />
+          <NavigationProperty Name="ProjectCategories" Relationship="CodeSearchModel.ProjectCategoriesCategory" FromRole="Category" ToRole="ProjectCategories" />
         </EntityType>
         <EntityType Name="Note">
           <Key>
@@ -218,6 +355,11 @@
           <Property Name="ProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProjectTitle" Type="String" Nullable="false" />
           <Property Name="ProjectDescription" Type="String" Nullable="false" />
+          <Property Name="Created" Type="String" Nullable="false" />
+          <Property Name="Modified" Type="String" Nullable="false" />
+          <NavigationProperty Name="ProjectNotes" Relationship="CodeSearchModel.ProjectProjectNote" FromRole="Project" ToRole="ProjectNote" />
+          <NavigationProperty Name="ProjectCategories" Relationship="CodeSearchModel.ProjectProjectCategories" FromRole="Project" ToRole="ProjectCategories" />
+          <NavigationProperty Name="ProjectSnippets" Relationship="CodeSearchModel.ProjectProjectSnippets" FromRole="Project" ToRole="ProjectSnippets" />
         </EntityType>
         <ComplexType Name="HttpPostedFileBase" />
         <EntityType Name="CategorySnippetAssociations">
@@ -278,6 +420,89 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ProjectNote">
+          <Key>
+            <PropertyRef Name="ProjectNoteId" />
+          </Key>
+          <Property Name="ProjectNoteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectNoteTitle" Type="String" Nullable="false" />
+          <Property Name="ProjectNoteContent" Type="String" Nullable="false" />
+          <Property Name="Created" Type="String" Nullable="false" />
+          <Property Name="Modified" Type="String" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="CodeSearchModel.ProjectProjectNote" FromRole="ProjectNote" ToRole="Project" />
+          <Property Name="ProjectProjectId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="ProjectProjectNote">
+          <End Type="CodeSearchModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="CodeSearchModel.ProjectNote" Role="ProjectNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectNote">
+              <PropertyRef Name="ProjectProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProjectCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Project" Relationship="CodeSearchModel.ProjectProjectCategories" FromRole="ProjectCategories" ToRole="Project" />
+          <Property Name="ProjectProjectId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="CodeSearchModel.ProjectCategoriesCategory" FromRole="ProjectCategories" ToRole="Category" />
+          <Property Name="CategoryCategoryId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="ProjectProjectCategories">
+          <End Type="CodeSearchModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="CodeSearchModel.ProjectCategories" Role="ProjectCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectCategories">
+              <PropertyRef Name="ProjectProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjectCategoriesCategory">
+          <End Type="CodeSearchModel.ProjectCategories" Role="ProjectCategories" Multiplicity="*" />
+          <End Type="CodeSearchModel.Category" Role="Category" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="ProjectCategories">
+              <PropertyRef Name="CategoryCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProjectSnippets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Project" Relationship="CodeSearchModel.ProjectProjectSnippets" FromRole="ProjectSnippets" ToRole="Project" />
+          <Property Name="ProjectProjectId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Snippet" Relationship="CodeSearchModel.ProjectSnippetsSnippet" FromRole="ProjectSnippets" ToRole="Snippet" />
+        </EntityType>
+        <Association Name="ProjectProjectSnippets">
+          <End Type="CodeSearchModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="CodeSearchModel.ProjectSnippets" Role="ProjectSnippets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectSnippets">
+              <PropertyRef Name="ProjectProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjectSnippetsSnippet">
+          <End Type="CodeSearchModel.ProjectSnippets" Role="ProjectSnippets" Multiplicity="*" />
+          <End Type="CodeSearchModel.Snippet" Role="Snippet" Multiplicity="1" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -336,6 +561,8 @@
           <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
           <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
           <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -348,6 +575,43 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ProjectNotes">
+      <EntityTypeMapping TypeName="IsTypeOf(CodeSearchModel.ProjectNote)">
+        <MappingFragment StoreEntitySet="ProjectNotes">
+          <ScalarProperty Name="ProjectNoteId" ColumnName="ProjectNoteId" />
+          <ScalarProperty Name="ProjectNoteTitle" ColumnName="ProjectNoteTitle" />
+          <ScalarProperty Name="ProjectNoteContent" ColumnName="ProjectNoteContent" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="ProjectProjectId" ColumnName="ProjectProjectId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectCategories">
+      <EntityTypeMapping TypeName="IsTypeOf(CodeSearchModel.ProjectCategories)">
+        <MappingFragment StoreEntitySet="ProjectCategories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProjectProjectId" ColumnName="ProjectProjectId" />
+          <ScalarProperty Name="CategoryCategoryId" ColumnName="CategoryCategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectSnippets">
+      <EntityTypeMapping TypeName="IsTypeOf(CodeSearchModel.ProjectSnippets)">
+        <MappingFragment StoreEntitySet="ProjectSnippets">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProjectProjectId" ColumnName="ProjectProjectId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ProjectSnippetsSnippet" TypeName="CodeSearchModel.ProjectSnippetsSnippet" StoreEntitySet="ProjectSnippets">
+      <EndProperty Name="Snippet">
+        <ScalarProperty Name="SnippetId" ColumnName="Snippet_SnippetId" />
+      </EndProperty>
+      <EndProperty Name="ProjectSnippets">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

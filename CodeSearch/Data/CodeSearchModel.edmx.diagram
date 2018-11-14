@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="085018045ecd4c629408f9c81f845cf5" Name="Diagram1" ZoomLevel="89" >
+        <EntityTypeShape EntityType="CodeSearchModel.Snippet" Width="1.5" PointX="7.125" PointY="1.125" />
+        <EntityTypeShape EntityType="CodeSearchModel.Category" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="CodeSearchModel.Note" Width="1.5" PointX="9.375" PointY="1.125" />
+        <EntityTypeShape EntityType="CodeSearchModel.Tag" Width="1.5" PointX="10.875" PointY="4" />
+        <EntityTypeShape EntityType="CodeSearchModel.Project" Width="1.5" PointX="2.875" PointY="5" />
+        <EntityTypeShape EntityType="CodeSearchModel.CategorySnippetAssociations" Width="1.5" PointX="5" PointY="1.125" />
+        <AssociationConnector Association="CodeSearchModel.CategorySnippetAssociationsCategory" />
+        <AssociationConnector Association="CodeSearchModel.CategorySnippetAssociationsSnippet" />
+        <AssociationConnector Association="CodeSearchModel.SnippetNote" />
+        <AssociationConnector Association="CodeSearchModel.SnippetTag" />
+        <EntityTypeShape EntityType="CodeSearchModel.ProjectNote" Width="1.5" PointX="5.375" PointY="6.5" />
+        <AssociationConnector Association="CodeSearchModel.ProjectProjectNote" />
+        <EntityTypeShape EntityType="CodeSearchModel.ProjectCategories" Width="1.5" PointX="0.625" PointY="2.875" />
+        <AssociationConnector Association="CodeSearchModel.ProjectProjectCategories" />
+        <AssociationConnector Association="CodeSearchModel.ProjectCategoriesCategory" />
+        <EntityTypeShape EntityType="CodeSearchModel.ProjectSnippets" Width="1.5" PointX="5.25" PointY="4.25" />
+        <AssociationConnector Association="CodeSearchModel.ProjectProjectSnippets" />
+        <AssociationConnector Association="CodeSearchModel.ProjectSnippetsSnippet" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/04/2018 07:28:18
--- Generated from EDMX file: C:\Users\njohnson\source\repos\CodeSearch\CodeSearch\Models\Data\CodeSearchModel.edmx
+-- Date Created: 11/14/2018 09:08:42
+-- Generated from EDMX file: C:\Users\njohnson\source\repos\CodeSearch\CodeSearch\Data\CodeSearchModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -29,6 +29,21 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_SnippetTag]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Tags] DROP CONSTRAINT [FK_SnippetTag];
 GO
+IF OBJECT_ID(N'[dbo].[FK_ProjectProjectNote]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProjectNotes] DROP CONSTRAINT [FK_ProjectProjectNote];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProjectProjectCategories]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProjectCategories] DROP CONSTRAINT [FK_ProjectProjectCategories];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProjectCategoriesCategory]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProjectCategories] DROP CONSTRAINT [FK_ProjectCategoriesCategory];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProjectProjectSnippets]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProjectSnippets] DROP CONSTRAINT [FK_ProjectProjectSnippets];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProjectSnippetsSnippet]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProjectSnippets] DROP CONSTRAINT [FK_ProjectSnippetsSnippet];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -51,6 +66,15 @@ IF OBJECT_ID(N'[dbo].[Projects]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[CategorySnippetAssociations]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CategorySnippetAssociations];
+GO
+IF OBJECT_ID(N'[dbo].[ProjectNotes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ProjectNotes];
+GO
+IF OBJECT_ID(N'[dbo].[ProjectCategories]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ProjectCategories];
+GO
+IF OBJECT_ID(N'[dbo].[ProjectSnippets]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ProjectSnippets];
 GO
 
 -- --------------------------------------------------
@@ -103,7 +127,9 @@ GO
 CREATE TABLE [dbo].[Projects] (
     [ProjectId] int IDENTITY(1,1) NOT NULL,
     [ProjectTitle] nvarchar(max)  NOT NULL,
-    [ProjectDescription] nvarchar(max)  NOT NULL
+    [ProjectDescription] nvarchar(max)  NOT NULL,
+    [Created] nvarchar(max)  NOT NULL,
+    [Modified] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -112,6 +138,33 @@ CREATE TABLE [dbo].[CategorySnippetAssociations] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [CategoryAssociationId] int  NOT NULL,
     [SnippetAssociationId] int  NOT NULL
+);
+GO
+
+-- Creating table 'ProjectNotes'
+CREATE TABLE [dbo].[ProjectNotes] (
+    [ProjectNoteId] int IDENTITY(1,1) NOT NULL,
+    [ProjectNoteTitle] nvarchar(max)  NOT NULL,
+    [ProjectNoteContent] nvarchar(max)  NOT NULL,
+    [Created] nvarchar(max)  NOT NULL,
+    [Modified] nvarchar(max)  NOT NULL,
+    [ProjectProjectId] int  NOT NULL
+);
+GO
+
+-- Creating table 'ProjectCategories'
+CREATE TABLE [dbo].[ProjectCategories] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [ProjectProjectId] int  NOT NULL,
+    [CategoryCategoryId] int  NOT NULL
+);
+GO
+
+-- Creating table 'ProjectSnippets'
+CREATE TABLE [dbo].[ProjectSnippets] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [ProjectProjectId] int  NOT NULL,
+    [Snippet_SnippetId] int  NOT NULL
 );
 GO
 
@@ -152,6 +205,24 @@ GO
 -- Creating primary key on [Id] in table 'CategorySnippetAssociations'
 ALTER TABLE [dbo].[CategorySnippetAssociations]
 ADD CONSTRAINT [PK_CategorySnippetAssociations]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [ProjectNoteId] in table 'ProjectNotes'
+ALTER TABLE [dbo].[ProjectNotes]
+ADD CONSTRAINT [PK_ProjectNotes]
+    PRIMARY KEY CLUSTERED ([ProjectNoteId] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'ProjectCategories'
+ALTER TABLE [dbo].[ProjectCategories]
+ADD CONSTRAINT [PK_ProjectCategories]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'ProjectSnippets'
+ALTER TABLE [dbo].[ProjectSnippets]
+ADD CONSTRAINT [PK_ProjectSnippets]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -217,6 +288,81 @@ GO
 CREATE INDEX [IX_FK_SnippetTag]
 ON [dbo].[Tags]
     ([TagSnippetId]);
+GO
+
+-- Creating foreign key on [ProjectProjectId] in table 'ProjectNotes'
+ALTER TABLE [dbo].[ProjectNotes]
+ADD CONSTRAINT [FK_ProjectProjectNote]
+    FOREIGN KEY ([ProjectProjectId])
+    REFERENCES [dbo].[Projects]
+        ([ProjectId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ProjectProjectNote'
+CREATE INDEX [IX_FK_ProjectProjectNote]
+ON [dbo].[ProjectNotes]
+    ([ProjectProjectId]);
+GO
+
+-- Creating foreign key on [ProjectProjectId] in table 'ProjectCategories'
+ALTER TABLE [dbo].[ProjectCategories]
+ADD CONSTRAINT [FK_ProjectProjectCategories]
+    FOREIGN KEY ([ProjectProjectId])
+    REFERENCES [dbo].[Projects]
+        ([ProjectId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ProjectProjectCategories'
+CREATE INDEX [IX_FK_ProjectProjectCategories]
+ON [dbo].[ProjectCategories]
+    ([ProjectProjectId]);
+GO
+
+-- Creating foreign key on [CategoryCategoryId] in table 'ProjectCategories'
+ALTER TABLE [dbo].[ProjectCategories]
+ADD CONSTRAINT [FK_ProjectCategoriesCategory]
+    FOREIGN KEY ([CategoryCategoryId])
+    REFERENCES [dbo].[Categories]
+        ([CategoryId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ProjectCategoriesCategory'
+CREATE INDEX [IX_FK_ProjectCategoriesCategory]
+ON [dbo].[ProjectCategories]
+    ([CategoryCategoryId]);
+GO
+
+-- Creating foreign key on [ProjectProjectId] in table 'ProjectSnippets'
+ALTER TABLE [dbo].[ProjectSnippets]
+ADD CONSTRAINT [FK_ProjectProjectSnippets]
+    FOREIGN KEY ([ProjectProjectId])
+    REFERENCES [dbo].[Projects]
+        ([ProjectId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ProjectProjectSnippets'
+CREATE INDEX [IX_FK_ProjectProjectSnippets]
+ON [dbo].[ProjectSnippets]
+    ([ProjectProjectId]);
+GO
+
+-- Creating foreign key on [Snippet_SnippetId] in table 'ProjectSnippets'
+ALTER TABLE [dbo].[ProjectSnippets]
+ADD CONSTRAINT [FK_ProjectSnippetsSnippet]
+    FOREIGN KEY ([Snippet_SnippetId])
+    REFERENCES [dbo].[Snippets]
+        ([SnippetId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ProjectSnippetsSnippet'
+CREATE INDEX [IX_FK_ProjectSnippetsSnippet]
+ON [dbo].[ProjectSnippets]
+    ([Snippet_SnippetId]);
 GO
 
 -- --------------------------------------------------

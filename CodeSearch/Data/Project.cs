@@ -7,35 +7,32 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeSearch.Models.Data
+namespace CodeSearch.Data
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Snippet
+    public partial class Project
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Snippet()
+        public Project()
         {
-            this.CategorySnippetAssociations = new HashSet<CategorySnippetAssociations>();
-            this.Notes = new HashSet<Note>();
-            this.Tags = new HashSet<Tag>();
+            this.ProjectNotes = new HashSet<ProjectNote>();
+            this.ProjectCategories = new HashSet<ProjectCategories>();
+            this.ProjectSnippets = new HashSet<ProjectSnippets>();
         }
     
-        public int SnippetId { get; set; }
-        public string SnippetName { get; set; }
-        public string SnippetContent { get; set; }
-        public string SnippetDescription { get; set; }
-        public Nullable<System.DateTime> Created { get; set; }
-        public Nullable<System.DateTime> Modified { get; set; }
-        public string SnippetLanguage { get; set; }
-        public string ReferenceURL { get; set; }
+        public int ProjectId { get; set; }
+        public string ProjectTitle { get; set; }
+        public string ProjectDescription { get; set; }
+        public string Created { get; set; }
+        public string Modified { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CategorySnippetAssociations> CategorySnippetAssociations { get; set; }
+        public virtual ICollection<ProjectNote> ProjectNotes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Note> Notes { get; set; }
+        public virtual ICollection<ProjectCategories> ProjectCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tag> Tags { get; set; }
+        public virtual ICollection<ProjectSnippets> ProjectSnippets { get; set; }
     }
 }

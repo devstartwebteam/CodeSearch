@@ -7,11 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeSearch.Models.Data
+namespace CodeSearch.Data
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class HttpPostedFileBase
+    public partial class Tag
     {
+        public int TagId { get; set; }
+        public string TagName { get; set; }
+        public int TagSnippetId { get; set; }
+        public string TagCategory { get; set; }
+    
+        public virtual Snippet Snippet { get; set; }
     }
 }

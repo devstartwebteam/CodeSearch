@@ -76,7 +76,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
     <script type="text/javascript">
 
-        $(document).ready(function () {
+        $(function () {
             var clipboard = new Clipboard('.w_copy', {
                 target: function (trigger) {
                     return $(trigger).closest('.w_snippet').find('#w_target_code').get(0);
@@ -128,6 +128,13 @@
     </script>
     <script>
         loadModeForSelectedOption();
+    </script>
+    <script>
+        $(function () {
+            $(".w-nav-tabs a").click(function () {
+                $(this).tab('show');
+            });
+        });
     </script>
 </body>
 </html>

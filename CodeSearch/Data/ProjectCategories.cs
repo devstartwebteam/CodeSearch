@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeSearch.Models.Data
+namespace CodeSearch.Data
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Tag
+    public partial class ProjectCategories
     {
-        public int TagId { get; set; }
-        public string TagName { get; set; }
-        public int TagSnippetId { get; set; }
-        public string TagCategory { get; set; }
+        public int Id { get; set; }
+        public int ProjectProjectId { get; set; }
+        public int CategoryCategoryId { get; set; }
     
-        public virtual Snippet Snippet { get; set; }
+        public virtual Project Project { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

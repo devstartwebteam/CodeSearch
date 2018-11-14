@@ -8,7 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CodeSearch.Models;
-using CodeSearch.Models.Data;
+using CodeSearch.Data;
 using CodeSearch.ViewModels;
 using CodeSearch.Helpers;
 
@@ -115,6 +115,7 @@ namespace CodeSearch.Controllers
                 db.Categories.Add(category);
                 db.SaveChanges();
 
+                TempData["SuccessMessage"] = "<div class='alert alert-success w-fade-out'><strong> Success!</strong> New Category Created</div>";
                 return RedirectToAction("Index");
             }
 
@@ -212,6 +213,7 @@ namespace CodeSearch.Controllers
 
                 db.SaveChanges();
 
+                TempData["UpdateMessage"] = "<div class='alert alert-info w-fade-out'>Category Successfully Updated!</div>";
                 return RedirectToAction("Index");
             }
 
@@ -250,6 +252,8 @@ namespace CodeSearch.Controllers
             Category category = db.Categories.Find(id);
             db.Categories.Remove(category);
             db.SaveChanges();
+
+            TempData["DeleteMessage"] = "<div class='alert alert-info w-fade-out'>Category Successfully Removed!</div>";
             return RedirectToAction("Index");
         }
 

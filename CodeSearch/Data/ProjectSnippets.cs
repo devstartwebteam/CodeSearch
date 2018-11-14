@@ -7,15 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeSearch.Models.Data
+namespace CodeSearch.Data
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Project
+    public partial class ProjectSnippets
     {
-        public int ProjectId { get; set; }
-        public string ProjectTitle { get; set; }
-        public string ProjectDescription { get; set; }
+        public int Id { get; set; }
+        public int ProjectProjectId { get; set; }
+    
+        public virtual Project Project { get; set; }
+        public virtual Snippet Snippet { get; set; }
     }
 }

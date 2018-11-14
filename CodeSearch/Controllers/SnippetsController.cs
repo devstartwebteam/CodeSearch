@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using CodeSearch.Models.Data;
+using CodeSearch.Data;
 using CodeSearch.ViewModels;
 using CodeSearch.Helpers;
 using System.Text;
@@ -78,7 +78,7 @@ namespace CodeSearch.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create(SnippetsViewModel model, int categoryList, string SnippetLanguage, string SnippetName, string SnippetDescription)
+        public ActionResult Create(SnippetsViewModel model, int categoryList, string SnippetLanguage)
         {
             if (ModelState.IsValid)
             {

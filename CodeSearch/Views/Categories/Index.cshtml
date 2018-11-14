@@ -1,8 +1,12 @@
-﻿@model IEnumerable<CodeSearch.Models.Data.Category>
+﻿@model IEnumerable<CodeSearch.Data.Category>
 
 @{
     ViewBag.Title = "Snippet Categories";
     Layout = "~/Views/Shared/_DashboardCategories.cshtml";
+
+    var SuccessMessage = TempData["SuccessMessage"];
+    var DeleteMessage = TempData["DeleteMessage"];
+    var UpdateMessage = TempData["UpdateMessage"];
 }
 
 <div class="w-index-title">
