@@ -11,6 +11,21 @@
 
 <div class="w-index-title">
     @Html.Partial("_PageTitle")
+
+    @if (SuccessMessage != null)
+    {
+        @Html.Raw(TempData["SuccessMessage"].ToString())
+    }
+
+    @if (DeleteMessage != null)
+    {
+        @Html.Raw(TempData["DeleteMessage"].ToString())
+    }
+
+    @if (UpdateMessage != null)
+    {
+        @Html.Raw(TempData["UpdateMessage"].ToString())
+    }
 </div>
 
 <p class="w-create-btn-sm btn btn-default">

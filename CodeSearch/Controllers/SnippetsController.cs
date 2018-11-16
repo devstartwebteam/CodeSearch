@@ -137,6 +137,8 @@ namespace CodeSearch.Controllers
             SnippetsViewModel snippetViewModel = new SnippetsViewModel
             {
                 Snippets = snippet,
+                SnippetName = snippet.SnippetName,
+                SnippetDescription = snippet.SnippetDescription,
                 CategoryList = categories.ToList<Category>(),
                 selectedCategory = selectedCatId
             };
@@ -167,9 +169,9 @@ namespace CodeSearch.Controllers
                     return new HttpNotFoundResult();
                 }
 
-                snippet.SnippetName = Sanitizer.GetSafeHtmlFragment(model.Snippets.SnippetName);
+                snippet.SnippetName = Sanitizer.GetSafeHtmlFragment(model.SnippetName);
                 snippet.SnippetContent = HtmlSanitizer.SanitizeHtml(model.Snippets.SnippetContent);
-                snippet.SnippetDescription = Sanitizer.GetSafeHtmlFragment(model.Snippets.SnippetDescription);
+                snippet.SnippetDescription = Sanitizer.GetSafeHtmlFragment(model.SnippetDescription);
                 snippet.ReferenceURL = Sanitizer.GetSafeHtmlFragment(model.Snippets.ReferenceURL);
                 snippet.SnippetLanguage = Sanitizer.GetSafeHtmlFragment(SnippetLanguage);
 

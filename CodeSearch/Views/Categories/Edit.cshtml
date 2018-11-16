@@ -29,7 +29,7 @@
             <div class="form-group row">
                 @Html.LabelFor(model => model.CategoryDescription, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-6 offset-md-4">
-                    @Html.EditorFor(model => model.CategoryDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextAreaFor(model => model.CategoryDescription, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.CategoryDescription, "", new { @class = "text-danger" })
                 </div>
             </div>
