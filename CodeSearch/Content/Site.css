@@ -578,11 +578,11 @@ body .w-nav-shadow {
 /* bx-slider adjustments */
 
 body .bx-viewport {
-    height: calc(100vh - 55px) !important;
+    height: calc(100vh - 51px) !important;
 }
 
 body .bx-wrapper {
-    height: calc(100vh - 55px);
+    height: calc(100vh - 51px);
     border: 0px;
     margin: 0px;
     box-shadow: none;
@@ -616,7 +616,7 @@ body .navbar-default {
     body .navbar-default .navbar-brand {
         color: white;
         text-shadow: none;
-        padding: 16px 17px;
+        padding: 14px 18px;
         line-height: 22px;
         margin: 0px 6px;
     }
@@ -624,7 +624,7 @@ body .navbar-default {
     body .navbar-default .navbar-nav > li > a {
         color: white;
         font-family: 'Proxima Nova', helvetica neue,helvetica,arial,sans-serif;
-        padding: 16px 12px;
+        padding: 14px 12px;
         line-height: 22px;
         margin: 1px 8px 0px 8px;
         text-shadow: none;
@@ -689,9 +689,31 @@ body .w-nav-search {
     padding: 0px 40px 0px 20px;
     margin: 10px 0px 0px 20px;
     background-color: #005a9e;
-    height: 36px;
+    height: 32px;
     font-size: 1.1em;
     border-radius: 3px;
+}
+
+body .w-notes-title-col {
+    padding-left:0px;
+    margin-top:10px;
+}
+
+body .w-notes-content-col input {
+    margin-top:40px;
+}
+
+body .w-notes-content-col textarea {
+    margin-top:20px;
+    height:175px;
+}
+
+body .w-notes-title-col .w-note-title {
+    margin-top:40px
+}
+
+body .w-notes-title-col .w-note-description {
+    margin-top:40px;
 }
 
     body .w-nav-search::-webkit-input-placeholder { /* Chrome/Opera/Safari */

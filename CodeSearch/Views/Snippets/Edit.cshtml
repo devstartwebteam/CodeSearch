@@ -105,7 +105,7 @@
         </div>
 
         <div class="form-group row">
-            @Html.LabelFor(model => model.Categories.CategoryName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Select Category", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-sm-6 offset-sm-4">
 
                 <select name="categoryList" id="categoryList">
@@ -116,8 +116,6 @@
                     </option>
             }
                 </select>
-
-
             </div>
         </div>
 
@@ -130,13 +128,38 @@
         </div>
 
         <div class="form-group row">
+            @Html.Label("Notes")
+
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#note0">Note #1</a></li>
+                <li><a data-toggle="tab" href="#note1">Note #2</a></li>
+                <li><a data-toggle="tab" href="#note2">Note #3</a></li>
+                <li><a data-toggle="tab" href="#note3">Note #4</a></li>
+            </ul>
+
+            <div class="tab-content">
+
+                @for (int i = 0; i < 4; i++)
+                    {
+
+                    <div id='@("note"+i.ToString())' class='tab-pane fade in @if(i == 0) { WriteLiteral("active"); }'>
+                        <input type="text" name='@("NoteList["+i.ToString()+"].NoteTitle")' value='@(Model.NoteList[i].NoteTitle.ToString())' class="form-control text-box single-line" />
+                        <textarea name='@("NoteList["+i.ToString()+"].NoteContent")' value='@(Model.NoteList[i].NoteContent.ToString())' class="form-control"></textarea>
+                        <input type="hidden" name='@("noteNum["+i.ToString()+"]")' value='@i.ToString()' />
+                    </div>
+                    }
+            </div>
+        </div>
+
+
+        <div class="form-group row">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
     }
-</div>
+</div><!-- .w-feature-row -->
 
 <div class="w-back-btn">
     @Html.ActionLink("Back to List", "Index")

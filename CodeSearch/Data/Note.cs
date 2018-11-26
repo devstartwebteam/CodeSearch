@@ -15,7 +15,7 @@ namespace CodeSearch.Data
     public partial class Note
     {
         public int NoteId { get; set; }
-        public Nullable<System.DateTime> NoteTitle { get; set; }
+        public string NoteTitle { get; set; }
         public string NoteContent { get; set; }
         public int NoteSnippetId { get; set; }
     

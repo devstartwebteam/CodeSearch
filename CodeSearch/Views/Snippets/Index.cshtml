@@ -7,7 +7,7 @@
     var SuccessMessage = TempData["SuccessMessage"];
     var DeleteMessage = TempData["DeleteMessage"];
     var UpdateMessage = TempData["UpdateMessage"];
-
+    var FailureMessage = TempData["FailureMessage"];
 }
 
 <div class="w-index-title">
@@ -28,6 +28,10 @@
         @Html.Raw(TempData["UpdateMessage"].ToString())
     }
 
+    @if (FailureMessage != null)
+    {
+        @Html.Raw(TempData["FailureMessage"].ToString())
+    }
 </div>
 
 <p class="w-create-btn-sm btn btn-default"> @Html.ActionLink("Create New", "Create") </p>
@@ -36,19 +40,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.SnippetName)
+                @Html.DisplayName("Name")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SnippetDescription)
+                @Html.DisplayName("Description")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ReferenceURL)
+                @Html.DisplayName("Reference URL")
             </th>
             <th>
-                Category
+                @Html.DisplayName("Category")
             </th>
             <th>
-                Actions
+                @Html.DisplayName("Actions")
             </th>
         </tr>
     </thead>
@@ -74,7 +78,6 @@
                     {
                         @Html.DisplayFor(modelItem => cat.Category.CategoryName)
                     }
-
                 </td>
 
                 <td>
@@ -83,7 +86,6 @@
                     @Html.ActionLink("Delete", "Delete", new { id = item.SnippetId })
                 </td>
             </tr>
-
         }
 
     </tbody>

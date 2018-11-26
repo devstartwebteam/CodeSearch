@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/14/2018 09:08:42
+-- Date Created: 11/20/2018 19:35:39
 -- Generated from EDMX file: C:\Users\njohnson\source\repos\CodeSearch\CodeSearch\Data\CodeSearchModel.edmx
 -- --------------------------------------------------
 
@@ -108,7 +108,7 @@ GO
 -- Creating table 'Notes'
 CREATE TABLE [dbo].[Notes] (
     [NoteId] int IDENTITY(1,1) NOT NULL,
-    [NoteTitle] datetime  NULL,
+    [NoteTitle] nvarchar(max)  NULL,
     [NoteContent] nvarchar(max)  NOT NULL,
     [NoteSnippetId] int  NOT NULL
 );

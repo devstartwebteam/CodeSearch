@@ -81,7 +81,7 @@
       <PropertyRef Name="NoteId" />
     </Key>
     <Property Name="NoteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="NoteTitle" Type="datetime" Nullable="true" />
+    <Property Name="NoteTitle" Type="nvarchar(max)" Nullable="true" />
     <Property Name="NoteContent" Type="nvarchar(max)" Nullable="false" />
     <Property Name="NoteSnippetId" Type="int" Nullable="false" />
   </EntityType>
@@ -333,7 +333,7 @@
             <PropertyRef Name="NoteId" />
           </Key>
           <Property Name="NoteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NoteTitle" Type="DateTime" Nullable="true" />
+          <Property Name="NoteTitle" Type="String" Nullable="true" />
           <Property Name="NoteContent" Type="String" Nullable="false" />
           <Property Name="NoteSnippetId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Snippet" Relationship="CodeSearchModel.SnippetNote" FromRole="Note" ToRole="Snippet" />

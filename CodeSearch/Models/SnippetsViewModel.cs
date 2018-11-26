@@ -10,15 +10,17 @@ namespace CodeSearch.ViewModels
     {
         public Data.Snippet Snippets { get; set; }
 
-        public Data.Category Categories { get; set; }
-        public Data.Note Notes { get; set; }
-        public Data.Tag Tags { get; set; }
-
         [Required]
         public string SnippetName { get; set; }
 
         [Required]
         public string SnippetDescription { get; set; }
+
+        public List<Data.Tag> TagList;
+        public int[] TagNum;
+
+        public List<Data.Note> NoteList;
+        public int[] noteNum;
 
         public List<Data.Category> CategoryList;
         public int selectedCategory;

@@ -7,7 +7,6 @@ using System.Web.Mvc;
 using CodeSearch.Data;
 using CodeSearch.ViewModels;
 using CodeSearch.Helpers;
-using System.Text;
 using Microsoft.Security.Application;
 using System.Web;
 
@@ -42,6 +41,10 @@ namespace CodeSearch.Controllers
                                  where csa.SnippetAssociationId == id
                                  select csa.Category.CategoryId).FirstOrDefault();
 
+            var allNotes = (from n in db.Notes
+                             where n.NoteSnippetId == id
+                             select n).ToList();
+
             Snippet snippet = db.Snippets.Find(id);
             HttpUtility.HtmlDecode(snippet.SnippetContent);
 
@@ -49,7 +52,8 @@ namespace CodeSearch.Controllers
             {
                 Snippets = snippet,
                 CategoryList = categories.ToList<Category>(),
-                selectedCategory = selectedCatId
+                selectedCategory = selectedCatId,
+                NoteList = allNotes
             };
 
             if (snippet == null)
@@ -63,10 +67,11 @@ namespace CodeSearch.Controllers
         public ActionResult Create()
         {
             var categories = from r in db.Categories
-                             where r.CategoryName != ""
-                             select r;
+                        where r.CategoryName != ""
+                        select r;
 
             SnippetsViewModel model = new SnippetsViewModel();
+
             model.CategoryList = categories.ToList<Category>();
 
             return View(model);
@@ -78,13 +83,15 @@ namespace CodeSearch.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create(SnippetsViewModel model, int categoryList, string SnippetLanguage)
+        public ActionResult Create(SnippetsViewModel model, int categoryList, string SnippetLanguage, List<Note> NoteList, int[] noteNum)
         {
-            if (ModelState.IsValid)
-            {
-                string snippetString = model.Snippets.SnippetContent.ToString();
+            //var errors = ModelState.Values.SelectMany(v => v.Errors);
 
-                var newSnippet = new Snippet
+            if (ModelState.IsValid && model.Snippets.SnippetContent != null)
+            {
+                    string snippetString = model.Snippets.SnippetContent.ToString();
+
+                Snippet newSnippet = new Snippet
                 {
                     SnippetName = Sanitizer.GetSafeHtmlFragment(model.SnippetName),
                     SnippetContent = HtmlSanitizer.SanitizeHtml(model.Snippets.SnippetContent),
@@ -93,11 +100,26 @@ namespace CodeSearch.Controllers
                     SnippetLanguage = Sanitizer.GetSafeHtmlFragment(SnippetLanguage)
                 };
 
-                var snippetCategory = new CategorySnippetAssociations
+                CategorySnippetAssociations snippetCategory = new CategorySnippetAssociations
                 {
                     SnippetAssociationId = newSnippet.SnippetId,
                     CategoryAssociationId = categoryList
                 };
+
+                if (NoteList.Any())
+                { 
+                    for (int i = 0; i < noteNum.Count(); i++)
+                    {
+                        Note newNote = new Note
+                        {
+                            NoteTitle = NoteList[i].NoteTitle,
+                            NoteContent = NoteList[i].NoteContent,
+                            NoteSnippetId = newSnippet.SnippetId
+                        };
+
+                        db.Notes.Add(newNote);
+                    }
+                }
 
                 db.CategorySnippetAssociations.Add(snippetCategory);
                 db.Snippets.Add(newSnippet);
@@ -133,6 +155,10 @@ namespace CodeSearch.Controllers
                                where csa.SnippetAssociationId == id
                                select csa.Category.CategoryId).FirstOrDefault();
 
+            var editNotes = (from n in db.Notes
+                             where n.NoteSnippetId == id
+                             select n).ToList();
+
             Snippet snippet = db.Snippets.Find(id);
             SnippetsViewModel snippetViewModel = new SnippetsViewModel
             {
@@ -140,13 +166,15 @@ namespace CodeSearch.Controllers
                 SnippetName = snippet.SnippetName,
                 SnippetDescription = snippet.SnippetDescription,
                 CategoryList = categories.ToList<Category>(),
-                selectedCategory = selectedCatId
+                selectedCategory = selectedCatId,
+                NoteList = editNotes
             };
 
             if (snippet == null)
             {
                 return HttpNotFound();
             }
+
             return View(snippetViewModel);
         }
 
@@ -156,7 +184,7 @@ namespace CodeSearch.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit(int id, SnippetsViewModel model, int categoryList, string SnippetLanguage)
+        public ActionResult Edit(int id, SnippetsViewModel model, int categoryList, string SnippetLanguage, List<Note> NoteList, int[] noteNum)
         {
             Snippet snippet = db.Snippets.Find(id);
 
@@ -167,6 +195,21 @@ namespace CodeSearch.Controllers
                 if (snippet == null || snippetCategoryAssociation == null)
                 {
                     return new HttpNotFoundResult();
+                }
+
+                if (NoteList.Any())
+                {
+                    for (int i = 0; i < noteNum.Count(); i++)
+                    {
+                        Note newNote = new Note
+                        {
+                            NoteTitle = NoteList[i].NoteTitle,
+                            NoteContent = NoteList[i].NoteContent,
+                            NoteSnippetId = snippet.SnippetId
+                        };
+
+                        db.Notes.Add(newNote);
+                    }
                 }
 
                 snippet.SnippetName = Sanitizer.GetSafeHtmlFragment(model.SnippetName);
@@ -207,12 +250,17 @@ namespace CodeSearch.Controllers
                                  select csa.Category.CategoryId).FirstOrDefault();
 
             Snippet snippet = db.Snippets.Find(id);
+
+            var allNotes = (from n in db.Notes
+                            where n.NoteSnippetId == id
+                            select n).ToList();
+
             SnippetsViewModel snippetViewModel = new SnippetsViewModel
             {
                 Snippets = snippet,
                 CategoryList = categories.ToList<Category>(),
-                selectedCategory = selectedCatId
-
+                selectedCategory = selectedCatId,
+                NoteList = allNotes
             };
 
             if (snippet == null)
@@ -231,6 +279,15 @@ namespace CodeSearch.Controllers
             Snippet snippet = db.Snippets.Find(id);
             CategorySnippetAssociations snippetCategory = db.CategorySnippetAssociations.Find(id);
 
+            var allNotes = (from n in db.Notes
+                            where n.NoteSnippetId == id
+                            select n).ToList();
+
+            foreach(Note note in allNotes)
+            {
+                db.Notes.Remove(note);
+            }
+           
             db.Snippets.Remove(snippet);
             db.CategorySnippetAssociations.Remove(snippetCategory);
 
