@@ -17,13 +17,13 @@
             </label>
 
             @using (Html.BeginForm())
-        {
+            {
             @Html.AntiForgeryToken()
 
             <div class="col-md-10 w-btn-left">
                 <input type="submit" value="Delete" class="btn btn-default" />
             </div>
-    }
+            }
 
         </div>
         <br />
@@ -31,61 +31,7 @@
         <div class="form-group row">
             <label for="example-text-input" class="control-label col-md-2">Selected Language</label>
             <div class="col-sm-10">
-                <select id="mode" name="SnippetLanguage" class="w-code-select" onchange="loadModeForSelectedOption()">
-                    <option value="text" selected="selected" data-mime-type="text">
-                        Plain Text
-                    </option>
-                    <option value="HTML"
-                            data-mime-type="text/html"
-                            data-script="/Scripts/codemirror-5.26.0/mode/htmlembedded/htmlembedded.js">
-                        HTML
-                    </option>
-                    <option value="CSS"
-                            data-mime-type="text/css"
-                            data-script="/Scripts/codemirror-5.26.0/mode/css/css.js">
-                        CSS
-                    </option>
-                    <option value="Javascript"
-                            data-mime-type="javascript"
-                            data-script="/Scripts/codemirror-5.26.0/mode/javascript/javascript.js">
-                        Javascript
-                    </option>
-                    <option value="PHP"
-                            data-mime-type="application/x-httpd-php"
-                            data-script="/Scripts/codemirror-5.26.0/mode/php/php.js">
-                        PHP
-                    </option>
-                    <option value="Plain PHP"
-                            data-mime-type="text/x-php"
-                            data-script="/Scripts/codemirror-5.26.0/mode/php/php.js">
-                        Plain PHP
-                    </option>
-                    <option value="C#"
-                            data-mime-type="text/x-csharp"
-                            data-script="/Scripts/codemirror-5.26.0/mode/clike/clike.js">
-                        C#
-                    </option>
-                    <option value="ASP.NET"
-                            data-mime-type="application/x-aspx"
-                            data-script="/Scripts/codemirror-5.26.0/mode/htmlembedded/htmlembedded.js">
-                        ASP.NET
-                    </option>
-                    <option value="Java"
-                            data-mime-type="text/x-java"
-                            data-script="/Scripts/codemirror-5.26.0/mode/java/java.js">
-                        Java
-                    </option>
-                    <option value="XML"
-                            data-mime-type="text/xml"
-                            data-script="/Scripts/codemirror-5.26.0/mode/xml/xml.js">
-                        XML
-                    </option>
-                    <option value="SQL"
-                            data-mime-type="text/x-mysql"
-                            data-script="/Scripts/codemirror-5.26.0/mode/sql/sql.js">
-                        SQL
-                    </option>
-                </select>
+                @Html.Partial("_SelectMode")
             </div>
         </div>
 
@@ -158,3 +104,4 @@
         }
         setValues();
 </script>
+

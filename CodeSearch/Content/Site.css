@@ -765,7 +765,7 @@ body .w-editor-col .control-label {
 }
 
 body .field-validation-valid { 
-    display:none; 
+    display:none;
 }
 
 body .w-text-area textarea, body .w-text-area .w-description-box, body #CategoryDescription {

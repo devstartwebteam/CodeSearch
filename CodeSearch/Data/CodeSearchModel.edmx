@@ -84,6 +84,7 @@
     <Property Name="NoteTitle" Type="nvarchar(max)" Nullable="true" />
     <Property Name="NoteContent" Type="nvarchar(max)" Nullable="false" />
     <Property Name="NoteSnippetId" Type="int" Nullable="false" />
+    <Property Name="NoteCount" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Tags">
     <Key>
@@ -337,6 +338,7 @@
           <Property Name="NoteContent" Type="String" Nullable="false" />
           <Property Name="NoteSnippetId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Snippet" Relationship="CodeSearchModel.SnippetNote" FromRole="Note" ToRole="Snippet" />
+          <Property Name="NoteCount" Type="Int32" Nullable="true" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -542,6 +544,7 @@
           <ScalarProperty Name="NoteTitle" ColumnName="NoteTitle" />
           <ScalarProperty Name="NoteContent" ColumnName="NoteContent" />
           <ScalarProperty Name="NoteSnippetId" ColumnName="NoteSnippetId" />
+          <ScalarProperty Name="NoteCount" ColumnName="NoteCount" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

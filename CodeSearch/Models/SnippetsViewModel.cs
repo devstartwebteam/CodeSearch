@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace CodeSearch.ViewModels
 {
@@ -16,11 +13,14 @@ namespace CodeSearch.ViewModels
         [Required]
         public string SnippetDescription { get; set; }
 
+        [Required]
+        public string SnippetContent { get; set; }
+
         public List<Data.Tag> TagList;
         public int[] TagNum;
 
         public List<Data.Note> NoteList;
-        public int[] noteNum;
+        public int noteCount;
 
         public List<Data.Category> CategoryList;
         public int selectedCategory;

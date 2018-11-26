@@ -18,6 +18,7 @@ namespace CodeSearch.Data
         public string NoteTitle { get; set; }
         public string NoteContent { get; set; }
         public int NoteSnippetId { get; set; }
+        public Nullable<int> NoteCount { get; set; }
     
         public virtual Snippet Snippet { get; set; }
     }

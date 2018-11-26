@@ -83,18 +83,18 @@ namespace CodeSearch.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create(SnippetsViewModel model, int categoryList, string SnippetLanguage, List<Note> NoteList, int[] noteNum)
+        public ActionResult Create(SnippetsViewModel model, int categoryList, string SnippetLanguage, List<Note> NoteList, int noteCount)
         {
-            //var errors = ModelState.Values.SelectMany(v => v.Errors);
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
 
-            if (ModelState.IsValid && model.Snippets.SnippetContent != null)
+            if (ModelState.IsValid)
             {
-                    string snippetString = model.Snippets.SnippetContent.ToString();
+                    string snippetString = model.SnippetContent.ToString();
 
                 Snippet newSnippet = new Snippet
                 {
                     SnippetName = Sanitizer.GetSafeHtmlFragment(model.SnippetName),
-                    SnippetContent = HtmlSanitizer.SanitizeHtml(model.Snippets.SnippetContent),
+                    SnippetContent = HtmlSanitizer.SanitizeHtml(snippetString),
                     SnippetDescription = Sanitizer.GetSafeHtmlFragment(model.SnippetDescription),
                     ReferenceURL = Sanitizer.GetSafeHtmlFragment(model.Snippets.ReferenceURL),
                     SnippetLanguage = Sanitizer.GetSafeHtmlFragment(SnippetLanguage)
@@ -108,13 +108,14 @@ namespace CodeSearch.Controllers
 
                 if (NoteList.Any())
                 { 
-                    for (int i = 0; i < noteNum.Count(); i++)
+                    for (int i = 0; i < noteCount; i++)
                     {
                         Note newNote = new Note
                         {
+                            NoteSnippetId = newSnippet.SnippetId,
                             NoteTitle = NoteList[i].NoteTitle,
                             NoteContent = NoteList[i].NoteContent,
-                            NoteSnippetId = newSnippet.SnippetId
+                            NoteCount = noteCount,
                         };
 
                         db.Notes.Add(newNote);
@@ -164,6 +165,7 @@ namespace CodeSearch.Controllers
             {
                 Snippets = snippet,
                 SnippetName = snippet.SnippetName,
+                SnippetContent = snippet.SnippetContent,
                 SnippetDescription = snippet.SnippetDescription,
                 CategoryList = categories.ToList<Category>(),
                 selectedCategory = selectedCatId,
@@ -184,7 +186,7 @@ namespace CodeSearch.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit(int id, SnippetsViewModel model, int categoryList, string SnippetLanguage, List<Note> NoteList, int[] noteNum)
+        public ActionResult Edit(int id, SnippetsViewModel model, int categoryList, string SnippetLanguage, List<Note> NoteList, int noteCount)
         {
             Snippet snippet = db.Snippets.Find(id);
 
@@ -197,15 +199,16 @@ namespace CodeSearch.Controllers
                     return new HttpNotFoundResult();
                 }
 
-                if (NoteList.Any())
+                if (NoteList.Any() && NoteList != null)
                 {
-                    for (int i = 0; i < noteNum.Count(); i++)
+                    for (int i = 0; i < noteCount; i++)
                     {
                         Note newNote = new Note
                         {
+                            NoteSnippetId = snippet.SnippetId,
                             NoteTitle = NoteList[i].NoteTitle,
                             NoteContent = NoteList[i].NoteContent,
-                            NoteSnippetId = snippet.SnippetId
+                            NoteCount = noteCount
                         };
 
                         db.Notes.Add(newNote);
@@ -213,7 +216,7 @@ namespace CodeSearch.Controllers
                 }
 
                 snippet.SnippetName = Sanitizer.GetSafeHtmlFragment(model.SnippetName);
-                snippet.SnippetContent = HtmlSanitizer.SanitizeHtml(model.Snippets.SnippetContent);
+                snippet.SnippetContent = HtmlSanitizer.SanitizeHtml(model.SnippetContent);
                 snippet.SnippetDescription = Sanitizer.GetSafeHtmlFragment(model.SnippetDescription);
                 snippet.ReferenceURL = Sanitizer.GetSafeHtmlFragment(model.Snippets.ReferenceURL);
                 snippet.SnippetLanguage = Sanitizer.GetSafeHtmlFragment(SnippetLanguage);
