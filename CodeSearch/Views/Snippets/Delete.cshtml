@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h1 class="w-dashboard-title w-primary-title">@ViewBag.Title</h1>
+@Html.Partial("_PageTitle")
 
 <div class="row w-feature-row">
 
@@ -17,13 +17,13 @@
             </label>
 
             @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
+            {
+                @Html.AntiForgeryToken()
 
-            <div class="col-md-10 w-btn-left">
-                <input type="submit" value="Delete" class="btn btn-default" />
-            </div>
-    }
+                <div class="col-md-10 w-btn-left">
+                    <input type="submit" value="Delete" class="btn btn-default" />
+                </div>
+            }
 
         </div>
         <br />
@@ -63,11 +63,11 @@
 
                 <select name="categoryList" id="categoryList" readonly>
                     @foreach (var item in Model.CategoryList)
-                {
-                    <option value="@item.CategoryId.ToString()">
-                        @item.CategoryName.ToString()
-                    </option>
-            }
+                    {
+                        <option value="@item.CategoryId.ToString()">
+                            @item.CategoryName.ToString()
+                        </option>
+                    }
                 </select>
 
 
@@ -99,15 +99,15 @@
                 <div class="tab-content">
 
                     @for (int i = 0; i <= 4; i++)
-                {
+                    {
 
-                    <div id='@("note"+i.ToString())' class='tab-pane fade in @if(i == 0) { WriteLiteral("active"); }'>
-                        <input type="text" name='@("NoteList["+i.ToString()+"].NoteTitle")' value='@if (i < Model.NoteCount) { WriteLiteral(Model.NoteList[i].NoteTitle.ToString()); }' class="w-note-input form-control text-box single-line" readonly />
-                        <textarea name='@("NoteList["+i.ToString()+"].NoteContent")' class="w-note-textarea form-control" readonly>
+                        <div id='@("note"+i.ToString())' class='tab-pane fade in @if(i == 0) { WriteLiteral("active"); }'>
+                            <input type="text" name='@("NoteList["+i.ToString()+"].NoteTitle")' value='@if (i < Model.NoteCount) { WriteLiteral(Model.NoteList[i].NoteTitle.ToString()); }' class="w-note-input form-control text-box single-line" readonly />
+                            <textarea name='@("NoteList["+i.ToString()+"].NoteContent")' class="w-note-textarea form-control" readonly>
                                 @if (i < Model.NoteCount) { WriteLiteral(Model.NoteList[i].NoteContent.ToString()); }
                         </textarea>
-                    </div>
-            }
+                        </div>
+                    }
                     <input type="hidden" name='noteCount' value='' id='w-note-counter' />
 
                 </div>

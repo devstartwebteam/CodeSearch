@@ -9,6 +9,8 @@
 
 <div class="row w-feature-row">
 
+    <div class="col-sm-12">
+
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -41,4 +43,6 @@
 
 <div>
     @Html.ActionLink("Back to List", "Index")
+</div>
+
 </div>

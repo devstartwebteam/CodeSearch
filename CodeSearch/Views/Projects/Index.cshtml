@@ -7,9 +7,32 @@
     var SuccessMessage = TempData["SuccessMessage"];
     var DeleteMessage = TempData["DeleteMessage"];
     var UpdateMessage = TempData["UpdateMessage"];
+    var FailureMessage = TempData["FailureMessage"];
 }
 
-@Html.Partial("_PageTitle")
+<div class="w-index-title">
+    @Html.Partial("_PageTitle")
+
+    @if (SuccessMessage != null)
+    {
+        @Html.Raw(TempData["SuccessMessage"].ToString())
+    }
+
+    @if (DeleteMessage != null)
+    {
+        @Html.Raw(TempData["DeleteMessage"].ToString())
+    }
+
+    @if (UpdateMessage != null)
+    {
+        @Html.Raw(TempData["UpdateMessage"].ToString())
+    }
+
+    @if (FailureMessage != null)
+    {
+        @Html.Raw(TempData["FailureMessage"].ToString())
+    }
+</div>
 
 <p class="w-create-btn-sm btn btn-default"> @Html.ActionLink("Create New", "Create") </p>
 
