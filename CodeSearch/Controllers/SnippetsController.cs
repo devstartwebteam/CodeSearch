@@ -106,7 +106,7 @@ namespace CodeSearch.Controllers
                     CategoryAssociationId = categoryList
                 };
 
-                if (NoteList.Any())
+                if (NoteList != null)
                 { 
                     for (int i = 0; i < noteCount; i++)
                     {

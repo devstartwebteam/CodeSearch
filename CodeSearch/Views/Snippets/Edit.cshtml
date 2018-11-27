@@ -90,24 +90,17 @@
 
                 <div class="tab-content">
 
-                    @for (int i = 0; i < Model.noteCount; i++)
-                    { 
-
-                    string noteTitle = "";
-                    string noteContent = "";
-
-                    if (Model.NoteList.Any() && Model.NoteList != null)
+                    @for (int i = 0; i < 4; i++)
                     {
-                        noteTitle = Model.NoteList[i].NoteTitle;
-                        noteContent = Model.NoteList[i].NoteContent;
-                    }
 
                     <div id='@("note"+i.ToString())' class='tab-pane fade in @if(i == 0) { WriteLiteral("active"); }'>
-                        <input type="text" name='@("NoteList["+i.ToString()+"].NoteTitle")' value='@(noteTitle)' class="w-note-input form-control text-box single-line" />
-                        <textarea name='@("NoteList["+i.ToString()+"].NoteContent")' value='@(noteContent)' class="w-note-textarea form-control"></textarea>
-                        <input type="hidden" name='@("noteNum["+i.ToString()+"]")' value='@i.ToString()' class="w-note-counter" />
+                        <input type="text" name='@("NoteList["+i.ToString()+"].NoteTitle")' value='@if (i <= Model.noteCount) { WriteLiteral(Model.NoteList[i].NoteTitle.ToString()); }' class="w-note-input form-control text-box single-line" />
+                        <textarea name='@("NoteList["+i.ToString()+"].NoteContent")' class="w-note-textarea form-control">
+                                @if (i <= Model.noteCount) { WriteLiteral(Model.NoteList[i].NoteContent.ToString()); }
+                        </textarea>
                     </div>
-            }
+                    }
+                    <input type="hidden" name='noteCount' value='' id='w-note-counter' />
 
                 </div>
             </div>
@@ -147,7 +140,9 @@
         }
         //console.log(noteCount);
 
-        var removeCounter = document.getElementsByClassName("w-note-counter");
+        var counter = document.getElementById("w-note-counter");
+        counter.setAttribute("value", noteCount);
+
         var removeNoteContent = document.getElementsByClassName("w-note-textarea");
         var removeNoteTitle = document.getElementsByClassName("w-note-input");
 
