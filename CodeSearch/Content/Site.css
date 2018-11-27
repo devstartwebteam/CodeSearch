@@ -776,7 +776,6 @@ body .w-text-area textarea, body .w-text-area .w-description-box, body #Category
     font-size: 14px;
     line-height: 1.428571429;
     color: #555555;
-    background-color: #ffffff;
     border: 1px solid #cccccc;
     border-radius: 4px;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -1133,7 +1132,7 @@ body .w-section-row .w-editor-col .w-title-row {
 
 body .w-section-row .w-editor-col .form-group {
     padding-left:40px;
-    margin-top:24px;
+    margin-top:18px;
 }
 
 body .w-editor-col .CodeMirror {

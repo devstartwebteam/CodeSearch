@@ -45,6 +45,10 @@ namespace CodeSearch.Controllers
                              where n.NoteSnippetId == id
                              select n).ToList();
 
+            var noteCount = (from n in db.Notes
+                             where n.NoteSnippetId == id
+                             select n.NoteCount).FirstOrDefault();
+
             Snippet snippet = db.Snippets.Find(id);
             HttpUtility.HtmlDecode(snippet.SnippetContent);
 
@@ -53,7 +57,8 @@ namespace CodeSearch.Controllers
                 Snippets = snippet,
                 CategoryList = categories.ToList<Category>(),
                 selectedCategory = selectedCatId,
-                NoteList = allNotes
+                NoteList = allNotes,
+                NoteCount = noteCount
             };
 
             if (snippet == null)
@@ -160,6 +165,10 @@ namespace CodeSearch.Controllers
                              where n.NoteSnippetId == id
                              select n).ToList();
 
+            var noteCount = (from n in db.Notes
+                             where n.NoteSnippetId == id
+                             select n.NoteCount).FirstOrDefault();
+
             Snippet snippet = db.Snippets.Find(id);
             SnippetsViewModel snippetViewModel = new SnippetsViewModel
             {
@@ -169,7 +178,8 @@ namespace CodeSearch.Controllers
                 SnippetDescription = snippet.SnippetDescription,
                 CategoryList = categories.ToList<Category>(),
                 selectedCategory = selectedCatId,
-                NoteList = editNotes
+                NoteList = editNotes,
+                NoteCount = noteCount
             };
 
             if (snippet == null)
@@ -199,8 +209,20 @@ namespace CodeSearch.Controllers
                     return new HttpNotFoundResult();
                 }
 
+                //If we have new notes being passed to the controller
                 if (NoteList.Any() && NoteList != null)
                 {
+                    //Remove all of the previous notes
+                    var removeNotes = (from n in db.Notes
+                                       where n.NoteSnippetId == id
+                                       select n).ToList();
+
+                    for (int i = 0; i < removeNotes.Count(); i++)
+                    {
+                        db.Notes.Remove(removeNotes[i]);
+                    }
+
+                    //Add all the new notes
                     for (int i = 0; i < noteCount; i++)
                     {
                         Note newNote = new Note
@@ -258,12 +280,17 @@ namespace CodeSearch.Controllers
                             where n.NoteSnippetId == id
                             select n).ToList();
 
+            var noteCount = (from n in db.Notes
+                             where n.NoteSnippetId == id
+                             select n.NoteCount).FirstOrDefault();
+
             SnippetsViewModel snippetViewModel = new SnippetsViewModel
             {
                 Snippets = snippet,
                 CategoryList = categories.ToList<Category>(),
                 selectedCategory = selectedCatId,
-                NoteList = allNotes
+                NoteList = allNotes,
+                NoteCount = noteCount
             };
 
             if (snippet == null)

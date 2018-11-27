@@ -20,7 +20,7 @@ namespace CodeSearch.ViewModels
         public int[] TagNum;
 
         public List<Data.Note> NoteList;
-        public int noteCount;
+        public int? NoteCount;
 
         public List<Data.Category> CategoryList;
         public int selectedCategory;

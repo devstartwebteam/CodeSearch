@@ -17,58 +17,57 @@
             </label>
 
             @using (Html.BeginForm())
-            {
+        {
             @Html.AntiForgeryToken()
 
             <div class="col-md-10 w-btn-left">
                 <input type="submit" value="Delete" class="btn btn-default" />
             </div>
-            }
+    }
 
         </div>
         <br />
 
         <div class="form-group row">
+            @Html.Label("Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-sm-6 offset-sm-4">
+                @Html.EditorFor(model => model.Snippets.SnippetName, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+            </div>
+        </div>
+
+        <div class="form-group row">
             <label for="example-text-input" class="control-label col-md-2">Selected Language</label>
             <div class="col-sm-10">
-                @Html.Partial("_SelectMode")
+                @Html.Partial("_SelectModeReadOnly")
             </div>
         </div>
 
         <div class="form-group row">
-            @Html.LabelFor(model => model.Snippets.SnippetName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-sm-6 offset-sm-4">
-                @Html.EditorFor(model => model.Snippets.SnippetName, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            @Html.LabelFor(model => model.Snippets.SnippetContent, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Snippet", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <textarea id="w_code" name="Snippets.SnippetContent" class="w-fields form-control codemirror-textarea">
-                @Html.Raw(Model.Snippets.SnippetContent)
-                </textarea>
+                <textarea id="w_code" name="Snippets.SnippetContent" class="w-fields form-control codemirror-textarea" readonly>@Html.Raw(Model.Snippets.SnippetContent)</textarea>
             </div>
         </div>
+        <br />
 
         <div class="form-group row">
-            @Html.LabelFor(model => model.Snippets.SnippetDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Description", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-sm-6 offset-sm-4 w-text-area">
-                @Html.TextAreaFor(model => model.Snippets.SnippetDescription, htmlAttributes: new { @class = "form-control" })
+                @Html.TextAreaFor(model => model.Snippets.SnippetDescription, htmlAttributes: new { @class = "form-control", @readonly = true })
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-md-2">Select Category</label>
+            <label class="control-label col-md-2">Selected Category</label>
             <div class="col-sm-6 offset-sm-4">
 
-                <select name="categoryList" id="categoryList">
+                <select name="categoryList" id="categoryList" readonly>
                     @foreach (var item in Model.CategoryList)
-                    {
+                {
                     <option value="@item.CategoryId.ToString()">
                         @item.CategoryName.ToString()
                     </option>
-                    }
+            }
                 </select>
 
 
@@ -76,11 +75,44 @@
         </div>
 
         <div class="form-group row">
-            @Html.LabelFor(model => model.Snippets.ReferenceURL, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Reference URL", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-sm-6 offset-sm-4">
-                @Html.EditorFor(model => model.Snippets.ReferenceURL, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Snippets.ReferenceURL, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
             </div>
         </div>
+
+        <div class="form-group row">
+            <div class="col-md-2 w-notes-title-col">
+                @Html.Label("Notes", htmlAttributes: new { @class = "control-label w-note-heading" }) <br />
+                @Html.Label("Title", htmlAttributes: new { @class = "control-label w-note-title" }) <br />
+                @Html.Label("Description", htmlAttributes: new { @class = "control-label w-note-description" })
+            </div>
+
+            <div class="col-sm-6 offset-sm-4 w-notes-content-col">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#note0">Note #1</a></li>
+                    <li><a data-toggle="tab" href="#note1">Note #2</a></li>
+                    <li><a data-toggle="tab" href="#note2">Note #3</a></li>
+                    <li><a data-toggle="tab" href="#note3">Note #4</a></li>
+                </ul>
+
+                <div class="tab-content">
+
+                    @for (int i = 0; i <= 4; i++)
+                {
+
+                    <div id='@("note"+i.ToString())' class='tab-pane fade in @if(i == 0) { WriteLiteral("active"); }'>
+                        <input type="text" name='@("NoteList["+i.ToString()+"].NoteTitle")' value='@if (i < Model.NoteCount) { WriteLiteral(Model.NoteList[i].NoteTitle.ToString()); }' class="w-note-input form-control text-box single-line" readonly />
+                        <textarea name='@("NoteList["+i.ToString()+"].NoteContent")' class="w-note-textarea form-control" readonly>
+                                @if (i < Model.NoteCount) { WriteLiteral(Model.NoteList[i].NoteContent.ToString()); }
+                        </textarea>
+                    </div>
+            }
+                    <input type="hidden" name='noteCount' value='' id='w-note-counter' />
+
+                </div>
+            </div>
+        </div><!-- end form-group-row -->
 
         <br />
 

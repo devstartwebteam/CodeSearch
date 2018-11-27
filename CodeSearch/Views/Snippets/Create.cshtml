@@ -15,105 +15,104 @@
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="col-sm-12">
+        <div class="col-sm-12">
 
-        <!-- Start Form Groups -->
-        <div class="form-group row">
-            @Html.Label("Select Language", htmlAttributes: new { @class = "control-label col-md-2" })
+            <!-- Start Form Groups -->
+            <div class="form-group row">
+                @Html.Label("Select Language", htmlAttributes: new { @class = "control-label col-md-2" })
 
-            <div class="col-sm-10">
-                @Html.Partial("_SelectMode")
-            </div>
-        </div>
-
-        <div class="form-group row">
-            @Html.Label("Snippet", htmlAttributes: new { @class = "control-label col-md-2" })
-
-            <div class="col-md-10">
-               @Html.TextAreaFor(model => model.SnippetContent, new { id = "w_code", @class = "w-fields codemirror-textarea form-control" })
-
-            </div>
-        </div>
-        <br />
-
-        <div class="form-group row">
-            @Html.Label("Name", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-sm-6 offset-sm-4">
-                @Html.TextBoxFor(model => model.SnippetName, htmlAttributes: new { @class = "form-control w-description-box" })
-                @Html.ValidationMessageFor(model => model.SnippetName, "Please enter a Snippet Name", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            @Html.Label("Description", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-sm-6 offset-sm-4 w-text-area">
-                @Html.TextAreaFor(model => model.SnippetDescription, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.SnippetDescription, "Please enter a Snippet Description.", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            @Html.Label("Select Category", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-sm-6 offset-sm-4">
-
-                <select name="categoryList" id="categoryList">
-                    @foreach (var item in Model.CategoryList)
-                {
-                    <option value="@item.CategoryId.ToString()">
-                        @item.CategoryName.ToString()
-                    </option>
-            }
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            @Html.Label("Reference URL", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-sm-6 offset-sm-4">
-                @Html.EditorFor(model => model.Snippets.ReferenceURL, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        </div>
-
-        <br />
-
-        <div class="form-group row">
-            <div class="col-md-2 w-notes-title-col">
-                @Html.Label("Notes", htmlAttributes: new { @class = "control-label w-note-heading" }) <br />
-                @Html.Label("Title", htmlAttributes: new { @class = "control-label w-note-title" }) <br />
-                @Html.Label("Description", htmlAttributes: new { @class = "control-label w-note-description" })
+                <div class="col-sm-10">
+                    @Html.Partial("_SelectMode")
+                </div>
             </div>
 
-            <div class="col-sm-6 offset-sm-4 w-notes-content-col">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#note0">Note #1</a></li>
-                    <li><a data-toggle="tab" href="#note1">Note #2</a></li>
-                    <li><a data-toggle="tab" href="#note2">Note #3</a></li>
-                    <li><a data-toggle="tab" href="#note3">Note #4</a></li>
-                </ul>
+            <div class="form-group row">
+                @Html.Label("Snippet", htmlAttributes: new { @class = "control-label col-md-2" })
 
-                <div class="tab-content">
-  
-                    @for (int i = 0; i < 4; i++)
-                    {
-                        <div id='@("note"+i.ToString())' class='tab-pane fade in @if(i == 0) { WriteLiteral("active"); }'>
-                            <input type="text" name='@("NoteList["+i.ToString()+"].NoteTitle")' class="w-note-input form-control text-box single-line" />
-                            <textarea name='@("NoteList["+i.ToString()+"].NoteContent")' class="w-note-textarea form-control"></textarea>
-                        </div>
-                    }
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.SnippetContent, new { id = "w_code", @class = "w-fields codemirror-textarea form-control" })
+                </div>
+            </div>
+            <br />
 
-                    <input type="hidden" name='noteCount' value='' id='w-note-counter' />
+            <div class="form-group row">
+                @Html.Label("Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-sm-6 offset-sm-4">
+                    @Html.TextBoxFor(model => model.SnippetName, htmlAttributes: new { @class = "form-control", @id="w-create-name-box" })
+                    @Html.ValidationMessageFor(model => model.SnippetName, "Please enter a Snippet Name", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.Label("Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-sm-6 offset-sm-4 w-text-area">
+                    @Html.TextAreaFor(model => model.SnippetDescription, new { @class = "form-control", @id="w-create-description-box" })
+                    @Html.ValidationMessageFor(model => model.SnippetDescription, "Please enter a Snippet Description.", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.Label("Select Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-sm-6 offset-sm-4">
+
+                    <select name="categoryList" id="categoryList">
+                        @foreach (var item in Model.CategoryList)
+                        {
+                            <option value="@item.CategoryId.ToString()">
+                                @item.CategoryName.ToString()
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.Label("Reference URL", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-sm-6 offset-sm-4">
+                    @Html.EditorFor(model => model.Snippets.ReferenceURL, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group row">
+                <div class="col-md-2 w-notes-title-col">
+                    @Html.Label("Notes", htmlAttributes: new { @class = "control-label w-note-heading" }) <br />
+                    @Html.Label("Title", htmlAttributes: new { @class = "control-label w-note-title" }) <br />
+                    @Html.Label("Description", htmlAttributes: new { @class = "control-label w-note-description" })
                 </div>
 
-            </div>
-        </div><!-- end .form-group row -->
+                <div class="col-sm-6 offset-sm-4 w-notes-content-col">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#note0">Note #1</a></li>
+                        <li><a data-toggle="tab" href="#note1">Note #2</a></li>
+                        <li><a data-toggle="tab" href="#note2">Note #3</a></li>
+                        <li><a data-toggle="tab" href="#note3">Note #4</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+
+                        @for (int i = 0; i < 4; i++)
+                        {
+                            <div id='@("note"+i.ToString())' class='tab-pane fade in @if(i == 0) { WriteLiteral("active"); }'>
+                                <input type="text" name='@("NoteList["+i.ToString()+"].NoteTitle")' class="w-note-input form-control text-box single-line" />
+                                <textarea name='@("NoteList["+i.ToString()+"].NoteContent")' class="w-note-textarea form-control"></textarea>
+                            </div>
+                        }
+
+                        <input type="hidden" name='noteCount' value='' id='w-note-counter' />
+                    </div>
+
+                </div>
+            </div><!-- end .form-group row -->
 
 
-        <div class="form-group row">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="form-group row">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
             </div>
         </div>
-    </div>
     }
 
     <div class="w-back-btn">
@@ -127,34 +126,43 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
-<script type="text/javascript">
 
-    document.getElementById("w-snippet-create-form").onsubmit = function () {
-        checkNotes();
-    };
+    <script type="text/javascript">
 
-    function checkNotes() {
+        document.getElementById("w-snippet-create-form").onsubmit = function () {
+            var name = document.getElementById("w-create-name-box");
+            var description = document.getElementById("w-create-description-box");
 
-        var noteCount = 0;
-        var notes = document.getElementsByClassName("w-note-input");
+            if (name.value != "" && description.value != "") {
+                    checkNotes();
+                 }
+            else {
+                console.log("validation errors exist");
+            }
+        };
 
-        for (i = 0; i < notes.length; i++) {
-            if (notes[i].value != "") {
-                noteCount++;
+        function checkNotes() {
+
+            var noteCount = 0;
+            var notes = document.getElementsByClassName("w-note-input");
+
+            for (i = 0; i < notes.length; i++) {
+                if (notes[i].value != "") {
+                    noteCount++;
+                }
+            }
+            //console.log(noteCount);
+
+            var counter = document.getElementById("w-note-counter");
+            counter.setAttribute("value", noteCount);
+
+            var removeNoteContent = document.getElementsByClassName("w-note-textarea");
+            var removeNoteTitle = document.getElementsByClassName("w-note-input");
+
+            for (j = 3; j >= noteCount; j--) {
+                removeNoteContent[j].parentNode.removeChild(removeNoteContent[j]);
+                removeNoteTitle[j].parentNode.removeChild(removeNoteTitle[j]);
             }
         }
-        //console.log(noteCount);
 
-        var counter = document.getElementById("w-note-counter");
-        counter.setAttribute("value", noteCount);
-
-        var removeNoteContent = document.getElementsByClassName("w-note-textarea");
-        var removeNoteTitle = document.getElementsByClassName("w-note-input");
-
-        for (j = 3; j >= noteCount; j--) {
-            removeNoteContent[j].parentNode.removeChild(removeNoteContent[j]);
-            removeNoteTitle[j].parentNode.removeChild(removeNoteTitle[j]);
-        }
-    }
-
-</script>
+    </script>
