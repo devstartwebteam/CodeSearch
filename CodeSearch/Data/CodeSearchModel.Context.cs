@@ -34,5 +34,6 @@ namespace CodeSearch.Data
         public virtual DbSet<ProjectNote> ProjectNotes { get; set; }
         public virtual DbSet<ProjectCategories> ProjectCategories { get; set; }
         public virtual DbSet<ProjectSnippets> ProjectSnippets { get; set; }
+        public virtual DbSet<Social> Socials { get; set; }
     }
 }

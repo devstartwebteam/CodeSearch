@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using CodeSearch.Data;
 
 namespace CodeSearch.Controllers
 {
+    [Authorize]
     public class ProjectsController : Controller
     {
         private CodeSearchModelContainer db = new CodeSearchModelContainer();
@@ -17,7 +15,8 @@ namespace CodeSearch.Controllers
         // GET: Projects
         public ActionResult Index()
         {
-            return View(db.Projects.ToList());
+            var projects = db.Projects.Include(x => x.ProjectCategories);
+            return View(projects.ToList());
         }
 
         // GET: Projects/Details/5

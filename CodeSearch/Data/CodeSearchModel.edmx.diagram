@@ -23,6 +23,7 @@
         <EntityTypeShape EntityType="CodeSearchModel.ProjectSnippets" Width="1.5" PointX="5.25" PointY="4.25" />
         <AssociationConnector Association="CodeSearchModel.ProjectProjectSnippets" />
         <AssociationConnector Association="CodeSearchModel.ProjectSnippetsSnippet" />
+        <EntityTypeShape EntityType="CodeSearchModel.Social" Width="1.5" PointX="7.625" PointY="6.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

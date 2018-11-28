@@ -13,7 +13,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 
-<body class="w-login-body w-body-fade" style="display:none;">
+<body class="w-login-body w-body-fade">
 
     @Html.Partial("_Navigation")
 
@@ -31,7 +31,6 @@
                             <div class="container-fluid w-feature-container w-feature-box">
                                 <div class="row w-title-row">
                                     <div class="col-sm-8">
-                                        <h1 class="w-dashboard-title w-primary-title">Dashboard</h1>
                                         @RenderBody()
                                     </div>
                                 </div>

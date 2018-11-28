@@ -206,6 +206,7 @@
     <Compile Include="Controllers\DisclaimerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProjectCategoriesController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SnippetsController.cs" />
@@ -216,6 +217,9 @@
       <DependentUpon>CodeSearchModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\ProjectSnippets.cs">
+      <DependentUpon>CodeSearchModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Social.cs">
       <DependentUpon>CodeSearchModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -1026,6 +1030,11 @@
     <Content Include="Views\Shared\_SelectMode.cshtml" />
     <Content Include="Views\Shared\_SelectModeReadOnly.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\_String.cshtml" />
+    <Content Include="Views\ProjectCategories\Create.cshtml" />
+    <Content Include="Views\ProjectCategories\Delete.cshtml" />
+    <Content Include="Views\ProjectCategories\Details.cshtml" />
+    <Content Include="Views\ProjectCategories\Edit.cshtml" />
+    <Content Include="Views\ProjectCategories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

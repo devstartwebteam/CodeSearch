@@ -15,6 +15,7 @@
     <EntitySet Name="ProjectNotes" EntityType="CodeSearchModel.Store.ProjectNotes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ProjectCategories" EntityType="CodeSearchModel.Store.ProjectCategories" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ProjectSnippets" EntityType="CodeSearchModel.Store.ProjectSnippets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Socials" EntityType="CodeSearchModel.Store.Socials" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="CategorySnippetAssociationsCategory" Association="CodeSearchModel.Store.CategorySnippetAssociationsCategory">
       <End Role="CategorySnippetAssociations" EntitySet="CategorySnippetAssociations" />
       <End Role="Category" EntitySet="Categories" />
@@ -139,6 +140,14 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ProjectProjectId" Type="int" Nullable="false" />
     <Property Name="Snippet_SnippetId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Socials">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SocialURL" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="CategorySnippetAssociationsCategory">
     <End Role="CategorySnippetAssociations" Type="CodeSearchModel.Store.CategorySnippetAssociations" Multiplicity="*" />
@@ -298,6 +307,7 @@
             <End Role="ProjectSnippets" EntitySet="ProjectSnippets" />
             <End Role="Snippet" EntitySet="Snippets" />
           </AssociationSet>
+          <EntitySet Name="Socials" EntityType="CodeSearchModel.Social" />
         </EntityContainer>
         <EntityType Name="Snippet">
           <Key>
@@ -505,6 +515,14 @@
           <End Type="CodeSearchModel.ProjectSnippets" Role="ProjectSnippets" Multiplicity="*" />
           <End Type="CodeSearchModel.Snippet" Role="Snippet" Multiplicity="1" />
         </Association>
+        <EntityType Name="Social">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="SocialURL" Type="String" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -604,6 +622,15 @@
         <MappingFragment StoreEntitySet="ProjectSnippets">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ProjectProjectId" ColumnName="ProjectProjectId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Socials">
+      <EntityTypeMapping TypeName="IsTypeOf(CodeSearchModel.Social)">
+        <MappingFragment StoreEntitySet="Socials">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SocialURL" ColumnName="SocialURL" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/26/2018 12:14:15
+-- Date Created: 11/27/2018 19:40:40
 -- Generated from EDMX file: C:\Users\njohnson\source\repos\CodeSearch\CodeSearch\Data\CodeSearchModel.edmx
 -- --------------------------------------------------
 
@@ -169,6 +169,14 @@ CREATE TABLE [dbo].[ProjectSnippets] (
 );
 GO
 
+-- Creating table 'Socials'
+CREATE TABLE [dbo].[Socials] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [SocialURL] nvarchar(max)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -224,6 +232,12 @@ GO
 -- Creating primary key on [Id] in table 'ProjectSnippets'
 ALTER TABLE [dbo].[ProjectSnippets]
 ADD CONSTRAINT [PK_ProjectSnippets]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Socials'
+ALTER TABLE [dbo].[Socials]
+ADD CONSTRAINT [PK_Socials]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
