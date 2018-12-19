@@ -24,6 +24,7 @@ namespace CodeSearch.Data
     
         public int ProjectId { get; set; }
         public string ProjectTitle { get; set; }
+        public string ProjectDoc { get; set; }
         public string ProjectDescription { get; set; }
         public string Created { get; set; }
         public string Modified { get; set; }

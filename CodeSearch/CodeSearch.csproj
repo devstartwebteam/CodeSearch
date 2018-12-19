@@ -232,6 +232,10 @@
     <Compile Include="Migrations\201812191658550_New Updates.Designer.cs">
       <DependentUpon>201812191658550_New Updates.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812192112455_Updated Projects Entity.cs" />
+    <Compile Include="Migrations\201812192112455_Updated Projects Entity.Designer.cs">
+      <DependentUpon>201812192112455_Updated Projects Entity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Data\Category.cs">
@@ -1068,6 +1072,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812191658550_New Updates.resx">
       <DependentUpon>201812191658550_New Updates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812192112455_Updated Projects Entity.resx">
+      <DependentUpon>201812192112455_Updated Projects Entity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

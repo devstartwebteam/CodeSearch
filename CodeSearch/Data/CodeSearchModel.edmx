@@ -102,6 +102,7 @@
     </Key>
     <Property Name="ProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ProjectTitle" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProjectDoc" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ProjectDescription" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Created" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Modified" Type="nvarchar(max)" Nullable="false" />
@@ -366,6 +367,7 @@
           </Key>
           <Property Name="ProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProjectTitle" Type="String" Nullable="false" />
+          <Property Name="ProjectDoc" Type="String" Nullable="true" />
           <Property Name="ProjectDescription" Type="String" Nullable="false" />
           <Property Name="Created" Type="String" Nullable="false" />
           <Property Name="Modified" Type="String" Nullable="false" />
@@ -581,6 +583,7 @@
         <MappingFragment StoreEntitySet="Projects">
           <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
           <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
+          <ScalarProperty Name="ProjectDoc" ColumnName="ProjectDoc" />
           <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
           <ScalarProperty Name="Created" ColumnName="Created" />
           <ScalarProperty Name="Modified" ColumnName="Modified" />

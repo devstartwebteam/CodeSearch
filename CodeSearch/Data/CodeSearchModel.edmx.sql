@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/27/2018 19:40:40
--- Generated from EDMX file: C:\Users\njohnson\source\repos\CodeSearch\CodeSearch\Data\CodeSearchModel.edmx
+-- Date Created: 12/19/2018 12:55:49
+-- Generated from EDMX file: C:\Users\njohnson\Source\Repos\CodeSearch\CodeSearch\Data\CodeSearchModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -76,6 +76,9 @@ GO
 IF OBJECT_ID(N'[dbo].[ProjectSnippets]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ProjectSnippets];
 GO
+IF OBJECT_ID(N'[dbo].[Socials]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Socials];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -128,6 +131,7 @@ GO
 CREATE TABLE [dbo].[Projects] (
     [ProjectId] int IDENTITY(1,1) NOT NULL,
     [ProjectTitle] nvarchar(max)  NOT NULL,
+    [ProjectDoc] nvarchar(max)  NULL,
     [ProjectDescription] nvarchar(max)  NOT NULL,
     [Created] nvarchar(max)  NOT NULL,
     [Modified] nvarchar(max)  NOT NULL
