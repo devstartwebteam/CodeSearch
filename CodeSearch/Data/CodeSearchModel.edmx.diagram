@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="085018045ecd4c629408f9c81f845cf5" Name="Diagram1" ZoomLevel="134" >
+      <Diagram DiagramId="085018045ecd4c629408f9c81f845cf5" Name="Diagram1" ZoomLevel="97" >
         <EntityTypeShape EntityType="CodeSearchModel.Snippet" Width="1.5" PointX="7.125" PointY="0.75" />
         <EntityTypeShape EntityType="CodeSearchModel.Category" Width="1.5" PointX="3" PointY="0.75" />
         <EntityTypeShape EntityType="CodeSearchModel.Note" Width="1.5" PointX="9.375" PointY="0.75" />
@@ -15,7 +15,7 @@
         <AssociationConnector Association="CodeSearchModel.CategorySnippetAssociationsSnippet" />
         <AssociationConnector Association="CodeSearchModel.SnippetNote" />
         <AssociationConnector Association="CodeSearchModel.SnippetTag" />
-        <EntityTypeShape EntityType="CodeSearchModel.ProjectNote" Width="1.5" PointX="5.375" PointY="6.5" />
+        <EntityTypeShape EntityType="CodeSearchModel.ProjectNote" Width="1.5" PointX="5.375" PointY="7" />
         <AssociationConnector Association="CodeSearchModel.ProjectProjectNote" />
         <EntityTypeShape EntityType="CodeSearchModel.ProjectCategories" Width="1.5" PointX="0.625" PointY="2.875" />
         <AssociationConnector Association="CodeSearchModel.ProjectProjectCategories" />

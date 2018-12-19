@@ -188,6 +188,10 @@ body #w-login-form .w-dark-btn a {
     padding: 15px 40px;
 }
 
+body .w-login-logo {
+    padding-bottom:10px;
+}
+
 body .w-learn-text {
     bottom: 15px;
     font-weight:bold;

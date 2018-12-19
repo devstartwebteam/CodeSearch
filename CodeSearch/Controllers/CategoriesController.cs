@@ -46,48 +46,31 @@ namespace CodeSearch.Controllers
             return View(new CategoriesViewModel());
         }
 
-        // POST: Categories/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        /*[HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryId,CategoryName,CategoryDescription,Created,Modified")] Category category)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Categories.Add(category);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(category);
-        }*/
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
         public ActionResult Create(CategoriesViewModel model)
         {
-            var validImageTypes = new string[]
-            {
-                "image/gif",
-                "image/jpeg",
-                "image/pjpeg",
-                "image/png"
-            };
-
-            if (model.ImageUpload == null || model.ImageUpload.ContentLength == 0)
-            {
-                    ModelState.AddModelError("ImageUpload", "This field is required");
-            }
-
-            else if (!validImageTypes.Contains(model.ImageUpload.ContentType))
-            {
-                    ModelState.AddModelError("ImageUpload", "Please choose either a GIF, JPG or PNG image.");
-            }
-
             if (ModelState.IsValid)
             {
+                var validImageTypes = new string[]
+                {
+                    "image/gif",
+                    "image/jpeg",
+                    "image/pjpeg",
+                    "image/png"
+                };
+
+                if (model.ImageUpload == null || model.ImageUpload.ContentLength == 0)
+                {
+                    ModelState.AddModelError("ImageUpload", "This field is required");
+                }
+
+                else if (!validImageTypes.Contains(model.ImageUpload.ContentType))
+                {
+                    ModelState.AddModelError("ImageUpload", "Please choose either a GIF, JPG or PNG image.");
+                }
+
                 var category = new Category
                 {
                     CategoryId = model.CategoryId,
@@ -121,40 +104,6 @@ namespace CodeSearch.Controllers
 
             return View();
         }
-
-        // GET: Categories/Edit/5
-        /*
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Category category = db.Categories.Find(id);
-            if (category == null)
-            {
-                return HttpNotFound();
-            }
-            return View(category);
-        }*/
-
-        // POST: Categories/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-
-        /*[HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoryId,CategoryName,CategoryDescription,Created,Modified")] Category category)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(category).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(category);
-        }*/
-
 
         public ActionResult Edit(int id)
         {

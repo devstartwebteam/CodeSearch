@@ -18,5 +18,5 @@ namespace CodeSearch.ViewModels
 
         [DataType(DataType.Upload)]
         public HttpPostedFileBase ImageUpload { get; set; }
-    }
+    }  
 }

@@ -12,7 +12,6 @@ namespace CodeSearch.ViewModels
     public class SnippetsViewModel
     {
         private CodeSearchModelContainer db = new CodeSearchModelContainer();
-
         public int SnippetId { get; set; }
 
         [Required]
