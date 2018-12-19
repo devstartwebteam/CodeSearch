@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/19/2018 12:55:49
+-- Date Created: 12/19/2018 15:01:37
 -- Generated from EDMX file: C:\Users\njohnson\Source\Repos\CodeSearch\CodeSearch\Data\CodeSearchModel.edmx
 -- --------------------------------------------------
 
@@ -78,6 +78,9 @@ IF OBJECT_ID(N'[dbo].[ProjectSnippets]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Socials]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Socials];
+GO
+IF OBJECT_ID(N'[dbo].[C__MigrationHistory]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[C__MigrationHistory];
 GO
 
 -- --------------------------------------------------
@@ -181,6 +184,15 @@ CREATE TABLE [dbo].[Socials] (
 );
 GO
 
+-- Creating table 'C__MigrationHistory'
+CREATE TABLE [dbo].[C__MigrationHistory] (
+    [MigrationId] nvarchar(150)  NOT NULL,
+    [ContextKey] nvarchar(300)  NOT NULL,
+    [Model] varbinary(max)  NOT NULL,
+    [ProductVersion] nvarchar(32)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -243,6 +255,12 @@ GO
 ALTER TABLE [dbo].[Socials]
 ADD CONSTRAINT [PK_Socials]
     PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [MigrationId], [ContextKey] in table 'C__MigrationHistory'
+ALTER TABLE [dbo].[C__MigrationHistory]
+ADD CONSTRAINT [PK_C__MigrationHistory]
+    PRIMARY KEY CLUSTERED ([MigrationId], [ContextKey] ASC);
 GO
 
 -- --------------------------------------------------

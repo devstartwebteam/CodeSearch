@@ -393,7 +393,6 @@ body .w-login-container input.w-login-btn, body .w-create-btn {
 
 body .w-login-field input, body .w-account-field input {
     margin: 10px auto;
-    background: #fdfdfd;
     vertical-align: middle;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -405,7 +404,6 @@ body .w-login-field input, body .w-account-field input {
     font-size: 14px;
     color: #333;
     max-width: 360px;
-    width: 100%;
 }
 
 body .w-login-wrap .w-primary-title, body .w-account-wrap .w-primary-title {

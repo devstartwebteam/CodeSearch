@@ -210,6 +210,9 @@
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SnippetsController.cs" />
+    <Compile Include="Data\C__MigrationHistory.cs">
+      <DependentUpon>CodeSearchModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\ProjectCategories.cs">
       <DependentUpon>CodeSearchModel.tt</DependentUpon>
     </Compile>
@@ -228,13 +231,9 @@
     <Compile Include="Helpers\ImageResize.cs" />
     <Compile Include="Helpers\ProjectHelpers.cs" />
     <Compile Include="Helpers\HtmlSanitizer.cs" />
-    <Compile Include="Migrations\201812191658550_New Updates.cs" />
-    <Compile Include="Migrations\201812191658550_New Updates.Designer.cs">
-      <DependentUpon>201812191658550_New Updates.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812192112455_Updated Projects Entity.cs" />
-    <Compile Include="Migrations\201812192112455_Updated Projects Entity.Designer.cs">
-      <DependentUpon>201812192112455_Updated Projects Entity.cs</DependentUpon>
+    <Compile Include="Migrations\201812192300071_Update Identity.cs" />
+    <Compile Include="Migrations\201812192300071_Update Identity.Designer.cs">
+      <DependentUpon>201812192300071_Update Identity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1070,11 +1069,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812191658550_New Updates.resx">
-      <DependentUpon>201812191658550_New Updates.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812192112455_Updated Projects Entity.resx">
-      <DependentUpon>201812192112455_Updated Projects Entity.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201812192300071_Update Identity.resx">
+      <DependentUpon>201812192300071_Update Identity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
