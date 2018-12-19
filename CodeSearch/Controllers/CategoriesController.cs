@@ -43,7 +43,7 @@ namespace CodeSearch.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
-            return View(new ImageViewModel());
+            return View(new CategoriesViewModel());
         }
 
         // POST: Categories/Create
@@ -66,7 +66,7 @@ namespace CodeSearch.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create(ImageViewModel model)
+        public ActionResult Create(CategoriesViewModel model)
         {
             var validImageTypes = new string[]
             {
@@ -164,7 +164,7 @@ namespace CodeSearch.Controllers
                 return new HttpNotFoundResult();
             }
 
-            var categoryImage = new ImageViewModel
+            var categoryImage = new CategoriesViewModel
             {
                 CategoryName = category.CategoryName,
                 CategoryDescription = category.CategoryDescription,
@@ -176,7 +176,7 @@ namespace CodeSearch.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, ImageViewModel model)
+        public ActionResult Edit(int id, CategoriesViewModel model)
         {
             var validImageTypes = new string[]
             {
@@ -241,7 +241,7 @@ namespace CodeSearch.Controllers
                 return HttpNotFound();
             }
 
-            var categoryImage = new ImageViewModel
+            var categoryImage = new CategoriesViewModel
             {
                 CategoryId = category.CategoryId,
                 CategoryName = category.CategoryName,

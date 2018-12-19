@@ -1,18 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Web;
 
 namespace CodeSearch.ViewModels
 {
     public class CategoriesViewModel
     {
-        public Data.Category Category;
+        [Required]
+        public int CategoryId { get; set; }
 
-        public List<Data.Snippet> SnippetList;
-        public int SnippetCount;
+        [Required]
+        public string CategoryName { get; set; }
 
-        public List<Data.Note> NoteList;
-        public int NoteCount;
+        public string CategoryDescription { get; set; }
+
+        public string ImageURL { get; set; }
+
+        [DataType(DataType.Upload)]
+        public HttpPostedFileBase ImageUpload { get; set; }
     }
 }

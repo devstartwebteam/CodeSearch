@@ -64,41 +64,8 @@ namespace CodeSearch.Controllers
             try
             {
                 if (ModelState.IsValid)
-                {           
-                    Snippet snippet = new Snippet
-                    {
-                        SnippetName = Sanitizer.GetSafeHtmlFragment(model.SnippetName),
-                        SnippetContent = HtmlSanitizer.SanitizeHtml(model.SnippetContent),
-                        SnippetDescription = Sanitizer.GetSafeHtmlFragment(model.SnippetDescription),
-                        ReferenceURL = Sanitizer.GetSafeHtmlFragment(model.ReferenceUrl),
-                        SnippetLanguage = Sanitizer.GetSafeHtmlFragment(model.SnippetLanguage)
-                    };
-
-                    CategorySnippetAssociations snippetCategory = new CategorySnippetAssociations
-                    {
-                        SnippetAssociationId = snippet.SnippetId,
-                        CategoryAssociationId = model.SelectedCategoryId
-                    };
-
-                    if(model.NoteList != null)
-                    {
-                        for (int i = 0; i < model.NoteCount; i++)
-                        {
-                            Note newNote = new Note
-                            {
-                                NoteSnippetId = snippet.SnippetId,
-                                NoteTitle = model.NoteList[i].NoteTitle,
-                                NoteContent = model.NoteList[i].NoteContent,
-                                NoteCount = model.NoteCount,
-                            };
-
-                            db.Notes.Add(newNote);
-                        }
-                    }
-
-                    db.CategorySnippetAssociations.Add(snippetCategory);
-                    db.Snippets.Add(snippet);
-                    db.SaveChanges();
+                {
+                    model.CreateNewSnippet(model);
 
                     TempData["SuccessMessage"] = "<div class='alert alert-success w-fade-out'><strong> Success!</strong> New Code Snippet Created</div>";
                 }
@@ -138,63 +105,22 @@ namespace CodeSearch.Controllers
         [ValidateInput(false)]
         public ActionResult Edit(SnippetsViewModel model, int id)
         {
-            Snippet snippet = db.Snippets.Find(id);
-
-            CategorySnippetAssociations snippetCategoryAssociation = db.CategorySnippetAssociations.Find(id);
 
             if (ModelState.IsValid) {
        
-                if (snippet == null || snippetCategoryAssociation == null)
+                if (model == null)
                 {
                     return new HttpNotFoundResult();
                 }
 
-                //If we have new notes being passed to the controller
-                if (model.NoteList.Any() && model.NoteList != null)
-                {
-                    //Remove all of the previous notes
-                    var removeNotes = (from n in db.Notes
-                                       where n.NoteSnippetId == id
-                                       select n).ToList();
-
-                    for (int i = 0; i < removeNotes.Count(); i++)
-                    {
-                        db.Notes.Remove(removeNotes[i]);
-                    }
-
-                    //Add all the new notes
-                    for (int i = 0; i < model.NoteCount; i++)
-                    {
-                        Note newNote = new Note
-                        {
-                            NoteSnippetId = snippet.SnippetId,
-                            NoteTitle = model.NoteList[i].NoteTitle,
-                            NoteContent = model.NoteList[i].NoteContent,
-                            NoteCount = model.NoteCount
-                        };
-
-                        db.Notes.Add(newNote);
-                    }
-                }
-
-                snippet.SnippetName = Sanitizer.GetSafeHtmlFragment(model.SnippetName);
-                snippet.SnippetContent = HtmlSanitizer.SanitizeHtml(model.SnippetContent);
-                snippet.SnippetDescription = Sanitizer.GetSafeHtmlFragment(model.SnippetDescription);
-                snippet.ReferenceURL = Sanitizer.GetSafeHtmlFragment(model.ReferenceUrl);
-                snippet.SnippetLanguage = Sanitizer.GetSafeHtmlFragment(model.SnippetLanguage);
-
-                snippetCategoryAssociation.CategoryAssociationId = model.SelectedCategoryId;
-
-                db.Entry(snippetCategoryAssociation).State = EntityState.Modified;
-                db.Entry(snippet).State = EntityState.Modified;
-                db.SaveChanges();
+                model.EditSnippet(model, id);
 
                 TempData["UpdateMessage"] = "<div class='alert alert-info w-fade-out'>Code Snippet Successfully Updated!</div>";
 
                 return RedirectToAction("Index");
             }
 
-            return View(snippet);
+            return View(model);
         }
 
         // GET: Snippets/Delete/5
@@ -220,23 +146,9 @@ namespace CodeSearch.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id )
         {
-            Snippet snippet = db.Snippets.Find(id);
-            CategorySnippetAssociations snippetCategory = db.CategorySnippetAssociations.Find(id);
-
-            var allNotes = (from n in db.Notes
-                            where n.NoteSnippetId == id
-                            select n).ToList();
-
-            foreach(Note note in allNotes)
-            {
-                db.Notes.Remove(note);
-            }
-           
-            db.Snippets.Remove(snippet);
-            db.CategorySnippetAssociations.Remove(snippetCategory);
-
-            db.SaveChanges();
-
+            SnippetsViewModel model = new SnippetsViewModel();
+            model.DeleteSnippet(id);
+            
             TempData["DeleteMessage"] = "<div class='alert alert-info w-fade-out'>Code Snippet Successfully Removed!</div>";
 
             return RedirectToAction("Index");
