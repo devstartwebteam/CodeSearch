@@ -8,6 +8,7 @@ using CodeSearch.ViewModels;
 using CodeSearch.Helpers;
 using Microsoft.Security.Application;
 using System.Web;
+using System.Data;
 
 namespace CodeSearch.Controllers
 {
@@ -32,51 +33,20 @@ namespace CodeSearch.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var categories = from r in db.Categories
-                             where r.CategoryName != ""
-                             select r;
+            SnippetsViewModel model = new SnippetsViewModel(id);
 
-            var selectedCatId = (from csa in db.CategorySnippetAssociations
-                                 where csa.SnippetAssociationId == id
-                                 select csa.Category.CategoryId).FirstOrDefault();
-
-            var allNotes = (from n in db.Notes
-                             where n.NoteSnippetId == id
-                             select n).ToList();
-
-            var noteCount = (from n in db.Notes
-                             where n.NoteSnippetId == id
-                             select n.NoteCount).FirstOrDefault();
-
-            Snippet snippet = db.Snippets.Find(id);
-            HttpUtility.HtmlDecode(snippet.SnippetContent);
-
-            SnippetsViewModel snippetViewModel = new SnippetsViewModel
-            {
-                Snippets = snippet,
-                CategoryList = categories.ToList<Category>(),
-                selectedCategory = selectedCatId,
-                NoteList = allNotes,
-                NoteCount = noteCount
-            };
-
-            if (snippet == null)
+            if (model == null)
             {
                 return HttpNotFound();
             }
-            return View(snippetViewModel);
+            return View(model);
         }
 
         // GET: Snippets/Create
         public ActionResult Create()
-        {
-            var categories = from r in db.Categories
-                        where r.CategoryName != ""
-                        select r;
-
+        {          
             SnippetsViewModel model = new SnippetsViewModel();
-
-            model.CategoryList = categories.ToList<Category>();
+            model.GetSnippetCategories(model);
 
             return View(model);
         }
@@ -87,54 +57,59 @@ namespace CodeSearch.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create(SnippetsViewModel model, int categoryList, string SnippetLanguage, List<Note> NoteList, int noteCount)
+        public ActionResult Create(SnippetsViewModel model)
         {
             var errors = ModelState.Values.SelectMany(v => v.Errors);
 
-            if (ModelState.IsValid)
+            try
             {
-                    string snippetString = model.SnippetContent.ToString();
-
-                Snippet newSnippet = new Snippet
-                {
-                    SnippetName = Sanitizer.GetSafeHtmlFragment(model.SnippetName),
-                    SnippetContent = HtmlSanitizer.SanitizeHtml(snippetString),
-                    SnippetDescription = Sanitizer.GetSafeHtmlFragment(model.SnippetDescription),
-                    ReferenceURL = Sanitizer.GetSafeHtmlFragment(model.Snippets.ReferenceURL),
-                    SnippetLanguage = Sanitizer.GetSafeHtmlFragment(SnippetLanguage)
-                };
-
-                CategorySnippetAssociations snippetCategory = new CategorySnippetAssociations
-                {
-                    SnippetAssociationId = newSnippet.SnippetId,
-                    CategoryAssociationId = categoryList
-                };
-
-                if (NoteList != null)
-                { 
-                    for (int i = 0; i < noteCount; i++)
+                if (ModelState.IsValid)
+                {           
+                    Snippet snippet = new Snippet
                     {
-                        Note newNote = new Note
+                        SnippetName = Sanitizer.GetSafeHtmlFragment(model.SnippetName),
+                        SnippetContent = HtmlSanitizer.SanitizeHtml(model.SnippetContent),
+                        SnippetDescription = Sanitizer.GetSafeHtmlFragment(model.SnippetDescription),
+                        ReferenceURL = Sanitizer.GetSafeHtmlFragment(model.ReferenceUrl),
+                        SnippetLanguage = Sanitizer.GetSafeHtmlFragment(model.SnippetLanguage)
+                    };
+
+                    CategorySnippetAssociations snippetCategory = new CategorySnippetAssociations
+                    {
+                        SnippetAssociationId = snippet.SnippetId,
+                        CategoryAssociationId = model.SelectedCategoryId
+                    };
+
+                    if(model.NoteList != null)
+                    {
+                        for (int i = 0; i < model.NoteCount; i++)
                         {
-                            NoteSnippetId = newSnippet.SnippetId,
-                            NoteTitle = NoteList[i].NoteTitle,
-                            NoteContent = NoteList[i].NoteContent,
-                            NoteCount = noteCount,
-                        };
+                            Note newNote = new Note
+                            {
+                                NoteSnippetId = snippet.SnippetId,
+                                NoteTitle = model.NoteList[i].NoteTitle,
+                                NoteContent = model.NoteList[i].NoteContent,
+                                NoteCount = model.NoteCount,
+                            };
 
-                        db.Notes.Add(newNote);
+                            db.Notes.Add(newNote);
+                        }
                     }
-                }
 
-                db.CategorySnippetAssociations.Add(snippetCategory);
-                db.Snippets.Add(newSnippet);
-                db.SaveChanges();
-                
-                TempData["SuccessMessage"] = "<div class='alert alert-success w-fade-out'><strong> Success!</strong> New Code Snippet Created</div>";
+                    db.CategorySnippetAssociations.Add(snippetCategory);
+                    db.Snippets.Add(snippet);
+                    db.SaveChanges();
+
+                    TempData["SuccessMessage"] = "<div class='alert alert-success w-fade-out'><strong> Success!</strong> New Code Snippet Created</div>";
+                }
+            }
+
+            catch(DataException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator");
             }
 
             return RedirectToAction("Index");
-
         }
 
         // GET: Snippets/Edit/5
@@ -145,48 +120,14 @@ namespace CodeSearch.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            //Get All Categories
-            var categories = from c in db.Categories
-                             where c.CategoryName != ""
-                             select c;
+            SnippetsViewModel model = new SnippetsViewModel(id);
 
-            //Get Assigned Category based on Snippet Id
-            /* var selectedCat = (from csa in db.CategorySnippetAssociations
-                               join c in db.Categories on csa.CategoryAssociationId equals c.CategoryId
-                               where csa.SnippetAssociationId == id
-                               select c.CategoryName).FirstOrDefault(); */
-
-            var selectedCatId = (from csa in db.CategorySnippetAssociations
-                               where csa.SnippetAssociationId == id
-                               select csa.Category.CategoryId).FirstOrDefault();
-
-            var editNotes = (from n in db.Notes
-                             where n.NoteSnippetId == id
-                             select n).ToList();
-
-            var noteCount = (from n in db.Notes
-                             where n.NoteSnippetId == id
-                             select n.NoteCount).FirstOrDefault();
-
-            Snippet snippet = db.Snippets.Find(id);
-            SnippetsViewModel snippetViewModel = new SnippetsViewModel
-            {
-                Snippets = snippet,
-                SnippetName = snippet.SnippetName,
-                SnippetContent = snippet.SnippetContent,
-                SnippetDescription = snippet.SnippetDescription,
-                CategoryList = categories.ToList<Category>(),
-                selectedCategory = selectedCatId,
-                NoteList = editNotes,
-                NoteCount = noteCount
-            };
-
-            if (snippet == null)
+            if (model == null)
             {
                 return HttpNotFound();
             }
 
-            return View(snippetViewModel);
+            return View(model);
         }
 
         // POST: Snippets/Edit/5
@@ -195,7 +136,7 @@ namespace CodeSearch.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit(int id, SnippetsViewModel model, int categoryList, string SnippetLanguage, List<Note> NoteList, int noteCount)
+        public ActionResult Edit(SnippetsViewModel model, int id)
         {
             Snippet snippet = db.Snippets.Find(id);
 
@@ -209,7 +150,7 @@ namespace CodeSearch.Controllers
                 }
 
                 //If we have new notes being passed to the controller
-                if (NoteList.Any() && NoteList != null)
+                if (model.NoteList.Any() && model.NoteList != null)
                 {
                     //Remove all of the previous notes
                     var removeNotes = (from n in db.Notes
@@ -222,14 +163,14 @@ namespace CodeSearch.Controllers
                     }
 
                     //Add all the new notes
-                    for (int i = 0; i < noteCount; i++)
+                    for (int i = 0; i < model.NoteCount; i++)
                     {
                         Note newNote = new Note
                         {
                             NoteSnippetId = snippet.SnippetId,
-                            NoteTitle = NoteList[i].NoteTitle,
-                            NoteContent = NoteList[i].NoteContent,
-                            NoteCount = noteCount
+                            NoteTitle = model.NoteList[i].NoteTitle,
+                            NoteContent = model.NoteList[i].NoteContent,
+                            NoteCount = model.NoteCount
                         };
 
                         db.Notes.Add(newNote);
@@ -239,10 +180,10 @@ namespace CodeSearch.Controllers
                 snippet.SnippetName = Sanitizer.GetSafeHtmlFragment(model.SnippetName);
                 snippet.SnippetContent = HtmlSanitizer.SanitizeHtml(model.SnippetContent);
                 snippet.SnippetDescription = Sanitizer.GetSafeHtmlFragment(model.SnippetDescription);
-                snippet.ReferenceURL = Sanitizer.GetSafeHtmlFragment(model.Snippets.ReferenceURL);
-                snippet.SnippetLanguage = Sanitizer.GetSafeHtmlFragment(SnippetLanguage);
+                snippet.ReferenceURL = Sanitizer.GetSafeHtmlFragment(model.ReferenceUrl);
+                snippet.SnippetLanguage = Sanitizer.GetSafeHtmlFragment(model.SnippetLanguage);
 
-                snippetCategoryAssociation.CategoryAssociationId = categoryList;
+                snippetCategoryAssociation.CategoryAssociationId = model.SelectedCategoryId;
 
                 db.Entry(snippetCategoryAssociation).State = EntityState.Modified;
                 db.Entry(snippet).State = EntityState.Modified;
@@ -264,40 +205,14 @@ namespace CodeSearch.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            //Get All Categories
-            var categories = from r in db.Categories
-                             where r.CategoryName != ""
-                             select r;
+            SnippetsViewModel model = new SnippetsViewModel(id);
 
-            var selectedCatId = (from csa in db.CategorySnippetAssociations
-                                 where csa.SnippetAssociationId == id
-                                 select csa.Category.CategoryId).FirstOrDefault();
-
-            Snippet snippet = db.Snippets.Find(id);
-
-            var allNotes = (from n in db.Notes
-                            where n.NoteSnippetId == id
-                            select n).ToList();
-
-            var noteCount = (from n in db.Notes
-                             where n.NoteSnippetId == id
-                             select n.NoteCount).FirstOrDefault();
-
-            SnippetsViewModel snippetViewModel = new SnippetsViewModel
-            {
-                Snippets = snippet,
-                CategoryList = categories.ToList<Category>(),
-                selectedCategory = selectedCatId,
-                NoteList = allNotes,
-                NoteCount = noteCount
-            };
-
-            if (snippet == null)
+            if (model == null)
             {
                 return HttpNotFound();
             }
 
-            return View(snippetViewModel);
+            return View(model);
         }
 
         // POST: Snippets/Delete/5

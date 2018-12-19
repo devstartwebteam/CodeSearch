@@ -11,21 +11,21 @@
     <div class="col-sm-12">
 
         <div class="form-group row">
-            @Html.LabelFor(model => model.CategoryName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-6 offset-md-4">
                 @Html.DisplayFor(model => model.CategoryName)
             </div>
         </div>
 
         <div class="form-group row">
-            @Html.LabelFor(model => model.CategoryDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Description", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-6 offset-md-4">
                 @Html.DisplayFor(model => model.CategoryDescription)
             </div>
         </div>
 
         <div class="form-group row">
-            @Html.LabelFor(model => model.ImageURL, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Image", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-6 offset-md-4">
                 <img src="@Model.ImageURL" class="w-index-img">
             </div>

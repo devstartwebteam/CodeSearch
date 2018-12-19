@@ -21,14 +21,14 @@
         <div class="form-group row">
             @Html.Label("Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-sm-6 offset-sm-4">
-                @Html.EditorFor(model => model.Snippets.SnippetName, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                @Html.EditorFor(model => model.SnippetName, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
             </div>
         </div>
 
         <div class="form-group row">
             @Html.Label("Snippet", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <textarea id="w_code" name="w_code" class="w-fields form-control codemirror-textarea" readonly>@Html.Raw(Model.Snippets.SnippetContent)</textarea>
+                <textarea id="w_code" name="SnippetContent" class="w-fields form-control codemirror-textarea" readonly>@Html.Raw(Model.SnippetContent)</textarea>
             </div>
         </div>
         <br />
@@ -36,7 +36,7 @@
         <div class="form-group row">
             @Html.Label("Description", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-sm-6 offset-sm-4 w-text-area">
-                @Html.TextAreaFor(model => model.Snippets.SnippetDescription, new { @class = "form-control w-description-box", @readonly=true} )
+                @Html.TextAreaFor(model => model.SnippetDescription, new { @class = "form-control w-description-box", @readonly=true} )
             </div>
         </div>
 
@@ -44,7 +44,7 @@
             <label class="control-label col-md-2">Select Category</label>
             <div class="col-sm-6 offset-sm-4">
 
-                <select name="categoryList" id="categoryList" readonly>
+                <select name="SelectedCategoryId" id="categoryList" readonly>
                     @foreach (var item in Model.CategoryList)
                 {
                     <option value="@item.CategoryId.ToString()">
@@ -58,7 +58,7 @@
         <div class="form-group row">
             @Html.Label("Reference URL", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-sm-6 offset-sm-4">
-                @Html.EditorFor(model => model.Snippets.ReferenceURL, new { htmlAttributes = new { @readonly=true, @class = "form-control" } })
+                @Html.EditorFor(model => model.ReferenceUrl, new { htmlAttributes = new { @readonly=true, @class = "form-control" } })
             </div>
         </div>
 
@@ -99,15 +99,15 @@
 
     <div class="w-back-btn">
         @Html.ActionLink("Back to List", "Index") | 
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Snippets.SnippetId })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.SnippetId })
     </div>
 
 </div><!-- end .w-feature-row -->
 
 <script>
 
-    var mode = "@Model.Snippets.SnippetLanguage"
-    var selectedCatId = "@Model.selectedCategory"
+    var mode = "@Model.SnippetLanguage"
+    var selectedCatId = "@Model.SelectedCategoryId"
 
         function setValues() {
             var modeSelect = document.getElementById("mode");

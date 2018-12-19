@@ -2,13 +2,8 @@
 
 
 <select id="mode" name="SnippetLanguage" class="w-code-select" onchange="loadModeForSelectedOption()">
-    <option value="text" selected="selected" data-mime-type="text">
+    <option value="text" data-mime-type="text">
         Plain Text
-    </option>
-    <option value="HTML"
-            data-mime-type="text/html"
-            data-script="/Scripts/codemirror-5.26.0/mode/htmlembedded/htmlembedded.js">
-        HTML
     </option>
     <option value="CSS"
             data-mime-type="text/css"
@@ -19,11 +14,6 @@
             data-mime-type="javascript"
             data-script="/Scripts/codemirror-5.26.0/mode/javascript/javascript.js">
         Javascript
-    </option>
-    <option value="PHP"
-            data-mime-type="application/x-httpd-php"
-            data-script="/Scripts/codemirror-5.26.0/mode/php/php.js">
-        PHP
     </option>
     <option value="Plain PHP"
             data-mime-type="text/x-php"
@@ -37,18 +27,23 @@
     </option>
     <option value="ASP.NET"
             data-mime-type="application/x-aspx"
-            data-script="/Scripts/codemirror-5.26.0/mode/htmlembedded/htmlembedded.js">
+            data-script="/Scripts/codemirror-5.26.0/mode/htmlmixed/htmlmixed.js">
         ASP.NET
     </option>
     <option value="Java"
             data-mime-type="text/x-java"
-            data-script="/Scripts/codemirror-5.26.0/mode/java/java.js">
+            data-script="/Scripts/codemirror-5.26.0/mode/clike/clike.js">
         Java
     </option>
     <option value="XML"
             data-mime-type="text/xml"
             data-script="/Scripts/codemirror-5.26.0/mode/xml/xml.js">
         XML
+    </option>
+    <option value="HTML"
+            data-mime-type="text/html"
+            data-script="/Scripts/codemirror-5.26.0/mode/htmlembedded/htmlembedded.js">
+        HTML
     </option>
     <option value="MySql"
             data-mime-type="text/x-mysql"

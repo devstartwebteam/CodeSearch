@@ -266,6 +266,7 @@
     <Compile Include="Data\Tag.cs">
       <DependentUpon>CodeSearchModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CategoriesViewModel.cs" />
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ImageViewModel.cs" />
