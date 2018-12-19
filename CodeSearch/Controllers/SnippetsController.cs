@@ -149,7 +149,7 @@ namespace CodeSearch.Controllers
             SnippetsViewModel model = new SnippetsViewModel();
             model.DeleteSnippet(id);
             
-            TempData["DeleteMessage"] = "<div class='alert alert-info w-fade-out'>Code Snippet Successfully Removed!</div>";
+            TempData["DeleteMessage"] = "<div class='alert alert-danger w-fade-out'>Code Snippet Successfully Removed!</div>";
 
             return RedirectToAction("Index");
         }

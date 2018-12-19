@@ -192,6 +192,18 @@ body .w-login-logo {
     padding-bottom:10px;
 }
 
+body .w-detail-btns {
+    list-style-type:none;
+    padding-left:0px;
+}
+
+body .w-detail-btns li {
+    display:inline-block;
+}
+body .w-detail-btns li a {
+    padding:0px 8px;
+}
+
 body .w-learn-text {
     bottom: 15px;
     font-weight:bold;
@@ -799,7 +811,7 @@ body .w-dev-row .col-sm-3 {
 }
 
 body .w-back-btn {
-    padding: 40px 20px;
+    padding: 40px;
 }
 
 body #w_submit {

@@ -28,9 +28,9 @@
 
             <div class="form-group row">
                 @Html.Label("Snippet", htmlAttributes: new { @class = "control-label col-md-2" })
-
                 <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.SnippetContent, new { id = "w_code", @class = "w-fields codemirror-textarea form-control" })
+                    <textarea id="w_code" name="SnippetContent" class="w-fields form-control codemirror-textarea">@Html.Raw(Model.SnippetContent)</textarea>
+                    @Html.ValidationMessageFor(model => model.SnippetContent, "Please enter a Code Snippet", new { @class = "text-danger" })
                 </div>
             </div>
             <br />

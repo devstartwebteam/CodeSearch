@@ -98,8 +98,11 @@
     </div><!-- end .col-sm-12 -->
 
     <div class="w-back-btn">
-        @Html.ActionLink("Back to List", "Index") | 
-        @Html.ActionLink("Edit", "Edit", new { id = Model.SnippetId })
+        <ul class="w-detail-btns">
+            <li>@Html.ActionLink("Back to List", "Index") | </li>
+            <li>@Html.ActionLink("Edit", "Edit", new { id = Model.SnippetId }) | </li>
+            <li>@Html.ActionLink("Delete", "Delete", new { id = Model.SnippetId }) </li>
+        </ul>
     </div>
 
 </div><!-- end .w-feature-row -->

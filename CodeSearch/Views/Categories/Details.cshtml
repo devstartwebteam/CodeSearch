@@ -29,12 +29,12 @@
             <div class="col-md-6 offset-md-4">
                 <img src="@Model.ImageURL" class="w-index-img">
             </div>
-       </div>
+        </div>
 
         <div class="w-back-btn">
-            @Html.ActionLink("Back to List", "Index") |
-            @Html.ActionLink("Edit", "Edit", new { id = Model.CategoryId })
+            <ul class="w-detail-btns">
+                <li>@Html.ActionLink("Back to List", "Index") |</li>
+                <li>@Html.ActionLink("Edit", "Edit", new { id = Model.CategoryId })</li>
+            </ul>
         </div>
-        
-        </div>    
     </div><!-- end .w-feature-row -->

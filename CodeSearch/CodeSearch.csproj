@@ -1042,6 +1042,7 @@
     <Content Include="Views\ProjectCategories\Details.cshtml" />
     <Content Include="Views\ProjectCategories\Edit.cshtml" />
     <Content Include="Views\ProjectCategories\Index.cshtml" />
+    <Content Include="Views\Shared\_IndexLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

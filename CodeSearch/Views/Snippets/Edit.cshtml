@@ -116,7 +116,10 @@
 </div><!-- .w-feature-row -->
 
 <div class="w-back-btn">
-    @Html.ActionLink("Back to List", "Index")
+    <ul class="w-detail-btns">
+        <li>@Html.ActionLink("Back to List", "Index") | </li>
+        <li>@Html.ActionLink("Delete", "Delete", new { id = Model.SnippetId }) </li>
+    </ul>
 </div>
 
 @section Scripts {
