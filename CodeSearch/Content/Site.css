@@ -406,8 +406,16 @@ body .w-login-field input, body .w-account-field input {
     max-width: 360px;
 }
 
+body #RememberMe {
+    margin-left:10px;
+}
+
 body .w-login-wrap .w-primary-title, body .w-account-wrap .w-primary-title {
     margin-top: 0px;
+}
+
+body .w-tiny-group {
+    padding-right:40px;
 }
 
 body .w-dev-titles {

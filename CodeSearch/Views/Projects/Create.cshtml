@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Create a New Project";
-    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    Layout = "~/Views/Shared/_ProjectLayout.cshtml";
 }
 
 @Html.Partial("_PageTitle")
@@ -16,33 +16,57 @@
         @Html.AntiForgeryToken()
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+        <div class="form-group row">
             @Html.Label("Project Name", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-sm-6 offset-sm-4">
                 @Html.EditorFor(model => model.ProjectTitle, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ProjectTitle, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.Label("Description", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProjectDescription, new { htmlAttributes = new { @class = "form-control" } })
+        <div class="form-group row">
+            @Html.Label("Project Description", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-sm-6 offset-sm-4 w-text-area">
+                @Html.TextAreaFor(model => model.ProjectDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProjectDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+                @Html.Label("Project Documentation", htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>
+        
+        <div class="form-group w-tiny-group row">
+                <textarea id="ProjectDoc" name="ProjectDoc" class="w-fields form-control"></textarea>
+        </div>
+
+        <div class="form-group row">
+            @Html.Label("Snippets", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-sm-6 offset-sm-4 w-text-area">
+                @Html.TextAreaFor(model => model.ProjectDescription, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ProjectDescription, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group row">
+            @Html.Label("Categories", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-sm-6 offset-sm-4 w-text-area">
+                @Html.TextAreaFor(model => model.ProjectDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProjectDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group row">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
-}
 
+    }
+
+    </div>
 </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-</div>
+    <div class="w-back-btn">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
