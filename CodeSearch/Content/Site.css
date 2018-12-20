@@ -286,6 +286,7 @@ body #w-search-form .fa {
     display: inline;
     position: relative;
     right: 40px;
+    opacity:0.8;
     padding: 10px 0px;
     cursor:pointer;
 }
@@ -641,6 +642,7 @@ body .navbar-default {
         padding: 14px 18px;
         line-height: 22px;
         margin: 0px 6px;
+        opacity:0.8;
     }
 
     body .navbar-default .navbar-nav > li > a {
@@ -651,6 +653,7 @@ body .navbar-default {
         margin: 1px 8px 0px 8px;
         text-shadow: none;
         font-size: 1.1em;
+        opacity:0.8;
     }
 
 body .navbar {
@@ -690,6 +693,78 @@ body .navbar-brand {
     line-height: 24px;
 }
 
+/* Side Navigation Menu */
+
+body .w-sidenav, body .w-sidenav-small {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #eee;
+  overflow-x: hidden;
+  padding-top:80px;
+  transition: 0.5s;
+  border-right: #c7c7c7 1px solid;
+}
+
+body .w-open-btn {
+    font-size:20px;
+    cursor:pointer;
+    bottom: 2px;
+    position: relative;
+    color:#fff;
+    padding-left:20px;
+    opacity:0.6;
+}
+
+body .w-sidenav a, body .w-sidenav-small a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 1.2em;
+  color: #818181;
+  font-family: 'Roboto', sans-serif;
+  display: block;
+  transition: 0.3s;
+}
+
+body .w-sidenav a:hover, body .w-sidenav-small a:hover {
+  color: #2066ac;
+}
+
+body .w-sidenav .closebtn, body .w-sidenav-small .closebtn {
+  position: absolute;
+  top: 50px;
+  right: 25px;
+  font-size: 52px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .w-sidenav, .w-sidenav-small {padding-top: 15px;}
+  .w-sidenav a, .w-sidenav-small a {font-size: 18px;}
+}
+
+/* Navigation Social Icons */
+
+body .w-nav-social-list {
+    list-style-type:none;
+    display:inline-block;
+    margin-top:11px;
+    margin-bottom:0px;
+}
+
+body .w-nav-social-list li {
+    display:inline-block;
+    padding-left:20px;
+}
+
+body .w-nav-social-list li a {
+    color:#fff;
+    opacity:0.8
+}
+
 body .w-to-bottom {
     position: fixed;
     bottom: 0px;
@@ -713,6 +788,7 @@ body .w-nav-search {
     background-color: #005a9e;
     height: 32px;
     font-size: 1.1em;
+    opacity:0.8;
     border-radius: 3px;
 }
 
@@ -1071,9 +1147,9 @@ body .w-login-wrap, body .w-account-wrap {
     text-align: center;
     background: rgba(255,255,255,0.7);
     padding: 30px 40px;
-    -webkit-box-shadow: 0 6px 6px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0 6px 6px rgba(0,0,0,0.3);
-    box-shadow: 0 6px 6px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 2px rgba(0,0,0,0.3);
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     -ms-border-radius: 3px;
@@ -1090,9 +1166,9 @@ body .w-home-login-wrap {
     text-align: center;
     background: rgba(255,255,255,0.7);
     padding: 30px 40px;
-    -webkit-box-shadow: 0 6px 6px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0 6px 6px rgba(0,0,0,0.3);
-    box-shadow: 0 6px 6px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 2px rgba(0,0,0,0.3);
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     -ms-border-radius: 3px;
@@ -1251,7 +1327,6 @@ body .w-section-row {
         box-shadow: none;
         -webkit-box-shadow: none;
     }
-
     body .w-account-field input, body .navbar-default .navbar-nav > li > a,
     body .navbar-default .navbar-brand {
         font-size: 14px;

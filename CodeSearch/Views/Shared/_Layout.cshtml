@@ -13,8 +13,9 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 
-<body class="w-login-body w-fade-in">
+<body id="w-layout-body" class="w-login-body w-fade-in">
 
+    @Html.Partial("_SideNav")
     @Html.Partial("_Navigation")
 
     @RenderBody()

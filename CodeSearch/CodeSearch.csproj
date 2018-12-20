@@ -1047,6 +1047,8 @@
     <Content Include="Views\ProjectCategories\Index.cshtml" />
     <Content Include="Views\Shared\_IndexLayout.cshtml" />
     <Content Include="Views\Shared\_ProjectLayout.cshtml" />
+    <Content Include="Views\Shared\_SideNav.cshtml" />
+    <Content Include="Views\Shared\_SideNavSmall.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
