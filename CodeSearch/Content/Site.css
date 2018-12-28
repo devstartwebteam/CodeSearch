@@ -703,6 +703,7 @@ body .w-sidenav, body .w-sidenav-small {
   top: 0;
   left: 0;
   background-color: #eee;
+  visibility:hidden;
   overflow-x: hidden;
   padding-top:80px;
   transition: 0.5s;
@@ -712,11 +713,16 @@ body .w-sidenav, body .w-sidenav-small {
 body .w-open-btn {
     font-size:20px;
     cursor:pointer;
-    bottom: 2px;
-    position: relative;
     color:#fff;
+    margin-top:12px;
     padding-left:20px;
+    display:inline-block;
     opacity:0.6;
+}
+
+body .w-open-btn-wrap {
+    display:inline-block;
+    position:absolute;
 }
 
 body .w-sidenav a, body .w-sidenav-small a {
@@ -751,8 +757,10 @@ body .w-sidenav .closebtn, body .w-sidenav-small .closebtn {
 body .w-nav-social-list {
     list-style-type:none;
     display:inline-block;
-    margin-top:11px;
+    margin-top:12px;
     margin-bottom:0px;
+    float:right;
+    margin-left:20px;
 }
 
 body .w-nav-social-list li {
