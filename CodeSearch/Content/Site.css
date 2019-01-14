@@ -144,6 +144,7 @@ html .w-fade-in {
 
 body .w-nav-wrap, body footer {
     font-family: 'Proxima Nova', helvetica neue,helvetica,arial,sans-serif;
+    z-index:100;
 }
 
 body .w-feature-wrap {
@@ -352,7 +353,7 @@ body .validation-summary-errors ul li {
 }
 
 body .w-login-container input.w-login-btn, body .w-create-btn {
-    font-weight: 200;
+    font-weight: 400;
     border-width: 1px;
     border-style: solid;
     cursor: pointer;
