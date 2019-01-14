@@ -1,9 +1,9 @@
-namespace CodeSearch.Migrations
+namespace CodeSearch.DataContexts.IdentityMigrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class UpdateIdentity : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {

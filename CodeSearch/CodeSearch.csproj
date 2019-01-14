@@ -210,6 +210,12 @@
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SnippetsController.cs" />
+    <Compile Include="DataContexts\IdentityDb.cs" />
+    <Compile Include="DataContexts\IdentityMigrations\201901142307460_InitialCreate.cs" />
+    <Compile Include="DataContexts\IdentityMigrations\201901142307460_InitialCreate.Designer.cs">
+      <DependentUpon>201901142307460_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\IdentityMigrations\Configuration.cs" />
     <Compile Include="Data\C__MigrationHistory.cs">
       <DependentUpon>CodeSearchModel.tt</DependentUpon>
     </Compile>
@@ -231,11 +237,6 @@
     <Compile Include="Helpers\ImageResize.cs" />
     <Compile Include="Helpers\ProjectHelpers.cs" />
     <Compile Include="Helpers\HtmlSanitizer.cs" />
-    <Compile Include="Migrations\201812192300071_Update Identity.cs" />
-    <Compile Include="Migrations\201812192300071_Update Identity.Designer.cs">
-      <DependentUpon>201812192300071_Update Identity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Data\Category.cs">
       <DependentUpon>CodeSearchModel.tt</DependentUpon>
@@ -1072,8 +1073,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812192300071_Update Identity.resx">
-      <DependentUpon>201812192300071_Update Identity.cs</DependentUpon>
+    <EmbeddedResource Include="DataContexts\IdentityMigrations\201901142307460_InitialCreate.resx">
+      <DependentUpon>201901142307460_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

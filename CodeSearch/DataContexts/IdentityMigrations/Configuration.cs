@@ -1,18 +1,19 @@
-namespace CodeSearch.Migrations
+namespace CodeSearch.DataContexts.IdentityMigrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<CodeSearch.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<CodeSearch.DataContexts.IdentityDb>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            MigrationsDirectory = @"DataContexts\IdentityMigrations";
         }
 
-        protected override void Seed(CodeSearch.Models.ApplicationDbContext context)
+        protected override void Seed(CodeSearch.DataContexts.IdentityDb context)
         {
             //  This method will be called after migrating to the latest version.
 
