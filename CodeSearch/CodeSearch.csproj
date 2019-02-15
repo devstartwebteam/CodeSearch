@@ -216,9 +216,6 @@
       <DependentUpon>201901142307460_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="DataContexts\IdentityMigrations\Configuration.cs" />
-    <Compile Include="Data\C__MigrationHistory.cs">
-      <DependentUpon>CodeSearchModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Data\ProjectCategories.cs">
       <DependentUpon>CodeSearchModel.tt</DependentUpon>
     </Compile>

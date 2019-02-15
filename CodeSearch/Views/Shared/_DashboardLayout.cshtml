@@ -109,17 +109,79 @@
         }
 
         function loadJS(src, callback) {
-            var s = document.createElement('script');
-            s.src = src;
-            s.async = true;
-            s.onreadystatechange = s.onload = function () {
-                var state = s.readyState;
-                if (!callback.done && (!state || /loaded|complete/.test(state))) {
-                    callback.done = true;
-                    callback();
+            var scriptArray = document.getElementsByTagName('script');
+            var duplicateScript = false;
+
+            for (i = 0; i < scriptArray.length; i++) {
+                var srcString = scriptArray[i].src;
+                if (srcString.includes(src)) {
+                    duplicateScript = true;
                 }
-            };
+            }
+            if (src != undefined && duplicateScript == false) {
+                var s = document.createElement('script');
+                s.src = src;
+                s.async = true;
+                s.onreadystatechange = s.onload = function () {
+                    var state = s.readyState;
+                    if (!callback.done && (!state || /loaded|complete/.test(state))) {
+                        callback.done = true;
+                        callback();
+                    }
+                };
+            
+            //Add the HTML library dependencies
+            if (src == '/Scripts/codemirror-5.26.0/mode/htmlmixed/htmlmixed.js') {
+                //XML
+                var xmlDep = document.createElement('script');
+                xmlDep.src = '/Scripts/codemirror-5.26.0/mode/xml/xml.js';
+                xmlDep.async = true;
+                document.getElementsByTagName('head')[0].appendChild(xmlDep);
+
+                //JavaScript
+                var jsDep = document.createElement('script');
+                jsDep.src = '/Scripts/codemirror-5.26.0/mode/javascript/javascript.js';
+                jsDep.async = true;
+                document.getElementsByTagName('head')[0].appendChild(jsDep);
+
+                //CSS
+                var cssDep = document.createElement('script');
+                cssDep.src = '/Scripts/codemirror-5.26.0/mode/css/css.js';
+                cssDep.async = true;
+                document.getElementsByTagName('head')[0].appendChild(cssDep);
+            }
+
+            //Add PHP/C# C-like library dependency
+            if (src == '/Scripts/codemirror-5.26.0/mode/php/php.js') {
+                //XML
+                var cDep = document.createElement('script');
+                cDep.src = '/Scripts/codemirror-5.26.0/mode/clike/clike.js';
+                cDep.async = true;
+                document.getElementsByTagName('head')[0].appendChild(cDep);
+            }
+
+            //Add HTMLembedded library dependencies
+            if (src == '/Scripts/codemirror-5.26.0/mode/htmlembedded/htmlembedded.js') {
+                //XML
+                var embXmlDep = document.createElement('script');
+                embXmlDep.src = '/Scripts/codemirror-5.26.0/mode/xml/xml.js';
+                embXmlDep.async = true;
+                document.getElementsByTagName('head')[0].appendChild(embXmlDep);
+
+                //JavaScript
+                var embJsDep = document.createElement('script');
+                embJsDep.src = '/Scripts/codemirror-5.26.0/mode/javascript/javascript.js';
+                embJsDep.async = true;
+                document.getElementsByTagName('head')[0].appendChild(embJsDep);
+
+                //CSS
+                var embCssDep = document.createElement('script');
+                embCssDep.src = '/Scripts/codemirror-5.26.0/mode/css/css.js';
+                embCssDep.async = true;
+                document.getElementsByTagName('head')[0].appendChild(embCssDep);
+            }
             document.getElementsByTagName('head')[0].appendChild(s);
+            }
         }
     </script>
     <script>
@@ -132,10 +194,6 @@
             });
         });
     </script>
-
-    <!-- add CodeMirror Mode Dependencies -->
-    <script src="/Scripts/codemirror-5.26.0/mode/clike/clike.js" async=""></script>
-    <script src="/Scripts/codemirror-5.26.0/mode/xml/xml.js" async=""></script>
 
 </body>
 </html>

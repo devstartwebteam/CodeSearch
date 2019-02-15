@@ -300,6 +300,10 @@ body .w-sidebar-label {
     text-align: left;
 }
 
+body .w-code-select {
+    max-width:200px;
+}
+
 body .w-dashboard-footer {
     padding: 40px;
 }

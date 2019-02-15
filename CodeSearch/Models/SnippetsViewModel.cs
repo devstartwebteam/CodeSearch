@@ -73,7 +73,7 @@ namespace CodeSearch.ViewModels
             Snippet snippet = new Snippet
             {
                 SnippetName = Sanitizer.GetSafeHtmlFragment(model.SnippetName),
-                SnippetContent = HtmlSanitizer.SanitizeHtml(model.SnippetContent),
+                SnippetContent = model.SnippetContent,
                 SnippetDescription = Sanitizer.GetSafeHtmlFragment(model.SnippetDescription),
                 ReferenceURL = Sanitizer.GetSafeHtmlFragment(model.ReferenceUrl),
                 SnippetLanguage = Sanitizer.GetSafeHtmlFragment(model.SnippetLanguage)
@@ -141,7 +141,7 @@ namespace CodeSearch.ViewModels
             }
 
             snippet.SnippetName = Sanitizer.GetSafeHtmlFragment(model.SnippetName);
-            snippet.SnippetContent = HtmlSanitizer.SanitizeHtml(model.SnippetContent);
+            snippet.SnippetContent = model.SnippetContent;
             snippet.SnippetDescription = Sanitizer.GetSafeHtmlFragment(model.SnippetDescription);
             snippet.ReferenceURL = Sanitizer.GetSafeHtmlFragment(model.ReferenceUrl);
             snippet.SnippetLanguage = Sanitizer.GetSafeHtmlFragment(model.SnippetLanguage);

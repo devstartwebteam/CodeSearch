@@ -35,6 +35,5 @@ namespace CodeSearch.Data
         public virtual DbSet<ProjectCategories> ProjectCategories { get; set; }
         public virtual DbSet<ProjectSnippets> ProjectSnippets { get; set; }
         public virtual DbSet<Social> Socials { get; set; }
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
     }
 }

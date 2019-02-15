@@ -60,18 +60,15 @@ namespace CodeSearch.Helpers
             // Use an XmlTextWriter to create self-closing tags
             using (StringWriter sw = new StringWriter())
             {
-                XmlWriter writer = new XmlTextWriter(sw);
-                doc.DocumentNode.WriteTo(writer);
+                doc.DocumentNode.WriteTo(sw);
                 output = sw.ToString();
 
                 // strip off XML doc header
                 if (!string.IsNullOrEmpty(output))
                 {
-                    int at = output.IndexOf("?>");
+                    int at = output.IndexOf("</");
                     output = output.Substring(at + 2);
                 }
-
-                writer.Close();
             }
             doc = null;
 

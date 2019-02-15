@@ -24,7 +24,6 @@
         <AssociationConnector Association="CodeSearchModel.ProjectProjectSnippets" />
         <AssociationConnector Association="CodeSearchModel.ProjectSnippetsSnippet" />
         <EntityTypeShape EntityType="CodeSearchModel.Social" Width="1.5" PointX="7.625" PointY="6.5" />
-        <EntityTypeShape EntityType="CodeSearchModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="8.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

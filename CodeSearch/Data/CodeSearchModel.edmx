@@ -16,7 +16,6 @@
     <EntitySet Name="ProjectCategories" EntityType="CodeSearchModel.Store.ProjectCategories" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ProjectSnippets" EntityType="CodeSearchModel.Store.ProjectSnippets" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Socials" EntityType="CodeSearchModel.Store.Socials" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="C__MigrationHistory" EntityType="CodeSearchModel.Store.C__MigrationHistory" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="CategorySnippetAssociationsCategory" Association="CodeSearchModel.Store.CategorySnippetAssociationsCategory">
       <End Role="CategorySnippetAssociations" EntitySet="CategorySnippetAssociations" />
       <End Role="Category" EntitySet="Categories" />
@@ -150,16 +149,6 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="SocialURL" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="C__MigrationHistory">
-    <Key>
-      <PropertyRef Name="MigrationId" />
-      <PropertyRef Name="ContextKey" />
-    </Key>
-    <Property Name="MigrationId" Type="nvarchar" Nullable="false" MaxLength="150" />
-    <Property Name="ContextKey" Type="nvarchar" Nullable="false" MaxLength="300" />
-    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
-    <Property Name="ProductVersion" Type="nvarchar" Nullable="false" MaxLength="32" />
   </EntityType>
   <Association Name="CategorySnippetAssociationsCategory">
     <End Role="CategorySnippetAssociations" Type="CodeSearchModel.Store.CategorySnippetAssociations" Multiplicity="*" />
@@ -320,7 +309,6 @@
             <End Role="Snippet" EntitySet="Snippets" />
           </AssociationSet>
           <EntitySet Name="Socials" EntityType="CodeSearchModel.Social" />
-          <EntitySet Name="C__MigrationHistory" EntityType="CodeSearchModel.C__MigrationHistory" />
         </EntityContainer>
         <EntityType Name="Snippet">
           <Key>
@@ -537,16 +525,6 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="SocialURL" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -656,16 +634,6 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="SocialURL" ColumnName="SocialURL" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="C__MigrationHistory">
-      <EntityTypeMapping TypeName="IsTypeOf(CodeSearchModel.C__MigrationHistory)">
-        <MappingFragment StoreEntitySet="C__MigrationHistory">
-          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-          <ScalarProperty Name="Model" ColumnName="Model" />
-          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
