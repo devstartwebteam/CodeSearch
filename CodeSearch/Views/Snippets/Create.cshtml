@@ -55,7 +55,7 @@
                 @Html.Label("Select Category", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-sm-6 offset-sm-4">
 
-                    <select name="SelectedCategoryId" id="categoryList">
+                    <select name="SelectedCategoryId" id="categoryList" class="form-control">
                         @foreach (var item in Model.CategoryList)
                         {
                             <option value="@item.CategoryId.ToString()">
