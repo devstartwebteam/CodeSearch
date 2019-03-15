@@ -142,7 +142,7 @@ namespace CodeSearch.ViewModels
 
             snippet.SnippetName = Sanitizer.GetSafeHtmlFragment(model.SnippetName);
             snippet.SnippetContent = model.SnippetContent;
-            snippet.SnippetDescription = Sanitizer.GetSafeHtmlFragment(model.SnippetDescription);
+            snippet.SnippetDescription = model.SnippetDescription;
             snippet.ReferenceURL = Sanitizer.GetSafeHtmlFragment(model.ReferenceUrl);
             snippet.SnippetLanguage = Sanitizer.GetSafeHtmlFragment(model.SnippetLanguage);
 
